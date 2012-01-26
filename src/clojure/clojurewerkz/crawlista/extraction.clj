@@ -22,9 +22,13 @@
   (^String [^String body]
            (-> ^Document (Jsoup/parse body) .title)))
 
-(defn extract-body
+(defn extract-body-text
   (^String [^String body]
            (-> ^Document (Jsoup/parse body) .body .text)))
+
+(defn extract-body-html
+  (^String [^String body]
+           (-> ^Document (Jsoup/parse body) .body .html)))
 
 
 
