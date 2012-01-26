@@ -1,6 +1,6 @@
 (ns clojurewerkz.crawlista.extraction
   (:import [org.jsoup Jsoup]
-           [org.jsoup.nodes Element]
+           [org.jsoup.nodes Document Element]
            [java.net URI URL MalformedURLException])
   (:use    [clojurewerkz.crawlista.string]
            [clojurewerkz.crawlista.url]))
@@ -17,6 +17,16 @@
 ;;
 ;; API
 ;;
+
+(defn extract-title
+  (^String [^String body]
+           (-> ^Document (Jsoup/parse body) .title)))
+
+(defn extract-body
+  (^String [^String body]
+           (-> ^Document (Jsoup/parse body) .body .text)))
+
+
 
 (defn extract-anchors
   [body]
@@ -55,11 +65,6 @@
         urls       (filter crawlable-href? (urls-from anchors))]
     (distinct (map (fn [^String s] (normalize-url (absolutize s uri)))
                    (filter (fn [^String s] (local-to? s host)) urls)))))
-
-
-(defn extract-title
-  [^String body]
-  (-> (Jsoup/parse body) .title))
 
 
 (defn has-anchor?

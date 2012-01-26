@@ -7,6 +7,9 @@
 (deftest test-extract-title
   (is (= "Wired.com" (extract-title (slurp (clojure.java.io/resource "html/wired.com.html"))))))
 
+(deftest test-extract-body
+  (is (= 139 (count (extract-body (slurp (clojure.java.io/resource "html/wired.com.html")))))))
+
 
 (deftest test-extract-local-urls
   (let [body     (slurp (clojure.java.io/resource "html/wired.com.html"))
