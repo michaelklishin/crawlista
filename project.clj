@@ -4,6 +4,12 @@
                  [clj-http            "0.2.4"]
                  [org.jsoup/jsoup     "1.6.1"]
                  [clojurewerkz/urly   "1.0.0-SNAPSHOT"]]
+  :multi-deps {
+               "1.4" [[org.clojure/clojure "1.4.0-beta1"]]
+               :all [[clj-http            "0.2.4"]
+                     [org.jsoup/jsoup     "1.6.1"]
+                     [clojurewerkz/urly   "1.0.0-SNAPSHOT"]]
+               }
   :source-path        "src/clojure"
   :java-source-path   "src/java"
   :resources-path     "src/resources"
