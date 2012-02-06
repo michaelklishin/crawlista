@@ -27,3 +27,10 @@
        "FF0000"   16711680
        "0x001100" 4352
        "001100"   4352))
+
+(deftest test-chop-last-path-segment
+  (are [input output] (is (= (chop-last-path-segment input) output))
+       "http://giove.local/a/b/c/d/e/"       "http://giove.local/a/b/c/d/e/"
+       "http://giove.local/a/b/c/index.html" "http://giove.local/a/b/c/"
+       "http://giove.local/a/"               "http://giove.local/a/"
+       "http://giove.local/"                 "http://giove.local/"))
