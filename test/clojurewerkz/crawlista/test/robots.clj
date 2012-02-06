@@ -8,7 +8,14 @@
   (is (= {} (parse "#  ")))
   (is (= {} (parse "  #  ")))
   (is (= {} (parse "# A comment")))
+  (is (= {} (parse "# A comment")))  
   (is (= {} (parse "  #    Комментарий"))))
+
+(deftest test-parsing-of-input-with-just-a-multiline-comment
+  (is (= {} (parse "# A comment
+                    # Another comment")))  
+  (is (= {} (parse "  #    Комментарий
+                   # и еще один"))))
 
 (deftest test-parsing-of-input-with-just-a-user-agent-string
   (let [input "User-agent: webcrawler"]
