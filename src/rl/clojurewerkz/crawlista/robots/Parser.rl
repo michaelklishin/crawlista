@@ -22,7 +22,6 @@ import clojure.lang.PersistentVector;
 
   action agent_end   {
     String lastSeenUserAgentName = new String(data, ansp, (p - ansp));
-    System.out.println("Seen UA " + lastSeenUserAgentName);
 
     result.assoc(lastSeenUserAgentName, PersistentVector.create());
   }
@@ -44,7 +43,7 @@ import clojure.lang.PersistentVector;
 
   token = LINE -- tspecials;
 
-  agent = token+ >agent_start %/agent_end;
+  agent = token+ >agent_start %agent_end %/agent_end;
   agentline = "User-agent:" . LWSP* . agent . (CRLF | commentline)  >agentline_start %/agentline_start;
   record = agentline;
 

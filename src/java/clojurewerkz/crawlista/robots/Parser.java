@@ -12,7 +12,7 @@ import clojure.lang.PersistentVector;
 
 
 
-// line 52 "src/rl/clojurewerkz/crawlista/robots/Parser.rl"
+// line 51 "src/rl/clojurewerkz/crawlista/robots/Parser.rl"
 
 
 public class Parser {
@@ -21,7 +21,7 @@ public class Parser {
 private static byte[] init__robots_actions_0()
 {
 	return new byte [] {
-	    0,    1,    0,    1,    1,    1,    2
+	    0,    1,    0,    1,    1,    1,    2,    2,    2,    0
 	};
 }
 
@@ -154,10 +154,10 @@ private static byte[] init__robots_trans_actions_0()
 {
 	return new byte [] {
 	    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
-	    0,    0,    3,    1,    1,    1,    0,    1,    0,    0,    0,    0,
-	    0,    0,    0,    0,    0,    0,    0,    0,    0,    3,    1,    0,
+	    0,    0,    3,    7,    7,    7,    0,    7,    0,    0,    0,    0,
+	    0,    0,    0,    0,    0,    0,    0,    0,    0,    3,    7,    0,
 	    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    3,
-	    1,    1,    1,    0,    0,    0,    0,    0,    0
+	    7,    7,    7,    0,    0,    0,    0,    0,    0
 	};
 }
 
@@ -185,7 +185,7 @@ static final int robots_error = 0;
 static final int robots_en_main = 44;
 
 
-// line 56 "src/rl/clojurewerkz/crawlista/robots/Parser.rl"
+// line 55 "src/rl/clojurewerkz/crawlista/robots/Parser.rl"
 
   public IPersistentMap parse(String input) throws ParseException {
     char[] data = input.toCharArray();
@@ -205,7 +205,7 @@ static final int robots_en_main = 44;
 	cs = robots_start;
 	}
 
-// line 70 "src/rl/clojurewerkz/crawlista/robots/Parser.rl"
+// line 69 "src/rl/clojurewerkz/crawlista/robots/Parser.rl"
     
 // line 211 "src/java/clojurewerkz/crawlista/robots/Parser.java"
 	{
@@ -299,7 +299,15 @@ case 1:
     ansp = p;
   }
 	break;
-// line 303 "src/java/clojurewerkz/crawlista/robots/Parser.java"
+	case 2:
+// line 23 "src/rl/clojurewerkz/crawlista/robots/Parser.rl"
+	{
+    String lastSeenUserAgentName = new String(data, ansp, (p - ansp));
+
+    result.assoc(lastSeenUserAgentName, PersistentVector.create());
+  }
+	break;
+// line 311 "src/java/clojurewerkz/crawlista/robots/Parser.java"
 			}
 		}
 	}
@@ -330,12 +338,11 @@ case 4:
 // line 23 "src/rl/clojurewerkz/crawlista/robots/Parser.rl"
 	{
     String lastSeenUserAgentName = new String(data, ansp, (p - ansp));
-    System.out.println("Seen UA " + lastSeenUserAgentName);
 
     result.assoc(lastSeenUserAgentName, PersistentVector.create());
   }
 	break;
-// line 339 "src/java/clojurewerkz/crawlista/robots/Parser.java"
+// line 346 "src/java/clojurewerkz/crawlista/robots/Parser.java"
 		}
 	}
 	}
@@ -345,7 +352,7 @@ case 5:
 	break; }
 	}
 
-// line 71 "src/rl/clojurewerkz/crawlista/robots/Parser.rl"
+// line 70 "src/rl/clojurewerkz/crawlista/robots/Parser.rl"
 
     if(cs == robots_error) {
       throw new ParseException("Unparseable input: " + input + ", p = " + p, p);
