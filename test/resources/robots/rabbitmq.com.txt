@@ -1,0 +1,7 @@
+User-agent: Googlebot
+Noindex: /releases/rabbitmq-server/*.xml$
+Noindex: /releases/rabbitmq-server/man/
+Allow: /
+
+User-agent: *
+Disallow: /releases/rabbitmq-server
