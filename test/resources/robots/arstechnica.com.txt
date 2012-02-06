@@ -1,0 +1,14 @@
+User-agent: *
+Allow: /
+Disallow: /dragons/
+Disallow: /civis/ucp.php
+Disallow: /civis/images/
+Disallow: /civis/memberlist.php
+Disallow: /civis/adm/
+Disallow: /civis/mcp.php
+Disallow: /civis/posting.php
+Disallow: /civis/report.php
+Disallow: /civis/search.php
+Disallow: /civis/viewonline.php
+Disallow: /civis/services/
+Disallow: /phpbb/

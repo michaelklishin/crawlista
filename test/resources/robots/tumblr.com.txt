@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /radar
+Disallow: /audio_file
+Disallow: /dashboard
+Disallow: /x

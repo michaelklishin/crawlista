@@ -1,0 +1,10 @@
+User-agent: *
+Disallow: /forward
+Disallow: /traffic
+Disallow: /mm_track
+Disallow: /search
+Disallow: /_uac/adpage.html
+Disallow: /profile
+Disallow: */comments 
+Disallow: /supersearch
+Disallow: /permalink/livefyre

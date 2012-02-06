@@ -1,0 +1,6 @@
+User-Agent: *
+Disallow: /mediacentral/*
+Disallow: /suns/tickets/vervelounge_requests.html
+Disallow: /search
+Sitemap: http://www.nba.com/video_sitemap_index.xml
+Sitemap: http://www.nba.com/sitemap_index.xml
