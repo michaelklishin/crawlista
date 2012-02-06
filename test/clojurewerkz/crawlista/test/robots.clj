@@ -18,6 +18,5 @@
                    # и еще один"))))
 
 (deftest test-parsing-of-input-with-just-a-user-agent-string
-  (let [input "User-agent: webcrawler"]
-    ))
+  (is (= { "webcrawler" [] } (parse "User-agent: webcrawler"))))
 
