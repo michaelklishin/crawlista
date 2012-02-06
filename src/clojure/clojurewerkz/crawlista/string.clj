@@ -32,3 +32,7 @@
     (Long/parseLong (if (.startsWith s "0x")
                       (subs s 2)
                       s) 16))
+
+(defn chop-last-path-segment
+  [^String s]
+  (.replaceAll s "[^/]+$" ""))

@@ -11,31 +11,37 @@
   (is (= 139 (count (extract-body-text (slurp (clojure.java.io/resource "html/wired.com.html")))))))
 
 (deftest test-extract-body-html
-  (is (= 2672 (count (extract-body-html (slurp (clojure.java.io/resource "html/wired.com.html")))))))
+  (is (= 2839 (count (extract-body-html (slurp (clojure.java.io/resource "html/wired.com.html")))))))
 
 
 (deftest test-extract-local-urls
   (let [body     (slurp (clojure.java.io/resource "html/wired.com.html"))
-        result   (extract-local-urls body "http://wired.com")]
+        result   (vec (extract-local-urls body "http://wired.com"))]
+    (is (= 8 (count result)))
     (is (=
          ["http://wired.com"
           "http://wired.com/wiredscience/2011/11/absolute-with-www"
-          "http://wired.comwww.wired.com/wiredscience/2011/11/link-without-http"
+          "http://wired.com/www.wired.com/wiredscience/2011/11/link-without-http"
           "http://wired.com/dangerroom/2011/11/absolute-without-domain"
-          "http://wired.comdangerroom/2011/11/relative"
+          "http://wired.com/dangerroom/2011/11/relative"
+          "http://wired.com/dangerroom.html"
           "http://wired.com/auth?goauth_start=1&goauth_service=linkedin&goauth_action=login&loc="
-          "http://wired.com/gadgets/news/2011/11/arms-new-tools-make-it-easier-for-android-devs-to-use-native-code.ars?comments=1"] (vec result)))))
+          "http://wired.com/gadgets/news/2011/11/arms-new-tools-make-it-easier-for-android-devs-to-use-native-code.ars?comments=1"]
+ result))))
 
 (deftest test-extract-local-followable-urls-case-1
   (let [body     (slurp (clojure.java.io/resource "html/wired.com.html"))
-        result   (extract-local-followable-urls body "http://wired.com")]
+        result   (vec (extract-local-followable-urls body "http://wired.com"))]
+    (is (= 7 (count result)))
     (is (=
          ["http://wired.com"
           "http://wired.com/wiredscience/2011/11/absolute-with-www"
-          "http://wired.comwww.wired.com/wiredscience/2011/11/link-without-http"
+          "http://wired.com/www.wired.com/wiredscience/2011/11/link-without-http"
           "http://wired.com/dangerroom/2011/11/absolute-without-domain"
-          "http://wired.comdangerroom/2011/11/relative"
-          "http://wired.com/gadgets/news/2011/11/arms-new-tools-make-it-easier-for-android-devs-to-use-native-code.ars?comments=1"] (vec result)))))
+          "http://wired.com/dangerroom/2011/11/relative"
+          "http://wired.com/dangerroom.html"
+          "http://wired.com/gadgets/news/2011/11/arms-new-tools-make-it-easier-for-android-devs-to-use-native-code.ars?comments=1"]
+          result))))
 
 
 (deftest test-extract-local-followable-urls-case-2

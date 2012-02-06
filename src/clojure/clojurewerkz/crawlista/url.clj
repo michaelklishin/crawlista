@@ -4,8 +4,17 @@
   (:use [clojure.string :only [split blank?]]
         [clojurewerkz.crawlista.string]
         [clojure.string :only [lower-case]]
-        [clojurewerkz.urly.core :only [path-of]]))
+        [clojurewerkz.urly.core :only [path-of url-like]]))
 
+;;
+;; Implementation
+;;
+
+;; ...
+
+;;
+;; API
+;;
 
 (defn strip-query-string
   [^String s]
@@ -60,12 +69,11 @@
     (maybe-chopr (normalize-host input) "/"))
   (absolutize [input against]
     (let [[input-without-query-string query-string] (separate-query-string input)
-          resolved (.toString (.resolve (URI. against)
-                                        (URI. input-without-query-string)))]
+          against-without-last-path-segment         (-> (url-like (URI. against)) .withoutLastPathSegment .toURI)
+          resolved                                  (.toString (.resolve against-without-last-path-segment (URI. input-without-query-string)))]
       (if query-string
         (str resolved "?" query-string)
         resolved)))
-
 
   URL
   (normalize-host [input]
@@ -77,7 +85,6 @@
     (URI. (.getScheme input) nil (maybe-chopl (.toLowerCase (.getHost input)) "www.") (.getPort input) (.getPath input) nil nil))
   (absolutize [input ^java.net.URI against]
     (.resolve against input)))
-
 
 
 (defprotocol DomainRoot
