@@ -11,6 +11,12 @@ import static clojure.lang.PersistentHashMap.create;
 %%{
   machine robots;
 
+  action agentline_start {}
+
+  action agent_start {}
+  action agent_end   {}
+
+
   CRLF = "\r" ? "\n";
   CTL = (cntrl | 127);
   LWSP = " " | "\t";
@@ -27,8 +33,8 @@ import static clojure.lang.PersistentHashMap.create;
 
   token = TEXT -- tspecials;
 
-  agent = token+;
-  agentline = "User-agent:" . LWSP* . agent . commentline? . CRLF;
+  agent = token+ >agent_start %/agent_end;
+  agentline = "User-agent:" . LWSP* . agent . commentline? . CRLF >agentline_start %/agentline_start;
   record = agentline;
 
   main := commentline* | ( commentline* . record )+ . (commentline*);
