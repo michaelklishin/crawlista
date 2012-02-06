@@ -4,9 +4,10 @@ package clojurewerkz.crawlista.robots;
 import java.text.ParseException;
 
 import clojure.lang.IPersistentMap;
+import clojure.lang.ITransientMap;
 import clojure.lang.PersistentHashMap;
+import clojure.lang.PersistentVector;
 
-import static clojure.lang.PersistentHashMap.create;
 
 %%{
   machine robots;
@@ -20,10 +21,10 @@ import static clojure.lang.PersistentHashMap.create;
   }
 
   action agent_end   {
-    String last_seen_agent_name = new String(data, ansp, (p - ansp));
-    System.out.println("Seen UA " + last_seen_agent_name);
+    String lastSeenUserAgentName = new String(data, ansp, (p - ansp));
+    System.out.println("Seen UA " + lastSeenUserAgentName);
 
-    
+    result.assoc(lastSeenUserAgentName, PersistentVector.create());
   }
 
 
@@ -44,7 +45,7 @@ import static clojure.lang.PersistentHashMap.create;
   token = LINE -- tspecials;
 
   agent = token+ >agent_start %/agent_end;
-  agentline = "User-agent:" . LWSP* . agent . commentline? . CRLF >agentline_start %/agentline_start;
+  agentline = "User-agent:" . LWSP* . agent . (CRLF | commentline)  >agentline_start %/agentline_start;
   record = agentline;
 
   main := commentline* | ( commentline* . record )+ . (commentline*);
@@ -53,7 +54,7 @@ import static clojure.lang.PersistentHashMap.create;
 public class Parser {
   %% write data;
 
-  public static IPersistentMap parse(String input) throws ParseException {
+  public IPersistentMap parse(String input) throws ParseException {
     char[] data = input.toCharArray();
     int cs;
     int eof = data.length;
@@ -63,15 +64,15 @@ public class Parser {
     // agent name start position
     int ansp = 0;
 
-    PersistentHashMap result = create();
+    ITransientMap result = PersistentHashMap.create().asTransient();
 
     %% write init;
     %% write exec;
 
     if(cs == robots_error) {
-        throw new ParseException("Unparseable input: " + input + ", p = " + p, p);
+      throw new ParseException("Unparseable input: " + input + ", p = " + p, p);
     }
 
-    return result;
+    return result.persistent();
   }
 }

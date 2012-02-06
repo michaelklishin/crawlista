@@ -12,4 +12,5 @@
 
 (defn parse
   [^String input]
-  (Parser/parse input))
+  (let [parser (Parser.)]
+    (.parse parser input)))
