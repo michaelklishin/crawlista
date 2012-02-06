@@ -74,14 +74,22 @@
        "http://www.store.apple.com" "http://store.apple.com"))
 
 (deftest test-absolutize-with-strings
-  (is (= (absolutize ""  "http://giove.local") "http://giove.local"))
-  (is (= (absolutize "/" "http://giove.local") "http://giove.local/"))
+  (is (= (absolutize ""  "http://giove.local")  "http://giove.local/"))
+  (is (= (absolutize ""  "http://giove.local/") "http://giove.local/"))
+  (is (= (absolutize "/" "http://giove.local")  "http://giove.local/"))
+  (is (= (absolutize "/" "http://giove.local/") "http://giove.local/"))
   (is (= (absolutize "/comments?authenticate=1" "http://giove.local") "http://giove.local/comments?authenticate=1"))
-  (are [input result] (is (= (absolutize input "http://giove.local") result))
-       ""                                  "http://giove.local"
+  (are [input result] (is (= (absolutize input "http://giove.local/") result))
+       ""                                  "http://giove.local/"
        "/"                                 "http://giove.local/"
        "/reviews"                          "http://giove.local/reviews"
-       "/autopia/2011/11/evs-go-off-grid/" "http://giove.local/autopia/2011/11/evs-go-off-grid/"))
+       "/autopia/2011/11/evs-go-off-grid/" "http://giove.local/autopia/2011/11/evs-go-off-grid/"
+       "offline.html"                      "http://giove.local/offline.html")
+    (is (= (absolutize "maintenance.html"  "http://giove.local/system/") "http://giove.local/system/maintenance.html"))
+    (is (= (absolutize "maintenance.html"  "http://giove.local/system")  "http://giove.local/maintenance.html"))
+    (is (= (absolutize "maintenance.html"  "http://giove.local/system/") "http://giove.local/system/maintenance.html"))
+    (is (= (absolutize "support/1.css" "http://tc.labs.opera.com/html/link/002.htm")  "http://tc.labs.opera.com/html/link/support/1.css"))
+    (is (= (absolutize "support/css"   "http://tc.labs.opera.com/html/link/002.htm")  "http://tc.labs.opera.com/html/link/support/css")))
 
 (deftest test-absolutize-with-uris
   (are [input result] (is (= (absolutize input (URI. "http://giove.local")) result))
