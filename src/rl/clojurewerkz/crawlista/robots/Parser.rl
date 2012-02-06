@@ -11,10 +11,20 @@ import static clojure.lang.PersistentHashMap.create;
 %%{
   machine robots;
 
-  action agentline_start {}
+  action agentline_start {
+    ansp = 0;
+  }
 
-  action agent_start {}
-  action agent_end   {}
+  action agent_start {
+    ansp = p;
+  }
+
+  action agent_end   {
+    String last_seen_agent_name = new String(data, ansp, (p - ansp));
+    System.out.println("Seen UA " + last_seen_agent_name);
+
+    
+  }
 
 
   CRLF = "\r" ? "\n";
@@ -25,13 +35,13 @@ import static clojure.lang.PersistentHashMap.create;
   LINE = TEXT -- CRLF;
   tspecials = "(" | ")" | "<" | ">" | "@" | "," | ";"
              | ":" | "\\" | "\"" | "/" | "[" | "]"
-             | "?" | "=" | "{" | "}" | " " | "\t"
+             | "?" | "=" | "{" | "}" | " " | "\t" | "#"
              ;
 
   comment = LWSP* . '#' . any*;
   commentline = comment . CRLF;
 
-  token = TEXT -- tspecials;
+  token = LINE -- tspecials;
 
   agent = token+ >agent_start %/agent_end;
   agentline = "User-agent:" . LWSP* . agent . commentline? . CRLF >agentline_start %/agentline_start;
@@ -49,6 +59,9 @@ public class Parser {
     int eof = data.length;
     int p = 0;
     int pe = eof;
+
+    // agent name start position
+    int ansp = 0;
 
     PersistentHashMap result = create();
 
