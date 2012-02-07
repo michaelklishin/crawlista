@@ -23,7 +23,7 @@ import clojure.lang.PersistentVector;
   action agent_end   {
     String lastSeenUserAgentName = new String(data, ansp, (p - ansp));
 
-    result.assoc(lastSeenUserAgentName, PersistentVector.create());
+    result.assoc(lastSeenUserAgentName.trim(), PersistentVector.create());
   }
 
 
@@ -35,7 +35,7 @@ import clojure.lang.PersistentVector;
   LINE = TEXT -- CRLF;
   tspecials = "(" | ")" | "<" | ">" | "@" | "," | ";"
              | ":" | "\\" | "\"" | "/" | "[" | "]"
-             | "?" | "=" | "{" | "}" | " " | "\t" | "#"
+             | "?" | "=" | "{" | "}" | "\t" | "#"
              ;
 
   comment = LWSP* . '#' . any*;
@@ -43,8 +43,8 @@ import clojure.lang.PersistentVector;
 
   token = LINE -- tspecials;
 
-  agent = token+ >agent_start %agent_end %/agent_end;
-  agentline = "User-agent:" . LWSP* . agent . (CRLF | commentline)  >agentline_start %/agentline_start;
+  agent = ('*' | TEXT+) >agent_start %agent_end %/agent_end;
+  agentline = "User-agent: " . agent . CRLF >agentline_start %/agentline_start;
   record = agentline;
 
   main := commentline* | ( commentline* . record )+ . (commentline*);

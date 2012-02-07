@@ -28,18 +28,16 @@ private static byte[] init__robots_actions_0()
 private static final byte _robots_actions[] = init__robots_actions_0();
 
 
-private static short[] init__robots_key_offsets_0()
+private static byte[] init__robots_key_offsets_0()
 {
-	return new short [] {
+	return new byte [] {
 	    0,    0,    3,    4,    6,    8,   10,   12,   14,   16,   18,   20,
-	   22,   24,   42,   61,   65,   66,   68,   70,   72,   74,   76,   78,
-	   80,   82,   84,   86,  104,  123,  124,  125,  126,  127,  128,  129,
-	  130,  131,  132,  133,  134,  151,  170,  173,  174,  178,  180,  182,
-	  184
+	   22,   24,   26,   30,   35,   36,   37,   38,   39,   40,   41,   42,
+	   43,   44,   45,   46,   47,   50,   55,   56,   60,   62,   64
 	};
 }
 
-private static final short _robots_key_offsets[] = init__robots_key_offsets_0();
+private static final byte _robots_key_offsets[] = init__robots_key_offsets_0();
 
 
 private static char[] init__robots_trans_keys_0()
@@ -47,19 +45,9 @@ private static char[] init__robots_trans_keys_0()
 	return new char [] {
 	    9,   32,   35,   10,   10,  115,   10,  101,   10,  114,   10,   45,
 	   10,   97,   10,  103,   10,  101,   10,  110,   10,  116,   10,   58,
-	    9,   10,   32,   44,   47,  123,  125,  127,    0,   31,   34,   35,
-	   40,   41,   58,   64,   91,   93,    9,   10,   13,   32,   34,   35,
-	   44,   47,  123,  125,  127,    0,   31,   40,   41,   58,   64,   91,
-	   93,    9,   10,   32,   35,   10,   10,  115,   10,  101,   10,  114,
-	   10,   45,   10,   97,   10,  103,   10,  101,   10,  110,   10,  116,
-	   10,   58,    9,   10,   32,   44,   47,  123,  125,  127,    0,   31,
-	   34,   35,   40,   41,   58,   64,   91,   93,    9,   10,   13,   32,
-	   34,   35,   44,   47,  123,  125,  127,    0,   31,   40,   41,   58,
-	   64,   91,   93,   10,  115,  101,  114,   45,   97,  103,  101,  110,
-	  116,   58,    9,   32,   44,   47,  123,  125,  127,    0,   31,   34,
-	   35,   40,   41,   58,   64,   91,   93,    9,   10,   13,   32,   34,
-	   35,   44,   47,  123,  125,  127,    0,   31,   40,   41,   58,   64,
-	   91,   93,    9,   32,   35,   10,    9,   32,   35,   85,   10,   85,
+	   10,   32,   10,  127,    0,   31,   10,   13,  127,    0,   31,   10,
+	  115,  101,  114,   45,   97,  103,  101,  110,  116,   58,   32,  127,
+	    0,   31,   10,   13,  127,    0,   31,   10,    9,   32,   35,   85,
 	   10,   85,   10,   85,    9,   32,   35,   85,    0
 	};
 }
@@ -71,10 +59,8 @@ private static byte[] init__robots_single_lengths_0()
 {
 	return new byte [] {
 	    0,    3,    1,    2,    2,    2,    2,    2,    2,    2,    2,    2,
-	    2,    8,   11,    4,    1,    2,    2,    2,    2,    2,    2,    2,
-	    2,    2,    2,    8,   11,    1,    1,    1,    1,    1,    1,    1,
-	    1,    1,    1,    1,    7,   11,    3,    1,    4,    2,    2,    2,
-	    4
+	    2,    2,    2,    3,    1,    1,    1,    1,    1,    1,    1,    1,
+	    1,    1,    1,    1,    1,    3,    1,    4,    2,    2,    4
 	};
 }
 
@@ -85,10 +71,8 @@ private static byte[] init__robots_range_lengths_0()
 {
 	return new byte [] {
 	    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
-	    0,    5,    4,    0,    0,    0,    0,    0,    0,    0,    0,    0,
-	    0,    0,    0,    5,    4,    0,    0,    0,    0,    0,    0,    0,
-	    0,    0,    0,    0,    5,    4,    0,    0,    0,    0,    0,    0,
-	    0
+	    0,    0,    1,    1,    0,    0,    0,    0,    0,    0,    0,    0,
+	    0,    0,    0,    0,    1,    1,    0,    0,    0,    0,    0
 	};
 }
 
@@ -99,10 +83,8 @@ private static short[] init__robots_index_offsets_0()
 {
 	return new short [] {
 	    0,    0,    4,    6,    9,   12,   15,   18,   21,   24,   27,   30,
-	   33,   36,   50,   66,   71,   73,   76,   79,   82,   85,   88,   91,
-	   94,   97,  100,  103,  117,  133,  135,  137,  139,  141,  143,  145,
-	  147,  149,  151,  153,  155,  168,  184,  188,  190,  195,  198,  201,
-	  204
+	   33,   36,   39,   43,   48,   50,   52,   54,   56,   58,   60,   62,
+	   64,   66,   68,   70,   72,   75,   80,   82,   87,   90,   93
 	};
 }
 
@@ -115,21 +97,12 @@ private static byte[] init__robots_indicies_0()
 	    0,    0,    2,    1,    3,    2,    3,    4,    2,    3,    5,    2,
 	    3,    6,    2,    3,    7,    2,    3,    8,    2,    3,    9,    2,
 	    3,   10,    2,    3,   11,    2,    3,   12,    2,    3,   13,    2,
-	   13,    3,   13,    2,    2,    2,    2,    2,    2,    2,    2,    2,
-	    2,   14,   15,   16,   17,   15,    2,   19,    2,    2,    2,    2,
-	    2,    2,    2,    2,    2,   18,   20,    3,   20,   21,    2,   22,
-	   21,   22,   23,   21,   22,   24,   21,   22,   25,   21,   22,   26,
-	   21,   22,   27,   21,   22,   28,   21,   22,   29,   21,   22,   30,
-	   21,   22,   31,   21,   22,   32,   21,   32,   22,   32,   21,   21,
-	   21,   21,   21,   21,   21,   21,   21,   21,   33,   19,   34,   19,
-	   19,   21,   19,   21,   21,   21,   21,   21,   21,   21,   21,   21,
-	   35,   36,    2,   37,    1,   38,    1,   39,    1,   40,    1,   41,
-	    1,   42,    1,   43,    1,   44,    1,   45,    1,   46,    1,   46,
-	   46,    1,    1,    1,    1,    1,    1,    1,    1,    1,    1,   47,
-	   48,   49,   50,   48,    1,   19,    1,    1,    1,    1,    1,    1,
-	    1,    1,    1,   51,   52,   52,   21,    1,   53,    1,    0,    0,
-	    2,   54,    1,    3,   55,    2,   22,   56,   21,    3,   55,    2,
-	    0,    0,    2,   54,    1,    0
+	    3,   14,    2,    3,    2,    2,   15,   16,   17,    2,    2,   18,
+	   19,    2,   20,    1,   21,    1,   22,    1,   23,    1,   24,    1,
+	   25,    1,   26,    1,   27,    1,   28,    1,   29,    1,   30,    1,
+	    1,    1,   31,   32,   33,    1,    1,   34,   35,    1,    0,    0,
+	    2,   36,    1,    3,   37,    2,    3,   37,    2,    0,    0,    2,
+	   36,    1,    0
 	};
 }
 
@@ -139,11 +112,10 @@ private static final byte _robots_indicies[] = init__robots_indicies_0();
 private static byte[] init__robots_trans_targs_0()
 {
 	return new byte [] {
-	    1,    0,    2,   45,    4,    5,    6,    7,    8,    9,   10,   11,
-	   12,   13,   14,   15,   47,   29,   14,   16,   15,   16,   46,   18,
-	   19,   20,   21,   22,   23,   24,   25,   26,   27,   28,   46,   28,
-	   47,   31,   32,   33,   34,   35,   36,   37,   38,   39,   40,   41,
-	   42,   48,   43,   41,   42,   48,   30,    3,   17
+	    1,    0,    2,   32,    4,    5,    6,    7,    8,    9,   10,   11,
+	   12,   13,   14,   15,   33,   16,   15,   33,   18,   19,   20,   21,
+	   22,   23,   24,   25,   26,   27,   28,   29,   34,   30,   29,   34,
+	   17,    3
 	};
 }
 
@@ -154,10 +126,9 @@ private static byte[] init__robots_trans_actions_0()
 {
 	return new byte [] {
 	    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
-	    0,    0,    3,    7,    7,    7,    0,    7,    0,    0,    0,    0,
-	    0,    0,    0,    0,    0,    0,    0,    0,    0,    3,    7,    0,
-	    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    3,
-	    7,    7,    7,    0,    0,    0,    0,    0,    0
+	    0,    0,    0,    3,    7,    7,    0,    0,    0,    0,    0,    0,
+	    0,    0,    0,    0,    0,    0,    0,    3,    7,    7,    0,    0,
+	    0,    0
 	};
 }
 
@@ -168,21 +139,19 @@ private static byte[] init__robots_eof_actions_0()
 {
 	return new byte [] {
 	    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
-	    0,    0,    5,    0,    0,    0,    0,    0,    0,    0,    0,    0,
-	    0,    0,    0,    0,    5,    0,    0,    0,    0,    0,    0,    0,
-	    0,    0,    0,    0,    0,    5,    0,    0,    0,    0,    1,    1,
-	    1
+	    0,    0,    0,    5,    0,    0,    0,    0,    0,    0,    0,    0,
+	    0,    0,    0,    0,    0,    5,    0,    0,    0,    1,    1
 	};
 }
 
 private static final byte _robots_eof_actions[] = init__robots_eof_actions_0();
 
 
-static final int robots_start = 44;
-static final int robots_first_final = 44;
+static final int robots_start = 31;
+static final int robots_first_final = 31;
 static final int robots_error = 0;
 
-static final int robots_en_main = 44;
+static final int robots_en_main = 31;
 
 
 // line 55 "src/rl/clojurewerkz/crawlista/robots/Parser.rl"
@@ -200,14 +169,14 @@ static final int robots_en_main = 44;
     ITransientMap result = PersistentHashMap.create().asTransient();
 
     
-// line 204 "src/java/clojurewerkz/crawlista/robots/Parser.java"
+// line 173 "src/java/clojurewerkz/crawlista/robots/Parser.java"
 	{
 	cs = robots_start;
 	}
 
 // line 69 "src/rl/clojurewerkz/crawlista/robots/Parser.rl"
     
-// line 211 "src/java/clojurewerkz/crawlista/robots/Parser.java"
+// line 180 "src/java/clojurewerkz/crawlista/robots/Parser.java"
 	{
 	int _klen;
 	int _trans = 0;
@@ -304,10 +273,10 @@ case 1:
 	{
     String lastSeenUserAgentName = new String(data, ansp, (p - ansp));
 
-    result.assoc(lastSeenUserAgentName, PersistentVector.create());
+    result.assoc(lastSeenUserAgentName.trim(), PersistentVector.create());
   }
 	break;
-// line 311 "src/java/clojurewerkz/crawlista/robots/Parser.java"
+// line 280 "src/java/clojurewerkz/crawlista/robots/Parser.java"
 			}
 		}
 	}
@@ -339,10 +308,10 @@ case 4:
 	{
     String lastSeenUserAgentName = new String(data, ansp, (p - ansp));
 
-    result.assoc(lastSeenUserAgentName, PersistentVector.create());
+    result.assoc(lastSeenUserAgentName.trim(), PersistentVector.create());
   }
 	break;
-// line 346 "src/java/clojurewerkz/crawlista/robots/Parser.java"
+// line 315 "src/java/clojurewerkz/crawlista/robots/Parser.java"
 		}
 	}
 	}
