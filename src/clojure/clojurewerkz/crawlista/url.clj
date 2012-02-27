@@ -97,7 +97,7 @@
 
   URI
   (root? [input]
-    (.isEmpty (UrlLike/normalizePath (.getPath input))))
+    (#{"" "/"} (UrlLike/pathOrDefault (.getPath input))))
 
   URL
   (root? [input]
