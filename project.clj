@@ -1,4 +1,4 @@
-(defproject clojurewerkz/crawlista "1.0.0-SNAPSHOT"
+(defproject clojurewerkz/crawlista "1.0.0-alpha1"
   :description "Support library for Clojure applications that crawl the Web"
   :dependencies [[org.clojure/clojure "1.3.0"]
                  [clj-http            "0.3.1-SNAPSHOT"]
