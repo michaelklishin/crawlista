@@ -4,6 +4,8 @@
         [clojurewerkz.crawlista.url]
         [clojure.test]))
 
+(println (str "Using Clojure version " *clojure-version*))
+
 (deftest test-extract-title
   (is (= "Wired.com" (extract-title (slurp (clojure.java.io/resource "html/wired.com.html"))))))
 
