@@ -42,7 +42,7 @@ Crawlista is built from the ground up for Clojure 1.3 and up.
 Crawlista uses [Leiningen 2](https://github.com/technomancy/leiningen/blob/master/doc/TUTORIAL.md). Make
 sure you have it installed and then run tests against Clojure 1.3.0 using
 
-    lein2 with-profile dev test
+    lein2 all test
 
 Then create a branch and make your changes on it. Once you are done with your changes and all
 tests pass, submit a pull request on Github.
