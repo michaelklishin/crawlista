@@ -48,8 +48,8 @@
   (let [host        (.getHost (URL. (strip-query-string uri)))
         anchors     (extract-local-anchors body uri)
         hrefs       (urls-from anchors)]
-    (distinct (map (fn [^String s] (normalize-url (absolutize s uri)))
-                   (filter (fn [^String s] (local-to? (strip-query-string s) host)) hrefs)))))
+    (set (distinct (map (fn [^String s] (normalize-url (absolutize s uri)))
+                        (filter (fn [^String s] (local-to? (strip-query-string s) host)) hrefs))))))
 
 (defn followable?
   [^Element anchor]
@@ -67,8 +67,8 @@
   (let [host       (.getHost (URL. uri))
         anchors    (extract-local-followable-anchors body (strip-query-string uri))
         urls       (filter crawlable-href? (urls-from anchors))]
-    (distinct (map (fn [^String s] (normalize-url (absolutize s uri)))
-                   (filter (fn [^String s] (local-to? s host)) urls)))))
+    (set (distinct (map (fn [^String s] (normalize-url (absolutize s uri)))
+                        (filter (fn [^String s] (local-to? s host)) urls))))))
 
 
 (defn has-anchor?
