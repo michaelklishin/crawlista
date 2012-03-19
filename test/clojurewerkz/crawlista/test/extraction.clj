@@ -132,6 +132,42 @@
     (is (= (sort expected) (sort result)))))
 
 
+(deftest test-extract-local-followable-urls-case-3
+  (let [body     (slurp (clojure.java.io/resource "html/page_in_german.html"))
+        result   (extract-local-followable-urls body "http://orceo.com")]
+    (is (= 30 (count result)))
+    (is (= #{"http://orceo.com/link/232"
+             "http://orceo.com/de/orceo/30-home"
+             "http://orceo.com/link/233"
+             "http://orceo.com/de/bt/188-it-service"
+             "http://orceo.com/link/224"
+             "http://orceo.com/de/bt/telefonanlagen-%28telekommunikation%29/386-themen-blog"
+             "http://orceo.com/de/lt/2-zutrittskontrolle"
+             "http://orceo.com/mobile"
+             "http://orceo.com/de/lt/1-video%C3%BCberwachung-kamera%C3%BCberwachung"
+             "http://orceo.com/de/bt/82-zahlungssysteme-ec-geraete-kartenterminals"
+             "http://orceo.com"
+             "http://orceo.com/de/bt/484-video%C3%BCberwachung"
+             "http://orceo.com/de/orceo/262-news-presse"
+             "http://orceo.com/de/impressum/72-home"
+             "http://orceo.com/de/orceo/54-kontakt-oeffnungszeiten"
+             "http://orceo.com/de/orceo/26-jobs"
+             "http://orceo.com/sitemap"
+             "http://orceo.com/de/rd/18-home"
+             "http://orceo.com/de/bt/telefonanlagen-%28telekommunikation%29/226-tk-produkte"
+             "http://orceo.com/de/lt/6-home"
+             "http://orceo.com/de/bt/telefonanlagen-%28telekommunikation%29/224-tk-planung"
+             "http://orceo.com/de/bt/12-home"
+             "http://orceo.com/de/nutzungsbedingungen/75-home"
+             "http://orceo.com/de/bt/480-dokumenten-management-system-dms"
+             "http://orceo.com/de/bt/7-telefonanlagen-%28telekommunikation%29"
+             "http://orceo.com/de/bt/9-netzwerke"
+             "http://orceo.com/de/bt/8-it-systeme"
+             "http://orceo.com/contact"
+             "http://orceo.com/users/sign_in"
+             "http://orceo.com/link/231"}
+           result))))
+
 (deftest test-has-anchor
   (let [body (slurp (clojure.java.io/resource "html/arstechnica.com_full.html"))]
     (is (has-anchor? body "/apple"))
