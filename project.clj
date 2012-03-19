@@ -7,7 +7,7 @@
                  [clojurewerkz/urly "1.0.0-beta2"]]
   :source-paths ["src/clojure"]
   :profiles {:dev {:resource-paths ["test/resources"]},
-             :1.4 {:dependencies [[org.clojure/clojure "1.4.0-beta4"]]}}
+             :1.4 {:dependencies [[org.clojure/clojure "1.4.0-beta5"]]}}
   :aliases { "all" ["with-profile" "dev:dev,1.4"] }
   :resource-paths ["src/resources"]
   :java-source-paths ["src/java"]
