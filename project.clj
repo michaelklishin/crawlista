@@ -11,4 +11,8 @@
   :aliases { "all" ["with-profile" "dev:dev,1.4"] }
   :resource-paths ["src/resources"]
   :java-source-paths ["src/java"]
-  :warn-on-reflection true)
+  :warn-on-reflection true
+  :test-selectors   {
+                     :default        (fn [v] true)
+                     :focus          (fn [v] (:focus v))
+                     })
