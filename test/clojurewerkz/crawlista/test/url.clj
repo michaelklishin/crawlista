@@ -1,7 +1,7 @@
 (ns clojurewerkz.crawlista.test.url
-  (:import (java.net URI URL))
-  (:use [clojurewerkz.crawlista.url]
-        [clojure.test]))
+  (:import [java.net URI URL])
+  (:use clojurewerkz.crawlista.url
+        clojure.test))
 
 (deftest test-relative-anchor-locality
   (is (local-to? "http://wired.com/reviews"         "wired.com"))
