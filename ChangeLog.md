@@ -1,3 +1,8 @@
+## Changes between Crawlista 1.0.0-alpha3 and 1.0.0-alpha4
+
+No changes yet, the cycle has just started.
+
+
 ## Changes between Crawlista 1.0.0-alpha2 and 1.0.0-alpha3
 
 ### Media (MIME) type classification functions
