@@ -564,6 +564,51 @@
     (is (= (sort expected) (sort result)))))
 
 
+(deftest test-extract-local-followable-urls-case-7
+  (let [body     (slurp (clojure.java.io/resource "html/case1.html"))
+        result   (extract-local-followable-urls body "http://www.iq-shop.de/")
+        expected #{"http://iq-shop.de/?___SID=U"
+                   "http://iq-shop.de/about/?___SID=U"
+                   "http://iq-shop.de/agb/?___SID=U"
+                   "http://iq-shop.de/bestellung/?___SID=U"
+                   "http://iq-shop.de/cast-puzzle-ring-ii.html?___SID=U"
+                   "http://iq-shop.de/catalog/seo_sitemap/category/?___SID=U"
+                   "http://iq-shop.de/catalogsearch/advanced/result/?___SID=U"
+                   "http://iq-shop.de/checkout/cart/?___SID=U"
+                   "http://iq-shop.de/contacts/?___SID=U"
+                   "http://iq-shop.de/cubiform-stacked-cubes.html?___SID=U"
+                   "http://iq-shop.de/cublino.html?___SID=U"
+                   "http://iq-shop.de/datenschutz/?___SID=U"
+                   "http://iq-shop.de/denk-knobel.html?___SID=U"
+                   "http://iq-shop.de/eureka-puzzle-globus.html?___SID=U"
+                   "http://iq-shop.de/eureka-puzzle-oskars-wurfel.html?___SID=U"
+                   "http://iq-shop.de/eureka-puzzle-schlussel-labyrinth.html?___SID=U"
+                   "http://iq-shop.de/flotter-vierer.html?___SID=U"
+                   "http://iq-shop.de/geld-tresor.html?___SID=U"
+                   "http://iq-shop.de/gutscheine.html/?___SID=U"
+                   "http://iq-shop.de/home/?___SID=U"
+                   "http://iq-shop.de/impressum/?___SID=U"
+                   "http://iq-shop.de/iq-mino"
+                   "http://iq-shop.de/iqmino-puzzle.html?___SID=U"
+                   "http://iq-shop.de/lieferung/?___SID=U"
+                   "http://iq-shop.de/markus-hofmann-produkte.html?___SID=U"
+                   "http://iq-shop.de/memory.html?___SID=U"
+                   "http://iq-shop.de/puzzles.html?___SID=U"
+                   "http://iq-shop.de/ravensburger-think.html?___SID=U"
+                   "http://iq-shop.de/remember.html?___SID=U"
+                   "http://iq-shop.de/ringpuzzle-superior-o.html?___SID=U"
+                   "http://iq-shop.de/strategiespiele.html?___SID=U"
+                   "http://iq-shop.de/voll-verknotet-knot-so-fast.html?___SID=U"
+                   "http://iq-shop.de/vortex.html?___SID=U"
+                   "http://iq-shop.de/widerruf/?___SID=U"
+                   "http://iq-shop.de/zahlung/?___SID=U"
+                   "https://iq-shop.de/checkout/onepage/?___SID=S"
+                   "https://iq-shop.de/customer/account/?___SID=S"
+                   "https://iq-shop.de/wishlist/?___SID=S"}]
+    (is (= 38 (count result)))
+    (is (= (sort expected) (sort result)))))
+
+
 (deftest test-has-anchor
   (let [body (slurp (clojure.java.io/resource "html/arstechnica.com_full.html"))]
     (is (has-anchor? body "/apple"))
