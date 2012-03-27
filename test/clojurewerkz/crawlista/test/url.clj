@@ -3,9 +3,12 @@
   (:use clojurewerkz.crawlista.url
         clojure.test))
 
-(deftest test-relative-anchor-locality
+(deftest ^:focus test-relative-anchor-locality
   (is (local-to? "http://wired.com/reviews"         "wired.com"))
   (is (local-to? "http://wired.com/reviews"         "www.wired.com"))
+  (is (local-to? "http://www.wired.com/reviews"     "wired.com"))
+  (is (local-to? "http://http://www.wired.com/reviews"  "wired.com"))
+  (is (local-to? "http://https://www.wired.com/reviews" "wired.com"))  
   (is (local-to? "http://www.wired.com/reviews"     "wired.com"))
   (is (local-to? "/reviews"                         "wired.com"))
   (is (not (local-to? "http://wired.com/reviews"    "apple.com")))

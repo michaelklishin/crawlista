@@ -117,7 +117,7 @@
 
 (defn local-to?
   [^String uri-str ^String host]
-  (let [uri (URI. (-> uri-str strip-query-string (maybe-prepend-protocol "http")))]
+  (let [uri (URI. (-> uri-str eliminate-extra-protocol-prefixes strip-query-string (maybe-prepend-protocol "http")))]
     (or (and (.getHost uri)
              (= (maybe-prepend (.toLowerCase host) "www.") (maybe-prepend (.toLowerCase (.getHost uri)) "www.")))
         (not (.isAbsolute uri)))))
