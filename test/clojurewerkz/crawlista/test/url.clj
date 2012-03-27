@@ -20,6 +20,11 @@
 (deftest test-strip-query-string
   (is (= "http://novemberain.com" (strip-query-string "http://novemberain.com?query=string"))))
 
+(deftest test-separate-query-string
+  (are [input output] (is (= output (separate-query-string input)))
+       "http://novemberain.com?query=string" ["http://novemberain.com" "query=string"]
+       "http://www.iq-shop.de/catalogsearch/advanced/result/?___SID=U?product_type=54" ["http://www.iq-shop.de/catalogsearch/advanced/result/" "___SID=U?product_type=54"]))
+
 (deftest test-resourcification
   (is (= "http://novemberain.com/" (resourcify "http://NOVEMBERAIN.com?query=string")))
   (is (= "http://novemberain.com/" (resourcify "http://NOVEMBERAIN.com")))
@@ -71,7 +76,8 @@
        "http://www.google.com/"     "http://google.com"
        "www.google.com/"            "google.com"
        "https://www.apple.com"      "https://apple.com"
-       "http://www.store.apple.com" "http://store.apple.com"))
+       "http://www.store.apple.com" "http://store.apple.com"
+       "http://www.iq-shop.de/catalogsearch/advanced/result/?___SID=U?product_type=54" "http://iq-shop.de/catalogsearch/advanced/result/?___SID=U?product_type=54"))
 
 (deftest test-absolutize-with-strings
   (is (= (absolutize ""  "http://giove.local")  "http://giove.local/"))
@@ -85,11 +91,13 @@
        "/reviews"                          "http://giove.local/reviews"
        "/autopia/2011/11/evs-go-off-grid/" "http://giove.local/autopia/2011/11/evs-go-off-grid/"
        "offline.html"                      "http://giove.local/offline.html")
-    (is (= (absolutize "maintenance.html"  "http://giove.local/system/") "http://giove.local/system/maintenance.html"))
-    (is (= (absolutize "maintenance.html"  "http://giove.local/system")  "http://giove.local/maintenance.html"))
-    (is (= (absolutize "maintenance.html"  "http://giove.local/system/") "http://giove.local/system/maintenance.html"))
-    (is (= (absolutize "support/1.css" "http://tc.labs.opera.com/html/link/002.htm")  "http://tc.labs.opera.com/html/link/support/1.css"))
-    (is (= (absolutize "support/css"   "http://tc.labs.opera.com/html/link/002.htm")  "http://tc.labs.opera.com/html/link/support/css")))
+  (is (= (absolutize "http://www.iq-shop.de/catalogsearch/advanced/result/?___SID=U?product_type=54" "www.iq-shop.de")
+         "http://www.iq-shop.de/catalogsearch/advanced/result/?___SID=U?product_type=54"))
+  (is (= (absolutize "maintenance.html"  "http://giove.local/system/") "http://giove.local/system/maintenance.html"))
+  (is (= (absolutize "maintenance.html"  "http://giove.local/system")  "http://giove.local/maintenance.html"))
+  (is (= (absolutize "maintenance.html"  "http://giove.local/system/") "http://giove.local/system/maintenance.html"))
+  (is (= (absolutize "support/1.css" "http://tc.labs.opera.com/html/link/002.htm")  "http://tc.labs.opera.com/html/link/support/1.css"))
+  (is (= (absolutize "support/css"   "http://tc.labs.opera.com/html/link/002.htm")  "http://tc.labs.opera.com/html/link/support/css")))
 
 (deftest test-absolutize-with-uris
   (are [input result] (is (= (absolutize input (URI. "http://giove.local")) result))

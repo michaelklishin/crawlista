@@ -4,7 +4,7 @@
   (:use [clojure.string :only [split blank?]]
         [clojurewerkz.crawlista.string]
         [clojure.string :only [lower-case]]
-        [clojurewerkz.urly.core :only [path-of url-like]]))
+        [clojurewerkz.urly.core :only [path-of url-like eliminate-extra-protocol-prefixes]]))
 
 ;;
 ;; Implementation
@@ -30,7 +30,7 @@
 
 (defn separate-query-string
   [^String s]
-  (split s #"\?"))
+  (split s #"\?" 2))
 
 (defn client-side-href?
   [^String s]
