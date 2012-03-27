@@ -11,7 +11,7 @@ Crawlista is a support library for Clojure applications that crawl the Web.
 
 With Leiningen
 
-    [clojurewerkz/crawlista "1.0.0-alpha1"]
+    [clojurewerkz/crawlista "1.0.0-alpha3"]
 
 or, if you are comfortable with using snapshots,
 
@@ -40,7 +40,7 @@ Crawlista is built from the ground up for Clojure 1.3 and up.
 ## Development
 
 Crawlista uses [Leiningen 2](https://github.com/technomancy/leiningen/blob/master/doc/TUTORIAL.md). Make
-sure you have it installed and then run tests against Clojure 1.3.0 using
+sure you have it installed and then run tests against Clojure 1.3.0 and 1.4.0[-beta5] using
 
     lein2 all test
 
