@@ -10,6 +10,10 @@
 Extraction test suite now has a few more example documents that do not close `<body>` and `<html>` tags, has extra protocol
 prefixes and so on.
 
+### Urly 1.0.0-beta8
+
+[Urly](https://github.com/michaelklishin/urly) has been upgraded to 1.0.0-beta8.
+
 
 ## Changes between Crawlista 1.0.0-alpha2 and 1.0.0-alpha3
 
