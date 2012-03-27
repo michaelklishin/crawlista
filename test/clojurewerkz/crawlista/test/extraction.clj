@@ -1,8 +1,9 @@
 (ns clojurewerkz.crawlista.test.extraction
   (:import [java.net URI URL])
-  (:use [clojurewerkz.crawlista.extraction]
-        [clojurewerkz.crawlista.url]
-        [clojure.test]))
+  (:use clojurewerkz.crawlista.extraction
+        clojurewerkz.crawlista.url
+        clojure.test
+        [clojure.pprint :only (pprint)]))
 
 (println (str "Using Clojure version " *clojure-version*))
 
@@ -21,28 +22,28 @@
         result   (extract-local-urls body "http://wired.com")]
     (is (= 8 (count result)))
     (is (=
-         #{"http://wired.com"
-           "http://wired.com/wiredscience/2011/11/absolute-with-www"
-           "http://wired.com/www.wired.com/wiredscience/2011/11/link-without-http"
-           "http://wired.com/dangerroom/2011/11/absolute-without-domain"
-           "http://wired.com/dangerroom/2011/11/relative"
-           "http://wired.com/dangerroom.html"
-           "http://wired.com/auth?goauth_start=1&goauth_service=linkedin&goauth_action=login&loc="
-           "http://wired.com/gadgets/news/2011/11/arms-new-tools-make-it-easier-for-android-devs-to-use-native-code.ars?comments=1"}
-         result))))
+         (sort #{"http://wired.com"
+                 "http://wired.com/dangerroom/2011/11/relative"
+                 "http://wired.com/dangerroom.html"
+                 "http://wired.com/wiredscience/2011/11/absolute-with-www"
+                 "http://wired.com/gadgets/news/2011/11/arms-new-tools-make-it-easier-for-android-devs-to-use-native-code.ars?comments=1"
+                 "http://wired.com/auth?goauth_start=1&goauth_service=linkedin&goauth_action=login&loc=/?goauth_action=closewindow&type=authenticate"
+                 "http://wired.com/www.wired.com/wiredscience/2011/11/link-without-http"
+                 "http://wired.com/dangerroom/2011/11/absolute-without-domain"})
+         (sort result)))))
 
 (deftest test-extract-local-followable-urls-case-1
   (let [body     (slurp (clojure.java.io/resource "html/example1.html"))
         result   (extract-local-followable-urls body "http://wired.com")]
     (is (= 7 (count result)))
-    (is (= #{"http://wired.com"
-             "http://wired.com/wiredscience/2011/11/absolute-with-www"
-             "http://wired.com/www.wired.com/wiredscience/2011/11/link-without-http"
-             "http://wired.com/dangerroom/2011/11/absolute-without-domain"
-             "http://wired.com/dangerroom/2011/11/relative"
-             "http://wired.com/dangerroom.html"
-             "http://wired.com/gadgets/news/2011/11/arms-new-tools-make-it-easier-for-android-devs-to-use-native-code.ars?comments=1"}
-           result))))
+    (is (= (sort #{"http://wired.com"
+                   "http://wired.com/wiredscience/2011/11/absolute-with-www"
+                   "http://wired.com/www.wired.com/wiredscience/2011/11/link-without-http"
+                   "http://wired.com/dangerroom/2011/11/absolute-without-domain"
+                   "http://wired.com/dangerroom/2011/11/relative"
+                   "http://wired.com/dangerroom.html"
+                   "http://wired.com/gadgets/news/2011/11/arms-new-tools-make-it-easier-for-android-devs-to-use-native-code.ars?comments=1"})
+           (sort result)))))
 
 
 (deftest test-extract-local-followable-urls-case-2
@@ -567,45 +568,82 @@
 (deftest test-extract-local-followable-urls-case-7
   (let [body     (slurp (clojure.java.io/resource "html/case1.html"))
         result   (extract-local-followable-urls body "http://www.iq-shop.de/")
-        expected #{"http://iq-shop.de/?___SID=U"
-                   "http://iq-shop.de/about/?___SID=U"
-                   "http://iq-shop.de/agb/?___SID=U"
-                   "http://iq-shop.de/bestellung/?___SID=U"
+        expected #{"http://iq-shop.de/catalogsearch/advanced/result/?___SID=U?product_type=24"
                    "http://iq-shop.de/cast-puzzle-ring-ii.html?___SID=U"
-                   "http://iq-shop.de/catalog/seo_sitemap/category/?___SID=U"
-                   "http://iq-shop.de/catalogsearch/advanced/result/?___SID=U"
-                   "http://iq-shop.de/checkout/cart/?___SID=U"
-                   "http://iq-shop.de/contacts/?___SID=U"
-                   "http://iq-shop.de/cubiform-stacked-cubes.html?___SID=U"
-                   "http://iq-shop.de/cublino.html?___SID=U"
-                   "http://iq-shop.de/datenschutz/?___SID=U"
-                   "http://iq-shop.de/denk-knobel.html?___SID=U"
-                   "http://iq-shop.de/eureka-puzzle-globus.html?___SID=U"
-                   "http://iq-shop.de/eureka-puzzle-oskars-wurfel.html?___SID=U"
-                   "http://iq-shop.de/eureka-puzzle-schlussel-labyrinth.html?___SID=U"
-                   "http://iq-shop.de/flotter-vierer.html?___SID=U"
-                   "http://iq-shop.de/geld-tresor.html?___SID=U"
-                   "http://iq-shop.de/gutscheine.html/?___SID=U"
-                   "http://iq-shop.de/home/?___SID=U"
-                   "http://iq-shop.de/impressum/?___SID=U"
-                   "http://iq-shop.de/iq-mino"
-                   "http://iq-shop.de/iqmino-puzzle.html?___SID=U"
-                   "http://iq-shop.de/lieferung/?___SID=U"
-                   "http://iq-shop.de/markus-hofmann-produkte.html?___SID=U"
-                   "http://iq-shop.de/memory.html?___SID=U"
-                   "http://iq-shop.de/puzzles.html?___SID=U"
-                   "http://iq-shop.de/ravensburger-think.html?___SID=U"
+                   "http://iq-shop.de/catalogsearch/advanced/result/?___SID=U?product_type=58"
+                   "http://iq-shop.de/catalogsearch/advanced/result/?___SID=U?product_type=27"
+                   "http://https//www.iq-shop.de/impressum/?___SID=U"
                    "http://iq-shop.de/remember.html?___SID=U"
-                   "http://iq-shop.de/ringpuzzle-superior-o.html?___SID=U"
-                   "http://iq-shop.de/strategiespiele.html?___SID=U"
-                   "http://iq-shop.de/voll-verknotet-knot-so-fast.html?___SID=U"
+                   "http://iq-shop.de/eureka-puzzle-schlussel-labyrinth.html?___SID=U"
+                   "http://iq-shop.de/catalogsearch/advanced/result/?___SID=U?product_type=28"
                    "http://iq-shop.de/vortex.html?___SID=U"
                    "http://iq-shop.de/widerruf/?___SID=U"
-                   "http://iq-shop.de/zahlung/?___SID=U"
+                   "http://iq-shop.de/catalogsearch/advanced/result/?___SID=U?product_type=17"
+                   "https://iq-shop.de/wishlist/?___SID=S"
+                   "http://iq-shop.de/eureka-puzzle-globus.html?___SID=U"
+                   "http://iq-shop.de/geld-tresor.html?___SID=U"
+                   "http://iq-shop.de/iqmino-puzzle.html?___SID=U"
+                   "http://iq-shop.de/agb/?___SID=U"
+                   "http://iq-shop.de/catalogsearch/advanced/result/?___SID=U?difficulty=21"
+                   "http://iq-shop.de/bestellung/?___SID=U"
                    "https://iq-shop.de/checkout/onepage/?___SID=S"
+                   "http://iq-shop.de/catalogsearch/advanced/result/?___SID=U?difficulty=23"
+                   "http://iq-shop.de/denk-knobel.html?___SID=U"
+                   "http://iq-shop.de/catalogsearch/advanced/result/?___SID=U?difficulty=25"
+                   "http://iq-shop.de/catalog/seo_sitemap/category/?___SID=U"
+                   "http://iq-shop.de/datenschutz/?___SID=U"
+                   "http://iq-shop.de/zahlung/?___SID=U"
+                   "http://iq-shop.de/lieferung/?___SID=U"
+                   "http://iq-shop.de/catalogsearch/advanced/result/?___SID=U?difficulty=26"
+                   "http://iq-shop.de/cublino.html?___SID=U"
+                   "http://iq-shop.de/ravensburger-think.html?___SID=U"
+                   "http://iq-shop.de/voll-verknotet-knot-so-fast.html?___SID=U"
+                   "http://iq-shop.de/eureka-puzzle-oskars-wurfel.html?___SID=U"
+                   "http://http//www.iq-shop.de/contacts/?___SID=U"
+                   "http://iq-shop.de/ringpuzzle-superior-o.html?___SID=U"
+                   "http://iq-shop.de/checkout/cart/?___SID=U"
+                   "http://iq-shop.de/memory.html?___SID=U"
+                   "http://iq-shop.de/strategiespiele.html?___SID=U"
+                   "http://iq-shop.de/puzzles.html?___SID=U" "http://iq-shop.de/iq-mino"
+                   "http://iq-shop.de/flotter-vierer.html?___SID=U"
+                   "http://http//www.iq-shop.de/catalogsearch/advanced/result/?___SID=U?product_type=30"
+                   "http://iq-shop.de/gutscheine.html/?___SID=U"
+                   "http://iq-shop.de/catalogsearch/advanced/result/?___SID=U?product_type=52"
+                   "http://iq-shop.de/catalogsearch/advanced/result/?___SID=U?product_type=9"
+                   "http://iq-shop.de/about/?___SID=U"
+                   "http://iq-shop.de/catalogsearch/advanced/result/?___SID=U?product_type=53"
+                   "http://iq-shop.de/catalogsearch/advanced/result/?___SID=U?product_type=20"
+                   "http://iq-shop.de/catalogsearch/advanced/result/?___SID=U?product_type=54"
+                   "http://iq-shop.de/?___SID=U"
                    "https://iq-shop.de/customer/account/?___SID=S"
-                   "https://iq-shop.de/wishlist/?___SID=S"}]
-    (is (= 38 (count result)))
+                   "http://https//www.iq-shop.de/catalogsearch/advanced/result/?___SID=U?product_type=57"
+                   "http://iq-shop.de/cubiform-stacked-cubes.html?___SID=U"
+                   "http://iq-shop.de/markus-hofmann-produkte.html?___SID=U"
+                   "http://iq-shop.de/catalogsearch/advanced/result/?___SID=U?product_type=22"
+                   "http://iq-shop.de/catalogsearch/advanced/result/?___SID=U?product_type=56"
+                   "http://iq-shop.de/home/?___SID=U"}]
+    (is (= 55 (count result)))
+    (is (= (sort expected) (sort result)))))
+
+
+(deftest test-extract-local-followable-urls-case-8
+  (let [body     (slurp (clojure.java.io/resource "html/case2.html"))
+        result   (extract-local-followable-urls body "http://www.iq-shop.de/")
+        expected #{"http://http//www.iq-shop.de/catalogsearch/advanced/result/?___SID=U?product_type=30"
+                   "http://iq-shop.de/catalogsearch/advanced/result/?___SID=U?product_type=17"
+                   "http://iq-shop.de/catalogsearch/advanced/result/?___SID=U?product_type=20"
+                   "http://iq-shop.de/catalogsearch/advanced/result/?___SID=U?product_type=22"
+                   "http://iq-shop.de/catalogsearch/advanced/result/?___SID=U?product_type=24"
+                   "http://iq-shop.de/catalogsearch/advanced/result/?___SID=U?product_type=27"
+                   "http://iq-shop.de/catalogsearch/advanced/result/?___SID=U?product_type=28"
+                   "http://iq-shop.de/catalogsearch/advanced/result/?___SID=U?product_type=52"
+                   "http://iq-shop.de/catalogsearch/advanced/result/?___SID=U?product_type=53"
+                   "http://iq-shop.de/catalogsearch/advanced/result/?___SID=U?product_type=54"
+                   "http://iq-shop.de/catalogsearch/advanced/result/?___SID=U?product_type=56"
+                   "http://iq-shop.de/catalogsearch/advanced/result/?___SID=U?product_type=58"
+                   "http://iq-shop.de/catalogsearch/advanced/result/?___SID=U?product_type=9"
+                   "https://http//https://www.iq-shop.de/catalogsearch/advanced/result/?___SID=U?product_type=57"}]
+    (is (= 14 (count result)))
     (is (= (sort expected) (sort result)))))
 
 

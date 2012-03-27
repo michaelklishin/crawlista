@@ -3,7 +3,9 @@
            [org.jsoup.nodes Document Element]
            [java.net URI URL MalformedURLException])
   (:use    [clojurewerkz.crawlista.string]
-           [clojurewerkz.crawlista.url]))
+           [clojurewerkz.crawlista.url]
+           [clojurewerkz.urly.core :only [url-like eliminate-extra-protocol-prefixes]]
+           [clojure.pprint :only (pprint)]))
 
 ;;
 ;; Implementation
@@ -13,6 +15,12 @@
   [anchors]
   (map (fn [a] (.attr ^Element a "href")) anchors))
 
+(defn followable?
+  [^Element anchor]
+  (let [rel-value (.attr anchor "rel")]
+    (or (nil? rel-value)
+        (not (= "nofollow"
+                (-> rel-value .toLowerCase .trim))))))
 
 ;;
 ;; API
@@ -33,45 +41,44 @@
 
 
 (defn extract-anchors
-  [body]
+  "Extracts anchor elements from HTML body"
+  [^String body]
   (seq (-> (Jsoup/parse body)
            (.getElementsByTag "a"))))
 
 (defn extract-local-anchors
-  [body uri]
+  "Extract anchor elements with hrefs local to the given page"
+  [^String body uri]
   (let [host        (.getHost (URL. uri))]
     (seq (-> (Jsoup/parse body)
              (.getElementsByTag "a")))))
 
 (defn extract-local-urls
-  [body uri]
+  "Extract URLs from anchor elements with hrefs local to the given page"
+  [^String body uri]
   (let [host        (.getHost (URL. (strip-query-string uri)))
         anchors     (extract-local-anchors body uri)
         hrefs       (urls-from anchors)]
-    (set (distinct (map (fn [^String s] (normalize-url (absolutize s uri)))
+    (set (distinct (map (fn [^String s] (-> (absolutize s uri) normalize-url eliminate-extra-protocol-prefixes))
                         (filter (fn [^String s] (local-to? (strip-query-string s) host)) hrefs))))))
 
-(defn followable?
-  [^Element anchor]
-  (let [rel-value (.attr anchor "rel")]
-    (or (nil? rel-value)
-        (not (= "nofollow"
-                (-> rel-value .toLowerCase .trim))))))
-
 (defn extract-local-followable-anchors
+  "Like extract-local-achors but filters out anchors that can be followed (do not have rel=nofollow attribute)"
   [body uri]
   (filter followable? (extract-local-anchors body uri)))
 
 (defn extract-local-followable-urls
+  "Like extract-local-urls but filters out anchors that can be followed (do not have rel=nofollow attribute)"
   [body uri]
   (let [host       (.getHost (URL. uri))
         anchors    (extract-local-followable-anchors body (strip-query-string uri))
         urls       (filter crawlable-href? (urls-from anchors))]
-    (set (distinct (map (fn [^String s] (normalize-url (absolutize s uri)))
+    (set (distinct (map (fn [^String s] (-> (absolutize s uri) normalize-url eliminate-extra-protocol-prefixes))
                         (filter (fn [^String s] (local-to? s host)) urls))))))
 
 
 (defn has-anchor?
+  "Returns true if page body has an anchor (<a> tag) with given URL href value and text"
   ([body uri]
      (let [hrefs (urls-from (extract-anchors body))]
        (some (fn [^String s]

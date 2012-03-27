@@ -1,6 +1,14 @@
 ## Changes between Crawlista 1.0.0-alpha3 and 1.0.0-alpha4
 
-No changes yet, the cycle has just started.
+### Bug fixes
+
+ * `crawlista.url/separate-query-string` now correctly handles URLs with query string like this: `?a=1?b=2`
+ * `crawlista.url/local-to?` now eliminates extra protocols (so `http://https://apple.com` becomes `https://apple.com`)
+
+### Test suite improvements
+
+Extraction test suite now has a few more example documents that do not close `<body>` and `<html>` tags, has extra protocol
+prefixes and so on.
 
 
 ## Changes between Crawlista 1.0.0-alpha2 and 1.0.0-alpha3
