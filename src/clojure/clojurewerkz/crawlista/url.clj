@@ -10,12 +10,6 @@
 ;; Implementation
 ;;
 
-;; ...
-
-;;
-;; API
-;;
-
 (defn strip-query-string
   [^String s]
   (.replaceAll s "\\?.*$" ""))
@@ -31,6 +25,23 @@
 (defn separate-query-string
   [^String s]
   (split s #"\?" 2))
+
+(defn- maybe-prepend-protocol
+  "Fixes broken URLs like //jobs.arstechnica.com/list/1186 (that parse fine and both have host and are not considered absolute by java.net.URI)"
+  ([^String uri-str]
+     (maybe-prepend-protocol uri-str "http"))
+  ([^String uri-str ^String proto]
+     (let [uri (URI. uri-str)]
+       (if (and (not (.isAbsolute uri))
+                (not (nil? (.getHost uri))))
+         (str proto ":" uri-str)
+         uri-str))))
+
+;; ...
+
+;;
+;; API
+;;
 
 (defn client-side-href?
   [^String s]
@@ -103,17 +114,6 @@
   (root? [input]
     (root? (.toURI input))))
 
-
-(defn- maybe-prepend-protocol
-  "Fixes broken URLs like //jobs.arstechnica.com/list/1186 (that parse fine and both have host and are not considered absolute by java.net.URI)"
-  ([^String uri-str]
-     (maybe-prepend-protocol uri-str "http"))
-  ([^String uri-str ^String proto]
-     (let [uri (URI. uri-str)]
-       (if (and (not (.isAbsolute uri))
-                (not (nil? (.getHost uri))))
-         (str proto ":" uri-str)
-         uri-str))))
 
 (defn local-to?
   [^String uri-str ^String host]
