@@ -1,3 +1,13 @@
+## Changes between Crawlista 1.0.0-alpha6 and 1.0.0-alpha7
+
+No changes yet.
+
+
+## Changes between Crawlista 1.0.0-alpha5 and 1.0.0-alpha6
+
+[Urly](https://github.com/michaelklishin/urly) has been upgraded to 1.0.0-rc2.
+
+
 ## Changes between Crawlista 1.0.0-alpha4 and 1.0.0-alpha5
 
 [Urly](https://github.com/michaelklishin/urly) has been upgraded to 1.0.0-rc1.
