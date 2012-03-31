@@ -8,7 +8,7 @@
                  [com.novemberain/pantomime "1.3.0-beta1"]]
   :source-paths ["src/clojure"]
   :profiles {:dev {:resource-paths ["test/resources"]},
-             :1.4 {:dependencies [[org.clojure/clojure "1.4.0-beta5"]]}}
+             :1.4 {:dependencies [[org.clojure/clojure "1.4.0-beta6"]]}}
   :aliases { "all" ["with-profile" "dev:dev,1.4"] }
   :resource-paths ["src/resources"]
   :java-source-paths ["src/java"]
