@@ -4,7 +4,7 @@
   :dependencies [[org.clojure/clojure "1.3.0"]
                  [clj-http "0.3.3"]
                  [org.jsoup/jsoup "1.6.1"]
-                 [clojurewerkz/urly "1.0.0-rc1"]
+                 [clojurewerkz/urly "1.0.0-rc2"]
                  [com.novemberain/pantomime "1.3.0-beta1"]]
   :source-paths ["src/clojure"]
   :profiles {:dev {:resource-paths ["test/resources"]},
