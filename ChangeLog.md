@@ -1,3 +1,8 @@
+## Changes between Crawlista 1.0.0-alpha4 and 1.0.0-alpha5
+
+[Urly](https://github.com/michaelklishin/urly) has been upgraded to 1.0.0-rc1.
+
+
 ## Changes between Crawlista 1.0.0-alpha3 and 1.0.0-alpha4
 
 ### Bug fixes
