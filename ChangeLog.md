@@ -1,6 +1,12 @@
 ## Changes between Crawlista 1.0.0-alpha6 and 1.0.0-alpha7
 
-No changes yet.
+### Pantomime 1.3.0-rc1
+
+[Pantomime](https://github.com/michaelklishin/pantomime) has been upgraded to 1.3.0-rc1.
+
+### JSoup 1.6.2
+
+[JSoup](https://jsoup.org) has been upgraded to 1.6.2.
 
 
 ## Changes between Crawlista 1.0.0-alpha5 and 1.0.0-alpha6
