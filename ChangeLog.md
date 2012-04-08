@@ -1,3 +1,18 @@
+## Changes between Crawlista 1.0.0-alpha7 and 1.0.0-alpha8
+
+### Improvements to clojurewerkz.crawlista.media/html-content?
+
+`clojurewerkz.crawlista.media/html-content?` now has 2-arity form that accepts HTTP response body
+and headers and performs smarter MIMEtype (content type) detection. The rationale for this is that
+there are broken Web applications, frameworks and servers that serve PDF and PNG documents as text/html.
+By using both response body detection techniques (magic bytes, special tags for XML subtypes, etc) and Content-Type
+HTTP header Crawlista can provide more accurate detection of HTML content.
+
+### clj-http 0.3.6
+
+[clj-http](https://github.com/dakrone/clj-http) has been upgraded to 0.3.6.
+
+
 ## Changes between Crawlista 1.0.0-alpha6 and 1.0.0-alpha7
 
 ### Pantomime 1.3.0-rc1
