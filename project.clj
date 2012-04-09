@@ -4,7 +4,7 @@
   :dependencies [[org.clojure/clojure       "1.3.0"]
                  [clj-http                  "0.3.6"]
                  [org.jsoup/jsoup           "1.6.2"]
-                 [clojurewerkz/urly         "1.0.0-rc3"]
+                 [clojurewerkz/urly         "1.0.0-rc4"]
                  [com.novemberain/pantomime "1.3.0-rc1"]]
   :source-paths      ["src/clojure"]
   :resource-paths    ["src/resources"]
@@ -13,6 +13,7 @@
              :1.4 {:dependencies [[org.clojure/clojure "1.4.0-beta6"]]}}
   :aliases  { "all" ["with-profile" "dev:dev,1.4"] }
   :warn-on-reflection true
-  :test-selectors     {:default  (constantly true)
-                       :focus    :focus
-                       :all      (constantly true)})
+  :test-selectors     {:default    (constantly true)
+                       :focus      :focus
+                       :extraction :extraction                       
+                       :all        (constantly true)})
