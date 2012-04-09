@@ -1,4 +1,4 @@
-(defproject clojurewerkz/crawlista "1.0.0-alpha10"
+(defproject clojurewerkz/crawlista "1.0.0-SNAPSHOT"
   :description "Support library for Clojure applications that crawl the Web"
   :min-lein-version "2.0.0"
   :dependencies [[org.clojure/clojure       "1.3.0"]
