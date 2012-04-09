@@ -4,7 +4,7 @@
            [java.net URI URL MalformedURLException])
   (:use    [clojurewerkz.crawlista.string]
            [clojurewerkz.crawlista.url]
-           [clojurewerkz.urly.core :only [url-like eliminate-extra-protocol-prefixes]]
+           [clojurewerkz.urly.core :only [url-like eliminate-extra-protocol-prefixes host-of mutate-query]]
            [clojure.pprint :only (pprint)]))
 
 ;;
@@ -49,7 +49,7 @@
 (defn extract-local-urls
   "Extract URLs from anchor elements with hrefs local to the given page"
   [^String body uri]
-  (let [host        (.getHost (URL. (strip-query-string uri)))
+  (let [host        (host-of uri)
         anchors     (extract-anchors body)
         hrefs       (urls-from anchors)]
     (set (distinct (map (fn [^String s] (-> (absolutize s uri) normalize-url eliminate-extra-protocol-prefixes))
@@ -63,7 +63,7 @@
 (defn extract-local-followable-urls
   "Like extract-local-urls but filters out anchors that can be followed (do not have rel=nofollow attribute)"
   [body uri]
-  (let [host       (.getHost (URL. uri))
+  (let [host       (host-of uri)
         anchors    (extract-local-followable-anchors body (strip-query-string uri))
         urls       (filter crawlable-href? (urls-from anchors))]
     (set (distinct (map (fn [^String s] (-> (absolutize s uri) normalize-url eliminate-extra-protocol-prefixes))

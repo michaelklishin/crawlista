@@ -10,6 +10,15 @@
 ;; Implementation
 ;;
 
+(def ^{:private true :const true}
+  ENCODED_SPACE "%20")
+(def ^{:private true :const true}
+  SPACE " ")
+
+(defn- encode-spaces
+  [^String s]
+  (.replaceAll s SPACE ENCODED_SPACE))
+
 (defn strip-query-string
   [^String s]
   (.replaceAll s "\\?.*$" ""))
@@ -80,10 +89,10 @@
     (maybe-chopr (normalize-host input) "/"))
   (absolutize [input against]
     (let [[input-without-query-string query-string] (separate-query-string input)
-          against-without-last-path-segment         (-> (url-like (URI. against)) .withoutLastPathSegment .toURI)
+          against-without-last-path-segment         (-> (url-like against) .withoutLastPathSegment .toURI)
           resolved                                  (.toString (.resolve against-without-last-path-segment (URI. input-without-query-string)))]
       (if query-string
-        (str resolved "?" query-string)
+        (str resolved "?" (encode-spaces query-string))
         resolved)))
 
   URL
