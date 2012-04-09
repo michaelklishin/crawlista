@@ -46,26 +46,19 @@
   (seq (-> (Jsoup/parse body)
            (.getElementsByTag "a"))))
 
-(defn extract-local-anchors
-  "Extract anchor elements with hrefs local to the given page"
-  [^String body uri]
-  (let [host        (.getHost (URL. uri))]
-    (seq (-> (Jsoup/parse body)
-             (.getElementsByTag "a")))))
-
 (defn extract-local-urls
   "Extract URLs from anchor elements with hrefs local to the given page"
   [^String body uri]
   (let [host        (.getHost (URL. (strip-query-string uri)))
-        anchors     (extract-local-anchors body uri)
+        anchors     (extract-anchors body)
         hrefs       (urls-from anchors)]
     (set (distinct (map (fn [^String s] (-> (absolutize s uri) normalize-url eliminate-extra-protocol-prefixes))
                         (filter (fn [^String s] (local-to? (strip-query-string s) host)) hrefs))))))
 
 (defn extract-local-followable-anchors
-  "Like extract-local-achors but filters out anchors that can be followed (do not have rel=nofollow attribute)"
+  "Like extract-achors but filters out anchors that can be followed (do not have rel=nofollow attribute)"
   [body uri]
-  (filter followable? (extract-local-anchors body uri)))
+  (filter followable? (extract-anchors body)))
 
 (defn extract-local-followable-urls
   "Like extract-local-urls but filters out anchors that can be followed (do not have rel=nofollow attribute)"
