@@ -1,6 +1,17 @@
-## Changes between Crawlista 1.0.0-alpha9 and 1.0.0-alpha10
+## Changes between Crawlista 1.0.0-alpha10 and 1.0.0-alpha11
 
 No changes yet.
+
+
+
+## Changes between Crawlista 1.0.0-alpha9 and 1.0.0-alpha10
+
+### Conservative encoding of unencoded characters
+
+Crawlista now will encode unencoded spaces in query strings. This is a conservative strategy
+that avoids double-encoding but solves issues with broken Web applications and content management
+systems that do not escape query parameter values.
+
 
 
 ## Changes between Crawlista 1.0.0-alpha8 and 1.0.0-alpha9
