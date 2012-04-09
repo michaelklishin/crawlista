@@ -19,30 +19,30 @@
 
 (deftest test-extract-local-urls
   (let [body     (slurp (clojure.java.io/resource "html/example1.html"))
-        result   (extract-local-urls body "http://wired.com")]
+        result   (extract-local-urls body "http://wired.com")
+        expected #{"http://wired.com"
+                   "http://wired.com/dangerroom/2011/11/relative"
+                   "http://wired.com/dangerroom.html"
+                   "http://wired.com/wiredscience/2011/11/absolute-with-www"
+                   "http://wired.com/gadgets/news/2011/11/arms-new-tools-make-it-easier-for-android-devs-to-use-native-code.ars?comments=1"
+                   "http://wired.com/auth?goauth_start=1&goauth_service=linkedin&goauth_action=login&loc=/?goauth_action=closewindow&type=authenticate"
+                   "http://wired.com/www.wired.com/wiredscience/2011/11/link-without-http"
+                   "http://wired.com/dangerroom/2011/11/absolute-without-domain"}]
     (is (= 8 (count result)))
-    (is (=
-         (sort #{"http://wired.com"
-                 "http://wired.com/dangerroom/2011/11/relative"
-                 "http://wired.com/dangerroom.html"
-                 "http://wired.com/wiredscience/2011/11/absolute-with-www"
-                 "http://wired.com/gadgets/news/2011/11/arms-new-tools-make-it-easier-for-android-devs-to-use-native-code.ars?comments=1"
-                 "http://wired.com/auth?goauth_start=1&goauth_service=linkedin&goauth_action=login&loc=/?goauth_action=closewindow&type=authenticate"
-                 "http://wired.com/www.wired.com/wiredscience/2011/11/link-without-http"
-                 "http://wired.com/dangerroom/2011/11/absolute-without-domain"})
-         (sort result)))))
+    (is (= (sort expected) (sort result)))))
 
 (deftest test-extract-local-followable-urls-case-1
   (let [body     (slurp (clojure.java.io/resource "html/example1.html"))
-        result   (extract-local-followable-urls body "http://wired.com")]
-    (is (= 7 (count result)))
-    (is (= (sort #{"http://wired.com"
+        result   (extract-local-followable-urls body "http://wired.com")
+        expected #{"http://wired.com"
                    "http://wired.com/wiredscience/2011/11/absolute-with-www"
                    "http://wired.com/www.wired.com/wiredscience/2011/11/link-without-http"
                    "http://wired.com/dangerroom/2011/11/absolute-without-domain"
                    "http://wired.com/dangerroom/2011/11/relative"
                    "http://wired.com/dangerroom.html"
-                   "http://wired.com/gadgets/news/2011/11/arms-new-tools-make-it-easier-for-android-devs-to-use-native-code.ars?comments=1"})
+                   "http://wired.com/gadgets/news/2011/11/arms-new-tools-make-it-easier-for-android-devs-to-use-native-code.ars?comments=1"}]
+    (is (= 7 (count result)))
+    (is (= (sort expected)
            (sort result)))))
 
 
@@ -135,39 +135,41 @@
 
 (deftest test-extract-local-followable-urls-case-3
   (let [body     (slurp (clojure.java.io/resource "html/page_in_german.html"))
-        result   (extract-local-followable-urls body "http://orceo.com")]
-    (is (= 30 (count result)))
-    (is (= #{"http://orceo.com/link/232"
-             "http://orceo.com/de/orceo/30-home"
-             "http://orceo.com/link/233"
-             "http://orceo.com/de/bt/188-it-service"
-             "http://orceo.com/link/224"
-             "http://orceo.com/de/bt/telefonanlagen-%28telekommunikation%29/386-themen-blog"
-             "http://orceo.com/de/lt/2-zutrittskontrolle"
-             "http://orceo.com/mobile"
-             "http://orceo.com/de/lt/1-video%C3%BCberwachung-kamera%C3%BCberwachung"
-             "http://orceo.com/de/bt/82-zahlungssysteme-ec-geraete-kartenterminals"
-             "http://orceo.com"
-             "http://orceo.com/de/bt/484-video%C3%BCberwachung"
-             "http://orceo.com/de/orceo/262-news-presse"
-             "http://orceo.com/de/impressum/72-home"
-             "http://orceo.com/de/orceo/54-kontakt-oeffnungszeiten"
-             "http://orceo.com/de/orceo/26-jobs"
-             "http://orceo.com/sitemap"
-             "http://orceo.com/de/rd/18-home"
-             "http://orceo.com/de/bt/telefonanlagen-%28telekommunikation%29/226-tk-produkte"
-             "http://orceo.com/de/lt/6-home"
-             "http://orceo.com/de/bt/telefonanlagen-%28telekommunikation%29/224-tk-planung"
-             "http://orceo.com/de/bt/12-home"
-             "http://orceo.com/de/nutzungsbedingungen/75-home"
-             "http://orceo.com/de/bt/480-dokumenten-management-system-dms"
-             "http://orceo.com/de/bt/7-telefonanlagen-%28telekommunikation%29"
-             "http://orceo.com/de/bt/9-netzwerke"
-             "http://orceo.com/de/bt/8-it-systeme"
-             "http://orceo.com/contact"
-             "http://orceo.com/users/sign_in"
-             "http://orceo.com/link/231"}
-           result))))
+        result   (extract-local-followable-urls body "http://orceo.com")
+        expected #{"http://orceo.com/link/232"
+                   "http://orceo.com/de/orceo/30-home"
+                   "http://orceo.com/link/233"
+                   "http://orceo.com/de/bt/188-it-service"
+                   "http://orceo.com/link/224"
+                   "http://orceo.com/de/bt/telefonanlagen-%28telekommunikation%29/386-themen-blog"
+                   "http://orceo.com/de/lt/2-zutrittskontrolle"
+                   "http://orceo.com/mobile"
+                   "http://orceo.com/de/lt/1-video%C3%BCberwachung-kamera%C3%BCberwachung"
+                   "http://orceo.com/de/bt/82-zahlungssysteme-ec-geraete-kartenterminals"
+                   "http://orceo.com"
+                   "http://orceo.com/de/bt/484-video%C3%BCberwachung"
+                   "http://orceo.com/de/orceo/262-news-presse"
+                   "http://orceo.com/de/impressum/72-home"
+                   "http://orceo.com/de/orceo/54-kontakt-oeffnungszeiten"
+                   "http://orceo.com/de/orceo/26-jobs"
+                   "http://orceo.com/sitemap"
+                   "http://orceo.com/de/rd/18-home"
+                   "http://orceo.com/de/bt/telefonanlagen-%28telekommunikation%29/226-tk-produkte"
+                   "http://orceo.com/de/lt/6-home"
+                   "http://orceo.com/de/bt/telefonanlagen-%28telekommunikation%29/224-tk-planung"
+                   "http://orceo.com/de/bt/12-home"
+                   "http://orceo.com/de/nutzungsbedingungen/75-home"
+                   "http://orceo.com/de/bt/480-dokumenten-management-system-dms"
+                   "http://orceo.com/de/bt/7-telefonanlagen-%28telekommunikation%29"
+                   "http://orceo.com/de/bt/9-netzwerke"
+                   "http://orceo.com/de/bt/8-it-systeme"
+                   "http://orceo.com/contact"
+                   "http://orceo.com/users/sign_in"
+                   "http://orceo.com/link/231"
+                   "http://orceo.com/search?query=not%20encoded"}]
+    (is (= 31 (count result)))
+    (is (= (sort expected)
+           (sort result)))))
 
 
 (deftest test-extract-local-followable-urls-case-4
