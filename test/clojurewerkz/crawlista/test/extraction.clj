@@ -2875,6 +2875,23 @@
     (is (= (sort expected) (sort result)))))
 
 
+(deftest test-extract-local-followable-urls-case-20
+  (let [body     (slurp (clojure.java.io/resource "html/case14.html"))
+        result   (extract-local-followable-urls body "http://www.elpais.com.uy")
+        expected #{"http://elpais.com.uy"
+                   "http://elpais.com.uy/edicion"
+                   "http://elpais.com.uy/edicion/ciudades"
+                   "http://elpais.com.uy/edicion/deportes"
+                   "http://elpais.com.uy/edicion/economia"
+                   "http://elpais.com.uy/edicion/ecos"
+                   "http://elpais.com.uy/edicion/editorial"
+                   "http://elpais.com.uy/edicion/espectaculos"
+                   "http://elpais.com.uy/edicion/internacional"
+                   "http://elpais.com.uy/edicion/nacional"}]
+    (is (= 10 (count result)))
+    (is (= (sort expected) (sort result)))))
+
+
 (deftest test-has-anchor
   (let [body (slurp (clojure.java.io/resource "html/arstechnica.com_full.html"))]
     (is (has-anchor? body "/apple"))
