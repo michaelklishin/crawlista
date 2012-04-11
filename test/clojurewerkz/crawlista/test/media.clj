@@ -31,4 +31,5 @@
        "http://clojuredocs.org/"                                             true
        "http://upload.wikimedia.org/wikipedia/en/1/1a/Clojure-glyph.svg"     false
        "http://upload.wikimedia.org/wikipedia/commons/9/9a/PNG_transparency_demonstration_2.png" false
-       "http://creativecommons.org/images/deed/cc-logo.jpg" false))
+       "http://creativecommons.org/images/deed/cc-logo.jpg" false
+       "http://elpais.com.uy/formatos/rss/index.asp?seccion=umomento" false))
