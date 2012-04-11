@@ -11,9 +11,13 @@
 ;; Implementation
 ;;
 
+(defn- ^String href-from
+  [^Element a]
+  (.attr ^Element a "href"))
+
 (defn- urls-from
   [anchors]
-  (map (fn [a] (.attr ^Element a "href")) anchors))
+  (map href-from anchors))
 
 (defn followable?
   [^Element anchor]
@@ -43,8 +47,7 @@
 (defn extract-anchors
   "Extracts anchor elements from HTML body"
   [^String body]
-  (seq (-> (Jsoup/parse body)
-           (.getElementsByTag "a"))))
+  (.getElementsByTag ^Document (Jsoup/parse body) "a"))
 
 (defn extract-local-urls
   "Extract URLs from anchor elements with hrefs local to the given page"

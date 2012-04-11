@@ -2892,6 +2892,14 @@
     (is (= (sort expected) (sort result)))))
 
 
+(deftest test-extract-local-followable-urls-case-21
+  (let [body     (slurp (clojure.java.io/resource "html/nobody.html"))
+        result   (extract-local-followable-urls body "http://tagesanzeiger.ch")]
+    (is (empty? result))
+    ;; because (empty? nil) returns true
+    (is (= #{} result))))
+
+
 (deftest test-has-anchor
   (let [body (slurp (clojure.java.io/resource "html/arstechnica.com_full.html"))]
     (is (has-anchor? body "/apple"))
