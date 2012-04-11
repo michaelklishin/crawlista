@@ -1,6 +1,19 @@
-## Changes between Crawlista 1.0.0-alpha10 and 1.0.0-alpha11
+## Changes between Crawlista 1.0.0-alpha11 and 1.0.0-alpha12
 
 No changes yet.
+
+
+## Changes between Crawlista 1.0.0-alpha10 and 1.0.0-alpha11
+
+### clojurewerkz.crawlista.extraction/extract-anchors no longer returns nil
+
+`clojurewerkz.crawlista.extraction/extract-anchors` no longer returns nil when there are no anchors on the page.
+Instead, it returns an empty list (an object that implements `java.util.List`).
+
+
+### Urly 1.0.0-rc5
+
+[Urly](https://github.com/michaelklishin/urly) has been upgraded to 1.0.0-rc5.
 
 
 
