@@ -1,6 +1,6 @@
 (ns clojurewerkz.crawlista.url
   (:import [java.net URI URL MalformedURLException]
-           [clojurewerkz.urly UrlLike])
+           clojurewerkz.urly.UrlLike)
   (:use [clojure.string :only [split blank?]]
         [clojurewerkz.crawlista.string]
         [clojure.string :only [lower-case]]
@@ -71,22 +71,14 @@
 
 
 (defprotocol URLNormalization
-  (normalize-host [input] "Normalizes host by chopping off www. if necessary")
-  (normalize-url  [input] "Normalizes URL by chopping off www. at the beginning and trailing slash at the end, if necessary")
+  (normalize-url  [input] "Normalizes URL by lowercasing host name, adding trailing slash at the end and so on, if necessary")
   (absolutize     [input against] "Returns absolute URL")
   (relativize     [input against] "Returns relative URL"))
 
 (extend-protocol URLNormalization
   String
-  (normalize-host [input]
-    (try
-      (let [url  (URL. input)
-            url* (URL. (.getProtocol url) (maybe-chopl (.toLowerCase (.getHost url)) "www.") (.getPort url) (.getFile url))]
-        (str url*))
-      (catch MalformedURLException e
-        (maybe-chopl (.toLowerCase input) "www."))))
   (normalize-url [input]
-    (maybe-chopr (normalize-host input) "/"))
+    (-> ^UrlLike (url-like input) .withoutWww .toString))
   (absolutize [input against]
     (let [[input-without-query-string query-string] (separate-query-string input)
           against-without-last-path-segment         (-> (url-like against) .withoutLastPathSegment .toURI)
@@ -95,14 +87,7 @@
         (str resolved "?" (encode-spaces query-string))
         resolved)))
 
-  URL
-  (normalize-host [input]
-    (URL. (.getProtocol input) (maybe-chopl (.toLowerCase (.getHost input)) "www.") (.getPort input) (.getFile input)))
-
-
   URI
-  (normalize-host [input]
-    (URI. (.getScheme input) nil (maybe-chopl (.toLowerCase (.getHost input)) "www.") (.getPort input) (.getPath input) nil nil))
   (absolutize [input ^java.net.URI against]
     (.resolve against input)))
 

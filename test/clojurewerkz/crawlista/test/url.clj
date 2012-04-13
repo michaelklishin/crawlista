@@ -8,7 +8,7 @@
   (is (local-to? "http://wired.com/reviews"         "www.wired.com"))
   (is (local-to? "http://www.wired.com/reviews"     "wired.com"))
   (is (local-to? "http://http://www.wired.com/reviews"  "wired.com"))
-  (is (local-to? "http://https://www.wired.com/reviews" "wired.com"))  
+  (is (local-to? "http://https://www.wired.com/reviews" "wired.com"))
   (is (local-to? "http://www.wired.com/reviews"     "wired.com"))
   (is (local-to? "/reviews"                         "wired.com"))
   (is (not (local-to? "http://wired.com/reviews"    "apple.com")))
@@ -65,21 +65,14 @@
   (is (not (crawlable-href? (slurp (clojure.java.io/resource "js/href_value1.js")))))
   (is (not (crawlable-href? "javascript: alert('123')"))))
 
-(deftest test-host-normalization-with-strings
-  (are [input result] (is (= (normalize-host input) result))
-       "http://www.google.com/"     "http://google.com/" ;; does not deal with path. MK.
-       "www.google.com/"            "google.com/"
-       "https://www.apple.com"      "https://apple.com"
-       "http://www.store.apple.com" "http://store.apple.com"
-       (URL. "http://www.google.com/") (URL. "http://google.com/")
-       (URI. "http://www.google.com/") (URI. "http://google.com/")))
-
-(deftest test-full-url-normalization-with-strings
+(deftest ^:focus test-full-url-normalization-with-strings
   (are [input result] (is (= (normalize-url input) result))
-       "http://www.google.com/"     "http://google.com"
-       "www.google.com/"            "google.com"
-       "https://www.apple.com"      "https://apple.com"
-       "http://www.store.apple.com" "http://store.apple.com"
+       "http://www.google.com/"     "http://google.com/"
+       "www.google.com"             "http://google.com/"
+       "https://www.apple.com"      "https://apple.com/"
+       "https://www.ibm.com"        "https://ibm.com/"
+       "https://www2.ibm.com"       "https://ibm.com/"
+       "http://www.store.apple.com" "http://store.apple.com/"
        "http://www.iq-shop.de/catalogsearch/advanced/result/?___SID=U?product_type=54" "http://iq-shop.de/catalogsearch/advanced/result/?___SID=U?product_type=54"))
 
 (deftest test-absolutize-with-strings
