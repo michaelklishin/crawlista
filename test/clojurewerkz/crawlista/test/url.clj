@@ -65,7 +65,7 @@
   (is (not (crawlable-href? (slurp (clojure.java.io/resource "js/href_value1.js")))))
   (is (not (crawlable-href? "javascript: alert('123')"))))
 
-(deftest ^:focus test-full-url-normalization-with-strings
+(deftest test-full-url-normalization-with-strings
   (are [input result] (is (= (normalize-url input) result))
        "http://www.google.com/"     "http://google.com/"
        "www.google.com"             "http://google.com/"
