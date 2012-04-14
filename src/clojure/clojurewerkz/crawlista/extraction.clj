@@ -2,10 +2,10 @@
   (:import [org.jsoup Jsoup]
            [org.jsoup.nodes Document Element]
            [java.net URI URL MalformedURLException])
-  (:use    [clojurewerkz.crawlista.string]
-           [clojurewerkz.crawlista.url]
-           [clojurewerkz.urly.core :only [url-like eliminate-extra-protocol-prefixes host-of mutate-query]]
-           [clojure.pprint :only (pprint)]))
+  (:use    clojurewerkz.crawlista.string
+           clojurewerkz.crawlista.url
+           [clojurewerkz.urly.core :only [url-like eliminate-extra-protocol-prefixes host-of mutate-query
+                                          absolutize normalize-url without-fragment]]))
 
 ;;
 ;; Implementation
@@ -55,8 +55,11 @@
   (let [host        (host-of uri)
         anchors     (extract-anchors body)
         hrefs       (urls-from anchors)]
-    (set (distinct (map (fn [^String s] (-> (absolutize s uri) normalize-url eliminate-extra-protocol-prefixes))
-                        (filter (fn [^String s] (local-to? (strip-query-string s) host)) hrefs))))))
+    (set (map (fn [^String s]
+                (-> (absolutize s uri) strip-fragment))
+              (filter (fn [^String s]
+                        (local-to? (strip-query-string s) host))
+                      hrefs)))))
 
 (defn extract-local-followable-anchors
   "Like extract-achors but filters out anchors that can be followed (do not have rel=nofollow attribute)"
@@ -69,8 +72,12 @@
   (let [host       (host-of uri)
         anchors    (extract-local-followable-anchors body (strip-query-string uri))
         urls       (filter crawlable-href? (urls-from anchors))]
-    (set (distinct (map (fn [^String s] (-> (absolutize s uri) normalize-url eliminate-extra-protocol-prefixes))
-                        (filter (fn [^String s] (local-to? s host)) urls))))))
+    (set (map (fn [^String s]
+                (-> (absolutize s uri) strip-fragment))
+              (filter
+               (fn [^String s]
+                 (local-to? s host))
+               urls)))))
 
 
 (defn has-anchor?

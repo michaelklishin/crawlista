@@ -23,6 +23,10 @@
   [^String s]
   (.replaceAll s "\\?.*$" ""))
 
+(defn strip-fragment
+  [^String s]
+  (.replaceAll s "\\#.*$" ""))
+
 (def resourcify
   (comp (fn [^String s]
           (if-not (re-find #"\.([a-zA-Z0-9]+)$" (path-of s))
@@ -30,10 +34,6 @@
             s))
         strip-query-string
         lower-case))
-
-(defn separate-query-string
-  [^String s]
-  (split s #"\?" 2))
 
 (defn- maybe-prepend-protocol
   "Fixes broken URLs like //jobs.arstechnica.com/list/1186 (that parse fine and both have host and are not considered absolute by java.net.URI)"
@@ -69,44 +69,6 @@
                                      (catch Exception e
                                        false))))
 
-
-(defprotocol URLNormalization
-  (normalize-url  [input] "Normalizes URL by lowercasing host name, adding trailing slash at the end and so on, if necessary")
-  (absolutize     [input against] "Returns absolute URL")
-  (relativize     [input against] "Returns relative URL"))
-
-(extend-protocol URLNormalization
-  String
-  (normalize-url [input]
-    (-> ^UrlLike (url-like input) .withoutWww .toString))
-  (absolutize [input against]
-    (let [[input-without-query-string query-string] (separate-query-string input)
-          against-without-last-path-segment         (-> (url-like against) .withoutLastPathSegment .toURI)
-          resolved                                  (.toString (.resolve against-without-last-path-segment (URI. input-without-query-string)))]
-      (if query-string
-        (str resolved "?" (encode-spaces query-string))
-        resolved)))
-
-  URI
-  (absolutize [input ^java.net.URI against]
-    (.resolve against input)))
-
-
-(defprotocol DomainRoot
-  (root? [input] "Returns true if given URL/URI is the site root"))
-
-(extend-protocol DomainRoot
-  String
-  (root? [input]
-    (root? (URI. (strip-query-string input))))
-
-  URI
-  (root? [input]
-    (#{"" "/"} (UrlLike/pathOrDefault (.getPath input))))
-
-  URL
-  (root? [input]
-    (root? (.toURI input))))
 
 
 (defn local-to?

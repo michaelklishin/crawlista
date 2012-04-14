@@ -20,14 +20,6 @@
   (is (not (local-to? "//jobs.arstechnica.com/list/1186" "arstechnica.com"))))
 
 
-(deftest test-strip-query-string
-  (is (= "http://novemberain.com" (strip-query-string "http://novemberain.com?query=string"))))
-
-(deftest test-separate-query-string
-  (are [input output] (is (= output (separate-query-string input)))
-       "http://novemberain.com?query=string" ["http://novemberain.com" "query=string"]
-       "http://www.iq-shop.de/catalogsearch/advanced/result/?___SID=U?product_type=54" ["http://www.iq-shop.de/catalogsearch/advanced/result/" "___SID=U?product_type=54"]))
-
 (deftest test-resourcification
   (is (= "http://novemberain.com/" (resourcify "http://NOVEMBERAIN.com?query=string")))
   (is (= "http://novemberain.com/" (resourcify "http://NOVEMBERAIN.com")))
@@ -64,55 +56,3 @@
   (is (not (crawlable-href? "javascript: void()(0)")))
   (is (not (crawlable-href? (slurp (clojure.java.io/resource "js/href_value1.js")))))
   (is (not (crawlable-href? "javascript: alert('123')"))))
-
-(deftest test-full-url-normalization-with-strings
-  (are [input result] (is (= (normalize-url input) result))
-       "http://www.google.com/"     "http://google.com/"
-       "www.google.com"             "http://google.com/"
-       "https://www.apple.com"      "https://apple.com/"
-       "https://www.ibm.com"        "https://ibm.com/"
-       "https://www2.ibm.com"       "https://ibm.com/"
-       "http://www.store.apple.com" "http://store.apple.com/"
-       "http://www.iq-shop.de/catalogsearch/advanced/result/?___SID=U?product_type=54" "http://iq-shop.de/catalogsearch/advanced/result/?___SID=U?product_type=54"))
-
-(deftest test-absolutize-with-strings
-  (is (= (absolutize ""  "http://giove.local")  "http://giove.local/"))
-  (is (= (absolutize ""  "http://giove.local/") "http://giove.local/"))
-  (is (= (absolutize "/" "http://giove.local")  "http://giove.local/"))
-  (is (= (absolutize "/" "http://giove.local/") "http://giove.local/"))
-  (is (= (absolutize "/comments?authenticate=1" "http://giove.local") "http://giove.local/comments?authenticate=1"))
-  (are [input result] (is (= (absolutize input "http://giove.local/") result))
-       ""                                  "http://giove.local/"
-       "/"                                 "http://giove.local/"
-       "/reviews"                          "http://giove.local/reviews"
-       "/autopia/2011/11/evs-go-off-grid/" "http://giove.local/autopia/2011/11/evs-go-off-grid/"
-       "offline.html"                      "http://giove.local/offline.html")
-  (is (= (absolutize "http://www.iq-shop.de/catalogsearch/advanced/result/?___SID=U?product_type=54" "www.iq-shop.de")
-         "http://www.iq-shop.de/catalogsearch/advanced/result/?___SID=U?product_type=54"))
-  (is (= (absolutize "maintenance.html"  "http://giove.local/system/") "http://giove.local/system/maintenance.html"))
-  (is (= (absolutize "maintenance.html"  "http://giove.local/system")  "http://giove.local/maintenance.html"))
-  (is (= (absolutize "maintenance.html"  "http://giove.local/system/") "http://giove.local/system/maintenance.html"))
-  (is (= (absolutize "support/1.css" "http://tc.labs.opera.com/html/link/002.htm")  "http://tc.labs.opera.com/html/link/support/1.css"))
-  (is (= (absolutize "support/css"   "http://tc.labs.opera.com/html/link/002.htm")  "http://tc.labs.opera.com/html/link/support/css")))
-
-(deftest test-absolutize-with-uris
-  (are [input result] (is (= (absolutize input (URI. "http://giove.local")) result))
-       (URI. "")                                  (URI. "http://giove.local")
-       (URI. "/")                                 (URI. "http://giove.local/")
-       (URI. "/reviews")                          (URI. "http://giove.local/reviews")
-       (URI. "/autopia/2011/11/evs-go-off-grid/") (URI. "http://giove.local/autopia/2011/11/evs-go-off-grid/")))
-
-(deftest test-whether-uri-is-root
-  (is (root? "http://giove.local"))
-  (is (root? "http://giove.local/"))
-  (is (root? "https://giove.local"))
-  (is (root? "https://giove.local/"))
-  (is (root? "http://www.giove.local"))
-  (is (root? "HTTPS://www.giove.local/"))
-  (is (root? "https://subdomain.giove.local"))
-  (is (root? "https://subdomain.giove.local/"))
-  (is (root? "https://www.subdomain.giove.local"))
-  (is (root? "http://www.subdomain.giove.local/"))
-  (is (not (root? "http://giove.local/path")))
-  (is (not (root? "https://giove.local/section/path")))
-  (is (not (root? "HTTPS://www.giove.local/search?q=weather"))))

@@ -4,7 +4,7 @@
   :dependencies [[org.clojure/clojure       "1.3.0"]
                  [clj-http                  "0.3.6"]
                  [org.jsoup/jsoup           "1.6.2"]
-                 [clojurewerkz/urly         "1.0.0-rc6"]
+                 [clojurewerkz/urly         "1.0.0-SNAPSHOT"]
                  [com.novemberain/pantomime "1.3.0-rc1"]]
   :source-paths       ["src/clojure"]
   :resource-paths     ["src/resources"]
