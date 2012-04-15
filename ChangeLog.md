@@ -1,6 +1,21 @@
+## Changes between Crawlista 1.0.0-alpha12 and 1.0.0-alpha13
+
+No changes so far.
+
+
 ## Changes between Crawlista 1.0.0-alpha11 and 1.0.0-alpha12
 
-No changes yet.
+### Less Aggressive Normalization
+
+This is a breaking change: Crawlista's extraction functions now perform less aggressive normalization
+(not stripping off `www.`, for example) and this may result in effectively duplicate URLs extracted but
+also means you won't get URLs that won't work for certain sites (that depend on `www.` prefixes or
+the presence of the trailing slash in path, etc).
+
+
+### Urly 1.0.0
+
+[Urly](https://github.com/michaelklishin/urly) has been upgraded to 1.0.0 (final).
 
 
 ## Changes between Crawlista 1.0.0-alpha10 and 1.0.0-alpha11
