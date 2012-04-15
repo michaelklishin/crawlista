@@ -10,7 +10,7 @@
   :resource-paths     ["src/resources"]
   :java-source-paths  ["src/java"]
   :profiles           {:dev {:resource-paths ["test/resources"]}
-                       :1.4 {:dependencies [[org.clojure/clojure "1.4.0-beta7"]]}}
+                       :1.4 {:dependencies [[org.clojure/clojure "1.4.0"]]}}
   :aliases            { "all" ["with-profile" "dev:dev,1.4"]}
   :warn-on-reflection true
   :test-selectors     {:default    (constantly true)
