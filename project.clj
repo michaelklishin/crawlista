@@ -14,10 +14,12 @@
   :aliases            { "all" ["with-profile" "dev:dev,1.4"]}
   :repositories {"clojure-releases" "http://build.clojure.org/releases"
                  "sonatype" {:url "http://oss.sonatype.org/content/repositories/releases"
-                             :snapshots false,
+                             :snapshots false
                              :releases {:checksum :fail :update :always}}}
   :warn-on-reflection true
   :test-selectors     {:default    (constantly true)
                        :focus      :focus
                        :extraction :extraction
-                       :all        (constantly true)})
+                       :robots     :robots
+                       :all        (constantly true)}
+  :javac-options      ["-target" "1.6" "-source" "1.6"])
