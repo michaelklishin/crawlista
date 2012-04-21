@@ -1,6 +1,13 @@
-## Changes between Crawlista 1.0.0-alpha12 and 1.0.0-alpha13
+## Changes between Crawlista 1.0.0-alpha13 and 1.0.0-alpha14
 
 No changes so far.
+
+
+## Changes between Crawlista 1.0.0-alpha12 and 1.0.0-alpha13
+
+### Pantomime 1.3.0
+
+[Pantomime](https://github.com/michaelklishin/urly) has been upgraded to 1.3.0.
 
 
 ## Changes between Crawlista 1.0.0-alpha11 and 1.0.0-alpha12
