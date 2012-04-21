@@ -5,6 +5,10 @@
 ;; Implementation
 ;;
 
+(defn parse*
+  [^String input]
+  (let [parser (Parser.)]
+    (.parse parser input)))
 
 ;;
 ;; API
@@ -12,5 +16,5 @@
 
 (defn parse
   [^String input]
-  (let [parser (Parser.)]
-    (.parse parser input)))
+  (let [xs (parse* input)]
+    xs))

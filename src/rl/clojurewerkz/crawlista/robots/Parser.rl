@@ -6,6 +6,8 @@ import java.text.ParseException;
 import clojure.lang.IPersistentMap;
 import clojure.lang.ITransientMap;
 import clojure.lang.PersistentHashMap;
+import clojure.lang.ITransientVector;
+import clojure.lang.IPersistentVector;
 import clojure.lang.PersistentVector;
 
 
@@ -22,38 +24,44 @@ import clojure.lang.PersistentVector;
 
   action agent_end   {
     String lastSeenUserAgentName = new String(data, ansp, (p - ansp));
+    System.out.println("See agent: " + lastSeenUserAgentName);
 
-    result.assoc(lastSeenUserAgentName.trim(), PersistentVector.create());
+    IPersistentMap m = PersistentHashMap.create();
+    result.conj(m.assoc("user-agent", lastSeenUserAgentName.trim()));
   }
 
 
-  CRLF = "\r" ? "\n";
-  CTL = (cntrl | 127);
-  LWSP = " " | "\t";
-  LWS = CRLF ? LWSP *;
-  TEXT = any -- CTL;
-  LINE = TEXT -- CRLF;
-  tspecials = "(" | ")" | "<" | ">" | "@" | "," | ";"
-             | ":" | "\\" | "\"" | "/" | "[" | "]"
-             | "?" | "=" | "{" | "}" | "\t" | "#"
-             ;
+  SP    = " ";
+  HT    = "\t";
+  HASH  = "#";
+  CRLF  = "\r" ? "\n";
 
-  comment = LWSP* . '#' . any*;
-  commentline = comment . CRLF;
+  CTL   = (cntrl | 127);
+  TEXT  = any -- CTL;
+  ID    = any -- HASH;
 
-  token = LINE -- tspecials;
+  blank        = (space | HT)*;
+  blankline    = blank* CRLF;
 
-  agent = ('*' | TEXT+) >agent_start %agent_end %/agent_end;
-  agentline = "User-agent: " . agent . CRLF >agentline_start %/agentline_start;
-  record = agentline;
+  comment      = blank* HASH TEXT*;
+  commentline  = comment CRLF;
+  blankcomment = blank? commentline;
+  commentblank = commentline* blank blankcomment*;
 
-  main := commentline* | ( commentline* . record )+ . (commentline*);
+  agent        = ('*' | ID+) >agent_start %/agent_end;
+  agentline    = "User-agent:" space* agent CRLF >agentline_start;
+
+  # record       = commentline* agentline (commentline | agentline)*;
+  record       = agentline;
+
+  main := blankcomment*
+       | blankcomment* record (commentblank record)* blankcomment*;
 }%%
 
 public class Parser {
   %% write data;
 
-  public IPersistentMap parse(String input) throws ParseException {
+  public IPersistentVector parse(String input) throws ParseException {
     char[] data = input.toCharArray();
     int cs;
     int eof = data.length;
@@ -63,7 +71,7 @@ public class Parser {
     // agent name start position
     int ansp = 0;
 
-    ITransientMap result = PersistentHashMap.create().asTransient();
+    ITransientVector result = PersistentVector.create().asTransient();
 
     %% write init;
     %% write exec;
@@ -72,6 +80,6 @@ public class Parser {
       throw new ParseException("Unparseable input: " + input + ", p = " + p, p);
     }
 
-    return result.persistent();
+    return (IPersistentVector)result.persistent();
   }
 }
