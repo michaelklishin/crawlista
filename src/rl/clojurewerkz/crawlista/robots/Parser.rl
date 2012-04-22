@@ -102,6 +102,51 @@ import clojure.lang.*;;
   }
 
 
+  #
+  # Noindex entries
+  #
+
+  action noindex_rule_start {
+    // System.out.println("action: noindex_rule_start. p = " + p);
+    nisp = p;
+  }
+
+  action noindex_rule_end   {
+    // System.out.println("action: noindex_rule_end. p = " + p);
+
+    String rule = new String(data, nisp, (p - nisp));
+    // we matched empty noindex line (Noindex:)
+    if(!rule.equals("Noindex:")) {
+      // System.out.println("Saw noindex_rule: " + rule);
+
+      IPersistentMap m = PersistentHashMap.create();
+      result.conj(m.assoc("noindex", rule.trim()));
+    }
+  }
+
+
+  #
+  # Crawl-delay entries
+  #
+
+  action crawldelay_rule_start {
+    // System.out.println("action: crawldelay_rule_start. p = " + p);
+    cdsp = p;
+  }
+
+  action crawldelay_rule_end   {
+    // System.out.println("action: crawldelay_rule_end. p = " + p);
+
+    String rule = new String(data, cdsp, (p - cdsp));
+    if(!rule.equals("Crawldelay:")) {
+      // System.out.println("Saw crawldelay_rule: " + rule);
+
+      IPersistentMap m = PersistentHashMap.create();
+      result.conj(m.assoc("crawl-delay", Long.valueOf(rule.trim())));
+    }
+  }
+
+
 
   SP             = " ";
   HT             = "\t";
@@ -109,6 +154,10 @@ import clojure.lang.*;;
   LF             = "\n";
   CR             = "\r";
   CRLF           = CR? LF;
+
+  # space built-in seems to be matching newlines and producing overly eager
+  # matches as a result
+  SPHT           = SP | HT;
 
   COLON          = ":";
 
@@ -120,12 +169,12 @@ import clojure.lang.*;;
 
   SLASH          = '/';
 
-  blank          = (space | HT)*;
+  blank          = SPHT*;
   blankline      = blank* CRLF;
 
   comment        = HASH TEXT*;
   commentline    = blank* comment CRLF;
-  blankcomment   = blank? commentline;
+  blankcomment   = CRLF | blank? commentline;
   commentblank   = commentline* blank blankcomment*;
 
 
@@ -148,14 +197,18 @@ import clojure.lang.*;;
   M              = 'M' | 'm';
   P              = 'P' | 'p';
 
+  C              = 'C' | 'c';
+  Y              = 'Y' | 'y';
+  X              = 'X' | 'x';
+
   agent_prefix   = U S E R "-" A G E N T COLON;
 
-  wildcard_agent  = WILDCARD;
+  wildcard_agent  = WILDCARD SPHT*;
   named_agent     = AGENT_INITIAL ID*;
 
   agent           = (wildcard_agent | named_agent) >agent_start %/agent_end %agent_end;
 
-  uchar           = (TEXT -- space);
+  uchar           = (TEXT -- HASH -- CR -- LF);
   pchar           = uchar | ":" | "@" | "&" | "=" | SLASH;
   segment         = pchar*;
   fsegment        = pchar*;
@@ -170,14 +223,24 @@ import clojure.lang.*;;
   sitemap_rule    = path >sitemap_rule_start %/sitemap_rule_end %sitemap_rule_end;
   sitemap_prefix  = S I T E M A P COLON;
 
-  agentline       = (space | HT)* agent_prefix    (space | HT)* agent          comment? CRLF;
-  disallowline    = (space | HT)* disallow_prefix CRLF |
-                    (space | HT)* disallow_prefix (space | HT)* disallow_rule  comment? CRLF;
-  allowline       = (space | HT)* allow_prefix CRLF |
-                    (space | HT)* allow_prefix     (space | HT)* allow_rule    comment? CRLF;
-  sitemapline     = (space | HT)* sitemap_prefix CRLF |
-                    (space | HT)* sitemap_prefix   (space | HT)* sitemap_rule  comment? CRLF;
-  ruleline        = disallowline | allowline | sitemapline;
+  crawldelay_rule    = digit+ >crawldelay_rule_start %/crawldelay_rule_end %crawldelay_rule_end;
+  crawldelay_prefix  = C R A W L "-" D E L A Y COLON;
+
+  noindex_rule    = path >noindex_rule_start %/noindex_rule_end %noindex_rule_end;
+  noindex_prefix  = N O I N D E X COLON;
+
+  agentline       = SPHT* agent_prefix       SPHT* agent          comment? CRLF;
+  disallowline    = SPHT* disallow_prefix    SPHT* CRLF
+                    | SPHT* disallow_prefix  SPHT* disallow_rule  comment? CRLF;
+  allowline       = SPHT* allow_prefix CRLF |
+                    SPHT* allow_prefix      SPHT* allow_rule    comment? CRLF;
+  sitemapline     = SPHT* sitemap_prefix CRLF |
+                    SPHT* sitemap_prefix    SPHT* sitemap_rule  comment? CRLF;
+
+  crawldelayline  = SPHT* crawldelay_prefix SPHT* crawldelay_rule comment? CRLF;
+  noindexline     = SPHT* noindex_prefix    SPHT* noindex_rule    comment? CRLF;
+
+  ruleline        = disallowline | allowline | sitemapline | noindexline | crawldelayline;
 
   record          = commentline* agentline (commentline agentline)*
                     | ruleline (commentline ruleline)*;
@@ -207,6 +270,12 @@ public class Parser {
 
     // sitemap line start position
     int slsp = 0;
+
+    // noindex line start position
+    int nisp = 0;
+
+    // crawl-delay line start position
+    int cdsp = 0;
 
     ITransientVector result = PersistentVector.create().asTransient();
 
