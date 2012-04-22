@@ -8,7 +8,7 @@
 (defn parse*
   [^String input]
   (let [parser (Parser.)]
-    (distinct (.parse parser input))))
+    (.parse parser input)))
 
 ;;
 ;; API
