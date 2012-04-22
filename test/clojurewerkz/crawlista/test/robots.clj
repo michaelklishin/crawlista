@@ -18,14 +18,15 @@
                    # и еще один"))
          (testing "simple cases"
            (are [input output] (is (= (parse* input) output))
-                "User-agent: *"                [{"user-agent" "*"}]
-                "User-agent: webcrawler"       [{"user-agent" "webcrawler"}]
-                "User-agent: Googlebot"        [{"user-agent" "Googlebot"}]
-                "User-agent:Googlebot"         [{"user-agent" "Googlebot"}]
-                "User-agent:Googlebot #GOOG"      [{"user-agent" "Googlebot"}]
-                "User-agent:Googlebot # Гуглобот" [{"user-agent" "Googlebot"}]
-                "User-agent: Megabot   "          [{"user-agent" "Megabot"}]
-                "\t\tUser-agent:\t\t\tMegabot   " [{"user-agent" "Megabot"}]
+                "User-agent: *"                        [{"user-agent" "*"}]
+                "User-agent: webcrawler"               [{"user-agent" "webcrawler"}]
+                "User-agent: Googlebot"                [{"user-agent" "Googlebot"}]
+                "User-agent:Googlebot"                 [{"user-agent" "Googlebot"}]
+                "User-Agent: Yahoo! Slurp"             [{"user-agent" "Yahoo! Slurp"}]
+                "User-agent:Googlebot #GOOG"           [{"user-agent" "Googlebot"}]
+                "User-agent:Googlebot # Гуглобот"      [{"user-agent" "Googlebot"}]
+                "User-agent: Megabot   "               [{"user-agent" "Megabot"}]
+                "\t\tUser-agent:\t\t\tMegabot   "      [{"user-agent" "Megabot"}]
                 "User-agent: webcrawler\nUser-agent: netcrawler" [{"user-agent" "webcrawler"}
                                                                   {"user-agent" "netcrawler"}]))
          (testing "more sophisticated scenarios"

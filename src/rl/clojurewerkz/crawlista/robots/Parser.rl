@@ -36,6 +36,8 @@ import clojure.lang.PersistentVector;
   CR             = "\r";
   CRLF           = CR? LF;
 
+  COLON          = ":";
+
   CTL            = (cntrl | 127);
   TEXT           = any -- CTL;
   ID             = any -- HASH -- CRLF;
@@ -50,11 +52,24 @@ import clojure.lang.PersistentVector;
   blankcomment   = blank? commentline;
   commentblank   = commentline* blank blankcomment*;
 
+
+  U              = 'U' | 'u';
+  S              = 'S' | 's';
+  E              = 'E' | 'e';
+  R              = 'R' | 'r';
+
+  A              = 'A' | 'a';
+  G              = 'G' | 'g';
+  N              = 'N' | 'n';
+  T              = 'T' | 't';
+
+  agent_prefix   = U S E R "-" A G E N T COLON;
+
   wildcard_agent = WILDCARD;
   named_agent    = AGENT_INITIAL ID*;
 
   agent          = (wildcard_agent | named_agent) >agent_start %/agent_end %agent_end;
-  agentline      = (space | HT)* "User-agent:" (space | HT)* agent comment? CRLF;
+  agentline      = (space | HT)* agent_prefix (space | HT)* agent comment? CRLF;
 
   record         = commentline* agentline commentline?;
 
