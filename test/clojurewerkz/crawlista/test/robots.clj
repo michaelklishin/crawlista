@@ -2,22 +2,39 @@
   (:use clojurewerkz.crawlista.robots
         clojure.test))
 
+(deftest ^{:robots true :focus true} test-low-level-parser-with-basic-examples
+         (are [input output] (is (= (parse* input) output))
+              "User-agent: *"                [{"user-agent" "*"}]
+              "User-agent: webcrawler"       [{"user-agent" "webcrawler"}]
+              "User-agent: Googlebot"        [{"user-agent" "Googlebot"}]
+              "User-agent:Googlebot"         [{"user-agent" "Googlebot"}]
+              "User-agent: Megabot   "       [{"user-agent" "Megabot"}]
+              "User-agent: webcrawler\nUser-agent: netcrawler" [{"user-agent" "webcrawler"}
+                                                                {"user-agent" "netcrawler"}]))
+
 (deftest ^{:robots true} test-low-level-parser
          (are [input output] (is (= (parse* input) output))
               "User-agent: webcrawler"       [{"user-agent" "webcrawler"}]
               "User-agent: Googlebot"        [{"user-agent" "Googlebot"}]
+              "User-agent: Megabot   "       [{"user-agent" "Megabot"}]
               "User-agent: Googlebot-Mobile" [{"user-agent" "Googlebot-Mobile"}]
+              "User-agent: Xyzzybot\nUser-agent: Xyzzybot-Mobile" [{"user-agent" "Xyzzybot"}
+                                                                   {"user-agent" "Xyzzybot-Mobile"}]
               "User-agent: Googlebot Mobile" [{"user-agent" "Googlebot Mobile"}]
               "User-agent: *"                [{"user-agent" "*"}]
               "User-agent: baiduspider"      [{"user-agent" "baiduspider"}]
               "User-agent: msnbot"           [{"user-agent" "msnbot"}]
+              ;; "User-agent: msnbot # MSN"           [{"user-agent" "msnbot"}]
               "User-agent: Oracle Secure Enterprise Search"                [{"user-agent" "Oracle Secure Enterprise Search"}]
               "User-agent: EDI/1.6.0 (Edacious & Intelligent Web Crawler)" [{"user-agent" "EDI/1.6.0 (Edacious & Intelligent Web Crawler)"}]
               "User-agent: Microsoft-WebDAV-MiniRedir/5.1.2600"            [{"user-agent" "Microsoft-WebDAV-MiniRedir/5.1.2600"}]
               "User-agent: Python-urllib/1.17"            [{"user-agent" "Python-urllib/1.17"}]
               "User-agent: MS Search 5.0 Robot"           [{"user-agent" "MS Search 5.0 Robot"}]
               "User-agent: Xenu Link Sleuth"              [{"user-agent" "Xenu Link Sleuth"}]
-              "User-agent: Mediapartners-Google"          [{"user-agent" "Mediapartners-Google"}]))
+              "User-agent: Mediapartners-Google\nUser-agent: curl"    [{"user-agent" "Mediapartners-Google"}
+                                                                       {"user-agent" "curl"}]
+              "User-agent: Python-urllib/1.17\nUser-agent:curl"      [{"user-agent" "Python-urllib/1.17"}
+                                                                      {"user-agent" "curl"}]))
 
 #_ (deftest ^{:robots true} test-parsing-of-input-with-just-a-one-line-comment
             (is (= {} (parse "#")))

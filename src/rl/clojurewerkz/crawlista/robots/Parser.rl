@@ -14,31 +14,33 @@ import clojure.lang.PersistentVector;
 %%{
   machine robots;
 
-  action agentline_start {
-    ansp = 0;
-  }
-
   action agent_start {
+    // System.out.println("action: agent_start. p = " + p);
     ansp = p;
   }
 
   action agent_end   {
+    // System.out.println("action: agent_end. p = " + p);
     String lastSeenUserAgentName = new String(data, ansp, (p - ansp));
-    System.out.println("See agent: " + lastSeenUserAgentName);
+    // System.out.println("See agent: " + lastSeenUserAgentName);
 
     IPersistentMap m = PersistentHashMap.create();
     result.conj(m.assoc("user-agent", lastSeenUserAgentName.trim()));
   }
 
 
-  SP    = " ";
-  HT    = "\t";
-  HASH  = "#";
-  CRLF  = "\r" ? "\n";
+  SP             = " ";
+  HT             = "\t";
+  HASH           = "#";
+  LF             = "\n";
+  CR             = "\r";
+  CRLF           = CR? LF;
 
-  CTL   = (cntrl | 127);
-  TEXT  = any -- CTL;
-  ID    = any -- HASH;
+  CTL            = (cntrl | 127);
+  TEXT           = any -- CTL;
+  ID             = any -- HASH -- CRLF;
+  AGENT_INITIAL  = 'a'..'z' | 'A'..'Z';
+  WILDCARD       = '*';
 
   blank        = (space | HT)*;
   blankline    = blank* CRLF;
@@ -48,11 +50,14 @@ import clojure.lang.PersistentVector;
   blankcomment = blank? commentline;
   commentblank = commentline* blank blankcomment*;
 
-  agent        = ('*' | ID+) >agent_start %/agent_end;
-  agentline    = "User-agent:" space* agent CRLF >agentline_start;
+  wildcard_agent = WILDCARD;
+  named_agent    = AGENT_INITIAL ID*;
 
-  # record       = commentline* agentline (commentline | agentline)*;
-  record       = agentline;
+  agent          = (wildcard_agent | named_agent) >agent_start %/agent_end %agent_end;
+  agentline      = "User-agent:" space* agent CRLF;
+
+  # record       = commentline* agentline commentline?;
+  record         = agentline;
 
   main := blankcomment*
        | blankcomment* record (commentblank record)* blankcomment*;
