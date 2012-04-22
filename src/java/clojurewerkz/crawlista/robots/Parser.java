@@ -5,21 +5,16 @@ package clojurewerkz.crawlista.robots;
 
 import java.text.ParseException;
 
-import clojure.lang.IPersistentMap;
-import clojure.lang.ITransientMap;
-import clojure.lang.PersistentHashMap;
-import clojure.lang.ITransientVector;
-import clojure.lang.IPersistentVector;
-import clojure.lang.PersistentVector;
+import clojure.lang.*;;
 
 
 
-// line 161 "src/rl/clojurewerkz/crawlista/robots/Parser.rl"
+// line 156 "src/rl/clojurewerkz/crawlista/robots/Parser.rl"
 
 
 public class Parser {
   
-// line 23 "src/java/clojurewerkz/crawlista/robots/Parser.java"
+// line 18 "src/java/clojurewerkz/crawlista/robots/Parser.java"
 private static byte[] init__robots_actions_0()
 {
 	return new byte [] {
@@ -556,7 +551,7 @@ static final int robots_error = 0;
 static final int robots_en_main = 221;
 
 
-// line 165 "src/rl/clojurewerkz/crawlista/robots/Parser.rl"
+// line 160 "src/rl/clojurewerkz/crawlista/robots/Parser.rl"
 
   public IPersistentVector parse(String input) throws ParseException {
     char[] data = input.toCharArray();
@@ -574,14 +569,14 @@ static final int robots_en_main = 221;
     ITransientVector result = PersistentVector.create().asTransient();
 
     
-// line 578 "src/java/clojurewerkz/crawlista/robots/Parser.java"
+// line 573 "src/java/clojurewerkz/crawlista/robots/Parser.java"
 	{
 	cs = robots_start;
 	}
 
-// line 182 "src/rl/clojurewerkz/crawlista/robots/Parser.rl"
+// line 177 "src/rl/clojurewerkz/crawlista/robots/Parser.rl"
     
-// line 585 "src/java/clojurewerkz/crawlista/robots/Parser.java"
+// line 580 "src/java/clojurewerkz/crawlista/robots/Parser.java"
 	{
 	int _klen;
 	int _trans = 0;
@@ -662,14 +657,14 @@ case 1:
 			switch ( _robots_actions[_acts++] )
 			{
 	case 0:
-// line 21 "src/rl/clojurewerkz/crawlista/robots/Parser.rl"
+// line 16 "src/rl/clojurewerkz/crawlista/robots/Parser.rl"
 	{
     // System.out.println("action: agent_start. p = " + p);
     ansp = p;
   }
 	break;
 	case 1:
-// line 26 "src/rl/clojurewerkz/crawlista/robots/Parser.rl"
+// line 21 "src/rl/clojurewerkz/crawlista/robots/Parser.rl"
 	{
     // System.out.println("action: agent_end. p = " + p);
     String lastSeenUserAgentName = new String(data, ansp, (p - ansp));
@@ -680,14 +675,14 @@ case 1:
   }
 	break;
 	case 2:
-// line 40 "src/rl/clojurewerkz/crawlista/robots/Parser.rl"
+// line 35 "src/rl/clojurewerkz/crawlista/robots/Parser.rl"
 	{
     // System.out.println("action: disallow_rule_start. p = " + p);
     drsp = p;
   }
 	break;
 	case 3:
-// line 45 "src/rl/clojurewerkz/crawlista/robots/Parser.rl"
+// line 40 "src/rl/clojurewerkz/crawlista/robots/Parser.rl"
 	{
     // System.out.println("action: disallow_rule_end. p = " + p);
 
@@ -704,14 +699,14 @@ case 1:
   }
 	break;
 	case 4:
-// line 66 "src/rl/clojurewerkz/crawlista/robots/Parser.rl"
+// line 61 "src/rl/clojurewerkz/crawlista/robots/Parser.rl"
 	{
     // System.out.println("action: allow_rule_start. p = " + p);
     drsp = p;
   }
 	break;
 	case 5:
-// line 71 "src/rl/clojurewerkz/crawlista/robots/Parser.rl"
+// line 66 "src/rl/clojurewerkz/crawlista/robots/Parser.rl"
 	{
     // System.out.println("action: allow_rule_end. p = " + p);
 
@@ -727,7 +722,7 @@ case 1:
     result.conj(m.assoc("allow", rule.trim()));
   }
 	break;
-// line 731 "src/java/clojurewerkz/crawlista/robots/Parser.java"
+// line 726 "src/java/clojurewerkz/crawlista/robots/Parser.java"
 			}
 		}
 	}
@@ -749,7 +744,7 @@ case 4:
 	while ( __nacts-- > 0 ) {
 		switch ( _robots_actions[__acts++] ) {
 	case 1:
-// line 26 "src/rl/clojurewerkz/crawlista/robots/Parser.rl"
+// line 21 "src/rl/clojurewerkz/crawlista/robots/Parser.rl"
 	{
     // System.out.println("action: agent_end. p = " + p);
     String lastSeenUserAgentName = new String(data, ansp, (p - ansp));
@@ -760,7 +755,7 @@ case 4:
   }
 	break;
 	case 3:
-// line 45 "src/rl/clojurewerkz/crawlista/robots/Parser.rl"
+// line 40 "src/rl/clojurewerkz/crawlista/robots/Parser.rl"
 	{
     // System.out.println("action: disallow_rule_end. p = " + p);
 
@@ -777,7 +772,7 @@ case 4:
   }
 	break;
 	case 5:
-// line 71 "src/rl/clojurewerkz/crawlista/robots/Parser.rl"
+// line 66 "src/rl/clojurewerkz/crawlista/robots/Parser.rl"
 	{
     // System.out.println("action: allow_rule_end. p = " + p);
 
@@ -793,7 +788,7 @@ case 4:
     result.conj(m.assoc("allow", rule.trim()));
   }
 	break;
-// line 797 "src/java/clojurewerkz/crawlista/robots/Parser.java"
+// line 792 "src/java/clojurewerkz/crawlista/robots/Parser.java"
 		}
 	}
 	}
@@ -803,7 +798,7 @@ case 5:
 	break; }
 	}
 
-// line 183 "src/rl/clojurewerkz/crawlista/robots/Parser.rl"
+// line 178 "src/rl/clojurewerkz/crawlista/robots/Parser.rl"
 
     if(cs == robots_error) {
       throw new ParseException("Unparseable input: " + input + ", p = " + p, p);

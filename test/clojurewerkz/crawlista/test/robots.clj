@@ -1,8 +1,9 @@
 (ns clojurewerkz.crawlista.test.robots
+  (:require [clojure.java.io :as io])
   (:use clojurewerkz.crawlista.robots
         clojure.test))
 
-(deftest ^{:robots true :focus true} test-disallow-lines-parsing
+(deftest ^{:robots true} test-disallow-lines-parsing
          (testing "simple cases with disallow lines only"
            (are [input output] (is (= (parse* input) output))
                 "Disallow:"                 [{"disallow"   ""}]
@@ -76,7 +77,14 @@
                                                                      {"allow"   "/searchable"}]
                 "User-agent: EDI/1.6.0 (Edacious & Intelligent Web Crawler)\nDisallow: /iplayer/cy/episode/*?from=r*"
                 [{"user-agent" "EDI/1.6.0 (Edacious & Intelligent Web Crawler)"}
-                 {"disallow"   "/iplayer/cy/episode/*?from=r*"}])))
+                 {"disallow"   "/iplayer/cy/episode/*?from=r*"}]))
+         (testing "real world robots.txt"
+           (are [input output] (is (= (parse* (slurp (io/resource input))) output))
+                "robots/apple.com.txt" [{"user-agent" "*"}
+                                        {"disallow" ""}]
+                "robots/nokia.com.txt" [{"user-agent" "*"}
+                                        {"disallow" "/*?action=catalogsearch&*&"}
+                                        {"disallow" "/*rep=hc"}])))
 
 #_ (deftest ^{:robots true} test-parsing-of-input-with-just-a-user-agent-string
             (is (= {"webcrawler" []}       (parse "User-agent: webcrawler")))

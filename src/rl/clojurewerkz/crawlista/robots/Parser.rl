@@ -3,12 +3,7 @@ package clojurewerkz.crawlista.robots;
 
 import java.text.ParseException;
 
-import clojure.lang.IPersistentMap;
-import clojure.lang.ITransientMap;
-import clojure.lang.PersistentHashMap;
-import clojure.lang.ITransientVector;
-import clojure.lang.IPersistentVector;
-import clojure.lang.PersistentVector;
+import clojure.lang.*;;
 
 
 %%{
