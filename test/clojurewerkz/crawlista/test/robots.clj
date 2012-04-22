@@ -68,8 +68,12 @@
            (are [input output] (is (= (parse* input) output))
                 "User-agent: *\nDisallow: /"                        [{"user-agent" "*"}
                                                                      {"disallow"   "/"}]
+                "User-agent: *\nAllow: /"                           [{"user-agent" "*"}
+                                                                     {"allow"   "/"}]
                 "User-agent: webcrawler\nDisallow: /search"         [{"user-agent" "webcrawler"}
                                                                      {"disallow"   "/search"}]
+                "User-agent: webcrawler\nAllow: /searchable"        [{"user-agent" "webcrawler"}
+                                                                     {"allow"   "/searchable"}]
                 "User-agent: EDI/1.6.0 (Edacious & Intelligent Web Crawler)\nDisallow: /iplayer/cy/episode/*?from=r*"
                 [{"user-agent" "EDI/1.6.0 (Edacious & Intelligent Web Crawler)"}
                  {"disallow"   "/iplayer/cy/episode/*?from=r*"}])))

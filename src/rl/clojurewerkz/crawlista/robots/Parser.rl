@@ -26,7 +26,7 @@ import clojure.lang.PersistentVector;
   action agent_end   {
     // System.out.println("action: agent_end. p = " + p);
     String lastSeenUserAgentName = new String(data, ansp, (p - ansp));
-    // System.out.println("See agent: " + lastSeenUserAgentName);
+    // System.out.println("Daw agent: " + lastSeenUserAgentName);
 
     IPersistentMap m = PersistentHashMap.create();
     result.conj(m.assoc("user-agent", lastSeenUserAgentName.trim()));
@@ -51,11 +51,38 @@ import clojure.lang.PersistentVector;
       rule = "";
     }
 
-    // System.out.println("See disallow_rule: " + rule);
+    // System.out.println("Daw disallow_rule: " + rule);
 
     IPersistentMap m = PersistentHashMap.create();
     result.conj(m.assoc("disallow", rule.trim()));
   }
+
+
+
+  #
+  # Allow rules
+  #
+
+  action allow_rule_start {
+    // System.out.println("action: allow_rule_start. p = " + p);
+    drsp = p;
+  }
+
+  action allow_rule_end   {
+    // System.out.println("action: allow_rule_end. p = " + p);
+
+    String rule = new String(data, drsp, (p - drsp));
+    // we matched "allow none" case (Allow:)
+    if(rule.equals("Allow:")) {
+      rule = "";
+    }
+
+    // System.out.println("Saw allow_rule: " + rule);
+
+    IPersistentMap m = PersistentHashMap.create();
+    result.conj(m.assoc("allow", rule.trim()));
+  }
+
 
 
   SP             = " ";
@@ -112,14 +139,19 @@ import clojure.lang.PersistentVector;
   segment         = pchar*;
   fsegment        = pchar*;
   path            = fsegment (SLASH segment)*;
-  disallow_rule   = path >disallow_rule_start %/disallow_rule_end %disallow_rule_end;
 
+  disallow_rule   = path >disallow_rule_start %/disallow_rule_end %disallow_rule_end;
   disallow_prefix = D I S A L L O W COLON;
+
+  allow_rule      = path >allow_rule_start %/allow_rule_end %allow_rule_end;
+  allow_prefix    = A L L O W COLON;
 
   agentline       = (space | HT)* agent_prefix    (space | HT)* agent          comment? CRLF;
   disallowline    = (space | HT)* disallow_prefix CRLF |
                     (space | HT)* disallow_prefix (space | HT)* disallow_rule  comment? CRLF;
-  ruleline        = disallowline;
+  allowline       = (space | HT)* allow_prefix CRLF |
+                    (space | HT)* allow_prefix     (space | HT)* allow_rule    comment? CRLF;
+  ruleline        = disallowline | allowline;
 
   record          = commentline* agentline (commentline agentline)*
                     | ruleline (commentline ruleline)*;
