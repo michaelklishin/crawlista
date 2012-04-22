@@ -46,7 +46,7 @@ import clojure.lang.*;;
       rule = "";
     }
 
-    // System.out.println("Daw disallow_rule: " + rule);
+    // System.out.println("Saw disallow_rule: " + rule);
 
     IPersistentMap m = PersistentHashMap.create();
     result.conj(m.assoc("disallow", rule.trim()));
@@ -60,13 +60,13 @@ import clojure.lang.*;;
 
   action allow_rule_start {
     // System.out.println("action: allow_rule_start. p = " + p);
-    drsp = p;
+    arsp = p;
   }
 
   action allow_rule_end   {
     // System.out.println("action: allow_rule_end. p = " + p);
 
-    String rule = new String(data, drsp, (p - drsp));
+    String rule = new String(data, arsp, (p - arsp));
     // we matched "allow none" case (Allow:)
     if(rule.equals("Allow:")) {
       rule = "";
@@ -76,6 +76,29 @@ import clojure.lang.*;;
 
     IPersistentMap m = PersistentHashMap.create();
     result.conj(m.assoc("allow", rule.trim()));
+  }
+
+
+  #
+  # Sitemap entries
+  #
+
+  action sitemap_rule_start {
+    // System.out.println("action: sitemap_rule_start. p = " + p);
+    slsp = p;
+  }
+
+  action sitemap_rule_end   {
+    // System.out.println("action: sitemap_rule_end. p = " + p);
+
+    String rule = new String(data, slsp, (p - slsp));
+    // we matched empty sitemap line (Sitemap:)
+    if(!rule.equals("Sitemap:")) {
+      // System.out.println("Saw sitemap_rule: " + rule);
+
+      IPersistentMap m = PersistentHashMap.create();
+      result.conj(m.assoc("sitemap", rule.trim()));
+    }
   }
 
 
@@ -122,6 +145,9 @@ import clojure.lang.*;;
   O              = 'O' | 'o';
   W              = 'W' | 'w';
 
+  M              = 'M' | 'm';
+  P              = 'P' | 'p';
+
   agent_prefix   = U S E R "-" A G E N T COLON;
 
   wildcard_agent  = WILDCARD;
@@ -141,12 +167,17 @@ import clojure.lang.*;;
   allow_rule      = path >allow_rule_start %/allow_rule_end %allow_rule_end;
   allow_prefix    = A L L O W COLON;
 
+  sitemap_rule    = path >sitemap_rule_start %/sitemap_rule_end %sitemap_rule_end;
+  sitemap_prefix  = S I T E M A P COLON;
+
   agentline       = (space | HT)* agent_prefix    (space | HT)* agent          comment? CRLF;
   disallowline    = (space | HT)* disallow_prefix CRLF |
                     (space | HT)* disallow_prefix (space | HT)* disallow_rule  comment? CRLF;
   allowline       = (space | HT)* allow_prefix CRLF |
                     (space | HT)* allow_prefix     (space | HT)* allow_rule    comment? CRLF;
-  ruleline        = disallowline | allowline;
+  sitemapline     = (space | HT)* sitemap_prefix CRLF |
+                    (space | HT)* sitemap_prefix   (space | HT)* sitemap_rule  comment? CRLF;
+  ruleline        = disallowline | allowline | sitemapline;
 
   record          = commentline* agentline (commentline agentline)*
                     | ruleline (commentline ruleline)*;
@@ -170,6 +201,12 @@ public class Parser {
 
     // disallow rule start position
     int drsp = 0;
+
+    // allow rule start position
+    int arsp = 0;
+
+    // sitemap line start position
+    int slsp = 0;
 
     ITransientVector result = PersistentVector.create().asTransient();
 
