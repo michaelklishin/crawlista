@@ -1,0 +1,138 @@
+# Notice: if you would like to crawl Facebook you can
+# contact us here: http://www.facebook.com/apps/site_scraping_tos.php
+# to apply for white listing. Our general terms are available
+# at http://www.facebook.com/apps/site_scraping_tos_terms.php
+
+User-agent: baiduspider
+Disallow: /ac.php
+Disallow: /ae.php
+Disallow: /album.php
+Disallow: /ap.php
+Disallow: /autologin.php
+Disallow: /checkpoint/
+Disallow: /feeds/
+Disallow: /l.php
+Disallow: /o.php
+Disallow: /p.php
+Disallow: /photo.php
+Disallow: /photo_comments.php
+Disallow: /photo_search.php
+Disallow: /photos.php
+
+User-agent: Googlebot
+Disallow: /ac.php
+Disallow: /ae.php
+Disallow: /album.php
+Disallow: /ap.php
+Disallow: /autologin.php
+Disallow: /checkpoint/
+Disallow: /feeds/
+Disallow: /l.php
+Disallow: /o.php
+Disallow: /p.php
+Disallow: /photo.php
+Disallow: /photo_comments.php
+Disallow: /photo_search.php
+Disallow: /photos.php
+
+User-agent: msnbot
+Disallow: /ac.php
+Disallow: /ae.php
+Disallow: /album.php
+Disallow: /ap.php
+Disallow: /autologin.php
+Disallow: /checkpoint/
+Disallow: /feeds/
+Disallow: /l.php
+Disallow: /o.php
+Disallow: /p.php
+Disallow: /photo.php
+Disallow: /photo_comments.php
+Disallow: /photo_search.php
+Disallow: /photos.php
+
+User-agent: naverbot
+Disallow: /ac.php
+Disallow: /ae.php
+Disallow: /album.php
+Disallow: /ap.php
+Disallow: /autologin.php
+Disallow: /checkpoint/
+Disallow: /feeds/
+Disallow: /l.php
+Disallow: /o.php
+Disallow: /p.php
+Disallow: /photo.php
+Disallow: /photo_comments.php
+Disallow: /photo_search.php
+Disallow: /photos.php
+
+User-agent: seznambot
+Disallow: /ac.php
+Disallow: /ae.php
+Disallow: /album.php
+Disallow: /ap.php
+Disallow: /autologin.php
+Disallow: /checkpoint/
+Disallow: /feeds/
+Disallow: /l.php
+Disallow: /o.php
+Disallow: /p.php
+Disallow: /photo.php
+Disallow: /photo_comments.php
+Disallow: /photo_search.php
+Disallow: /photos.php
+
+User-agent: Slurp
+Disallow: /ac.php
+Disallow: /ae.php
+Disallow: /album.php
+Disallow: /ap.php
+Disallow: /autologin.php
+Disallow: /checkpoint/
+Disallow: /feeds/
+Disallow: /l.php
+Disallow: /o.php
+Disallow: /p.php
+Disallow: /photo.php
+Disallow: /photo_comments.php
+Disallow: /photo_search.php
+Disallow: /photos.php
+
+User-agent: teoma
+Disallow: /ac.php
+Disallow: /ae.php
+Disallow: /album.php
+Disallow: /ap.php
+Disallow: /autologin.php
+Disallow: /checkpoint/
+Disallow: /feeds/
+Disallow: /l.php
+Disallow: /o.php
+Disallow: /p.php
+Disallow: /photo.php
+Disallow: /photo_comments.php
+Disallow: /photo_search.php
+Disallow: /photos.php
+
+User-agent: Yandex
+Disallow: /ac.php
+Disallow: /ae.php
+Disallow: /album.php
+Disallow: /ap.php
+Disallow: /autologin.php
+Disallow: /checkpoint/
+Disallow: /feeds/
+Disallow: /l.php
+Disallow: /o.php
+Disallow: /p.php
+Disallow: /photo.php
+Disallow: /photo_comments.php
+Disallow: /photo_search.php
+Disallow: /photos.php
+
+User-agent: *
+Disallow: /
+
+# E-mail sitemaps@lists.facebook.com if you are authorized to access these and are getting denied.
+Sitemap: http://www.facebook.com/sitemap.php

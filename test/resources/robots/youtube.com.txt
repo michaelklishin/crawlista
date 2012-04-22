@@ -1,0 +1,19 @@
+User-agent: Mediapartners-Google*
+Disallow:
+
+User-agent: *
+Disallow: /bulletin
+Disallow: /comment
+Disallow: /forgot
+Disallow: /get_video
+Disallow: /get_video_info
+Disallow: /login
+Disallow: /results
+Disallow: /signup
+Disallow: /t/terms
+Disallow: /t/privacy
+Disallow: /verify_age
+Disallow: /videos
+Disallow: /watch_ajax
+Disallow: /watch_popup
+Disallow: /watch_queue_ajax
