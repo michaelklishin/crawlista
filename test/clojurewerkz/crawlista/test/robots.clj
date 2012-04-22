@@ -2,7 +2,14 @@
   (:use clojurewerkz.crawlista.robots
         clojure.test))
 
-(deftest ^{:robots true :focus true} test-low-level-parser
+(deftest ^{:robots true :focus true} test-disallow-lines-parsing
+         (testing "simple cases with disallow lines only"
+           (are [input output] (is (= (parse* input) output))
+                "Disallow:"                 [{"disallow"   ""}]
+                "Disallow: /"               [{"disallow"   "/"}]
+                "Disallow: /search"         [{"disallow"   "/search"}])))
+
+(deftest ^{:robots true} test-low-level-parser
          (testing "cases with comments only"
            (are [input] (is (= [] (parse* input)))
                 "#"
@@ -16,7 +23,7 @@
                     # Another comment"
                 "  #    Комментарий
                    # и еще один"))
-         (testing "simple cases"
+         (testing "simple cases with just agent lines"
            (are [input output] (is (= (parse* input) output))
                 "User-agent: *"                        [{"user-agent" "*"}]
                 "User-agent: webcrawler"               [{"user-agent" "webcrawler"}]
@@ -28,8 +35,10 @@
                 "User-agent: Megabot   "               [{"user-agent" "Megabot"}]
                 "\t\tUser-agent:\t\t\tMegabot   "      [{"user-agent" "Megabot"}]
                 "User-agent: webcrawler\nUser-agent: netcrawler" [{"user-agent" "webcrawler"}
-                                                                  {"user-agent" "netcrawler"}]))
-         (testing "more sophisticated scenarios"
+                                                                  {"user-agent" "netcrawler"}]
+                "User-agent:Googlebot # Гуглобот\nUser-agent: baidu"      [{"user-agent" "Googlebot"}
+                                                                           {"user-agent" "baidu"}]))
+         (testing "more sophisticated scenarios with just agent lines"
            (are [input output] (is (= (parse* input) output))
                 "User-agent: webcrawler"       [{"user-agent" "webcrawler"}]
                 "User-agent: Googlebot"        [{"user-agent" "Googlebot"}]
@@ -54,7 +63,16 @@
                                                                               {"user-agent" "curl"}]
                 " #Big search engines\nUser-agent: msnbot # MSN\nUser-agent: Googlebot # Google"  [{"user-agent" "msnbot"}
                                                                                                    {"user-agent" "Googlebot"}]
-                " #Big search engines\n#User-agent: msnbot # MSN\nUser-agent: Googlebot # Google" [{"user-agent" "Googlebot"}])))
+                " #Big search engines\n#User-agent: msnbot # MSN\nUser-agent: Googlebot # Google" [{"user-agent" "Googlebot"}]))
+         (testing "simple cases with agent and allow/disallow lines"
+           (are [input output] (is (= (parse* input) output))
+                "User-agent: *\nDisallow: /"                        [{"user-agent" "*"}
+                                                                     {"disallow"   "/"}]
+                "User-agent: webcrawler\nDisallow: /search"         [{"user-agent" "webcrawler"}
+                                                                     {"disallow"   "/search"}]
+                "User-agent: EDI/1.6.0 (Edacious & Intelligent Web Crawler)\nDisallow: /iplayer/cy/episode/*?from=r*"
+                [{"user-agent" "EDI/1.6.0 (Edacious & Intelligent Web Crawler)"}
+                 {"disallow"   "/iplayer/cy/episode/*?from=r*"}])))
 
 #_ (deftest ^{:robots true} test-parsing-of-input-with-just-a-user-agent-string
             (is (= {"webcrawler" []}       (parse "User-agent: webcrawler")))
