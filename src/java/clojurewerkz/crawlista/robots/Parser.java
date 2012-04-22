@@ -14,7 +14,7 @@ import clojure.lang.PersistentVector;
 
 
 
-// line 64 "src/rl/clojurewerkz/crawlista/robots/Parser.rl"
+// line 63 "src/rl/clojurewerkz/crawlista/robots/Parser.rl"
 
 
 public class Parser {
@@ -33,8 +33,8 @@ private static final byte _robots_actions[] = init__robots_actions_0();
 private static byte[] init__robots_key_offsets_0()
 {
 	return new byte [] {
-	    0,    0,    4,    9,   10,   11,   12,   13,   14,   15,   16,   17,
-	   18,   19,   20,   28,   30,   35,   40,   41,   44,   49
+	    0,    0,    5,   10,   11,   12,   13,   14,   15,   16,   17,   18,
+	   19,   20,   21,   29,   32,   35
 	};
 }
 
@@ -44,11 +44,10 @@ private static final byte _robots_key_offsets[] = init__robots_key_offsets_0();
 private static char[] init__robots_trans_keys_0()
 {
 	return new char [] {
-	   32,   35,    9,   13,   10,   13,  127,    0,   31,   10,  115,  101,
-	  114,   45,   97,  103,  101,  110,  116,   58,   32,   42,    9,   13,
-	   65,   90,   97,  122,   10,   13,   32,   35,   85,    9,   13,   10,
-	   13,  127,    0,   31,   10,   10,   13,   35,   32,   35,   85,    9,
-	   13,   32,   35,   85,    9,   13,    0
+	   32,   35,   85,    9,   13,   10,   13,  127,    0,   31,   10,  115,
+	  101,  114,   45,   97,  103,  101,  110,  116,   58,   32,   42,    9,
+	   13,   65,   90,   97,  122,   10,   13,   35,   10,   13,   35,   32,
+	   35,   85,    9,   13,    0
 	};
 }
 
@@ -58,8 +57,8 @@ private static final char _robots_trans_keys[] = init__robots_trans_keys_0();
 private static byte[] init__robots_single_lengths_0()
 {
 	return new byte [] {
-	    0,    2,    3,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-	    1,    1,    2,    2,    3,    3,    1,    3,    3,    3
+	    0,    3,    3,    1,    1,    1,    1,    1,    1,    1,    1,    1,
+	    1,    1,    2,    3,    3,    3
 	};
 }
 
@@ -70,7 +69,7 @@ private static byte[] init__robots_range_lengths_0()
 {
 	return new byte [] {
 	    0,    1,    1,    0,    0,    0,    0,    0,    0,    0,    0,    0,
-	    0,    0,    3,    0,    1,    1,    0,    0,    1,    1
+	    0,    0,    3,    0,    0,    1
 	};
 }
 
@@ -80,8 +79,8 @@ private static final byte _robots_range_lengths[] = init__robots_range_lengths_0
 private static byte[] init__robots_index_offsets_0()
 {
 	return new byte [] {
-	    0,    0,    4,    9,   11,   13,   15,   17,   19,   21,   23,   25,
-	   27,   29,   31,   37,   40,   45,   50,   52,   56,   61
+	    0,    0,    5,   10,   12,   14,   16,   18,   20,   22,   24,   26,
+	   28,   30,   32,   38,   42,   46
 	};
 }
 
@@ -91,12 +90,11 @@ private static final byte _robots_index_offsets[] = init__robots_index_offsets_0
 private static byte[] init__robots_indicies_0()
 {
 	return new byte [] {
-	    0,    2,    0,    1,    3,    4,    1,    1,    2,    3,    1,    5,
-	    1,    6,    1,    7,    1,    8,    1,    9,    1,   10,    1,   11,
-	    1,   12,    1,   13,    1,   14,    1,   14,   15,   14,   16,   16,
-	    1,   17,   18,    1,   19,    2,   20,   19,    1,   21,   22,    1,
-	    1,   23,   21,    1,   17,   25,    1,   24,    0,    2,   20,    0,
-	    1,   19,   23,   20,   19,    1,    0
+	    0,    2,    3,    0,    1,    4,    5,    1,    1,    2,    4,    1,
+	    6,    1,    7,    1,    8,    1,    9,    1,   10,    1,   11,    1,
+	   12,    1,   13,    1,   14,    1,   15,    1,   15,   16,   15,   17,
+	   17,    1,   18,   19,   20,    1,   18,   22,   20,   21,    0,    2,
+	    3,    0,    1,    0
 	};
 }
 
@@ -106,9 +104,8 @@ private static final byte _robots_indicies[] = init__robots_indicies_0();
 private static byte[] init__robots_trans_targs_0()
 {
 	return new byte [] {
-	    1,    0,    2,   20,    3,    5,    6,    7,    8,    9,   10,   11,
-	   12,   13,   14,   15,   19,   21,   18,   16,    4,   21,   18,   17,
-	   19,   19
+	    1,    0,    2,    4,   17,    3,    5,    6,    7,    8,    9,   10,
+	   11,   12,   13,   14,   15,   16,   17,    3,    2,   16,   16
 	};
 }
 
@@ -119,8 +116,7 @@ private static byte[] init__robots_trans_actions_0()
 {
 	return new byte [] {
 	    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
-	    0,    0,    0,    1,    1,    3,    3,    0,    0,    0,    0,    0,
-	    0,    3
+	    0,    0,    0,    0,    1,    1,    3,    3,    3,    0,    3
 	};
 }
 
@@ -131,21 +127,21 @@ private static byte[] init__robots_eof_actions_0()
 {
 	return new byte [] {
 	    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
-	    0,    0,    0,    3,    0,    0,    0,    3,    0,    0
+	    0,    0,    0,    3,    3,    0
 	};
 }
 
 private static final byte _robots_eof_actions[] = init__robots_eof_actions_0();
 
 
-static final int robots_start = 20;
-static final int robots_first_final = 20;
+static final int robots_start = 17;
+static final int robots_first_final = 17;
 static final int robots_error = 0;
 
-static final int robots_en_main = 20;
+static final int robots_en_main = 17;
 
 
-// line 68 "src/rl/clojurewerkz/crawlista/robots/Parser.rl"
+// line 67 "src/rl/clojurewerkz/crawlista/robots/Parser.rl"
 
   public IPersistentVector parse(String input) throws ParseException {
     char[] data = input.toCharArray();
@@ -160,14 +156,14 @@ static final int robots_en_main = 20;
     ITransientVector result = PersistentVector.create().asTransient();
 
     
-// line 164 "src/java/clojurewerkz/crawlista/robots/Parser.java"
+// line 160 "src/java/clojurewerkz/crawlista/robots/Parser.java"
 	{
 	cs = robots_start;
 	}
 
-// line 82 "src/rl/clojurewerkz/crawlista/robots/Parser.rl"
+// line 81 "src/rl/clojurewerkz/crawlista/robots/Parser.rl"
     
-// line 171 "src/java/clojurewerkz/crawlista/robots/Parser.java"
+// line 167 "src/java/clojurewerkz/crawlista/robots/Parser.java"
 	{
 	int _klen;
 	int _trans = 0;
@@ -265,7 +261,7 @@ case 1:
     result.conj(m.assoc("user-agent", lastSeenUserAgentName.trim()));
   }
 	break;
-// line 269 "src/java/clojurewerkz/crawlista/robots/Parser.java"
+// line 265 "src/java/clojurewerkz/crawlista/robots/Parser.java"
 			}
 		}
 	}
@@ -297,7 +293,7 @@ case 4:
     result.conj(m.assoc("user-agent", lastSeenUserAgentName.trim()));
   }
 	break;
-// line 301 "src/java/clojurewerkz/crawlista/robots/Parser.java"
+// line 297 "src/java/clojurewerkz/crawlista/robots/Parser.java"
 		}
 	}
 	}
@@ -307,7 +303,7 @@ case 5:
 	break; }
 	}
 
-// line 83 "src/rl/clojurewerkz/crawlista/robots/Parser.rl"
+// line 82 "src/rl/clojurewerkz/crawlista/robots/Parser.rl"
 
     if(cs == robots_error) {
       throw new ParseException("Unparseable input: " + input + ", p = " + p, p);

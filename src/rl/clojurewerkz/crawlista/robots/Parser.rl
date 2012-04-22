@@ -42,22 +42,21 @@ import clojure.lang.PersistentVector;
   AGENT_INITIAL  = 'a'..'z' | 'A'..'Z';
   WILDCARD       = '*';
 
-  blank        = (space | HT)*;
-  blankline    = blank* CRLF;
+  blank          = (space | HT)*;
+  blankline      = blank* CRLF;
 
-  comment      = blank* HASH TEXT*;
-  commentline  = comment CRLF;
-  blankcomment = blank? commentline;
-  commentblank = commentline* blank blankcomment*;
+  comment        = HASH TEXT*;
+  commentline    = blank* comment CRLF;
+  blankcomment   = blank? commentline;
+  commentblank   = commentline* blank blankcomment*;
 
   wildcard_agent = WILDCARD;
   named_agent    = AGENT_INITIAL ID*;
 
   agent          = (wildcard_agent | named_agent) >agent_start %/agent_end %agent_end;
-  agentline      = "User-agent:" space* agent CRLF;
+  agentline      = (space | HT)* "User-agent:" (space | HT)* agent comment? CRLF;
 
-  # record       = commentline* agentline commentline?;
-  record         = agentline;
+  record         = commentline* agentline commentline?;
 
   main := blankcomment*
        | blankcomment* record (commentblank record)* blankcomment*;

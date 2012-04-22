@@ -8,7 +8,10 @@
               "User-agent: webcrawler"       [{"user-agent" "webcrawler"}]
               "User-agent: Googlebot"        [{"user-agent" "Googlebot"}]
               "User-agent:Googlebot"         [{"user-agent" "Googlebot"}]
-              "User-agent: Megabot   "       [{"user-agent" "Megabot"}]
+              "User-agent:Googlebot #GOOG"      [{"user-agent" "Googlebot"}]
+              "User-agent:Googlebot # Гуглобот" [{"user-agent" "Googlebot"}]
+              "User-agent: Megabot   "          [{"user-agent" "Megabot"}]
+              "\t\tUser-agent:\t\t\tMegabot   " [{"user-agent" "Megabot"}]
               "User-agent: webcrawler\nUser-agent: netcrawler" [{"user-agent" "webcrawler"}
                                                                 {"user-agent" "netcrawler"}]))
 
@@ -34,7 +37,10 @@
               "User-agent: Mediapartners-Google\nUser-agent: curl"    [{"user-agent" "Mediapartners-Google"}
                                                                        {"user-agent" "curl"}]
               "User-agent: Python-urllib/1.17\nUser-agent:curl"      [{"user-agent" "Python-urllib/1.17"}
-                                                                      {"user-agent" "curl"}]))
+                                                                      {"user-agent" "curl"}]
+              " #Big search engines\nUser-agent: msnbot # MSN\nUser-agent: Googlebot # Google" [{"user-agent" "msnbot"}
+                                                                                                {"user-agent" "Googlebot"}]
+              " #Big search engines\n#User-agent: msnbot # MSN\nUser-agent: Googlebot # Google" [{"user-agent" "Googlebot"}]))
 
 #_ (deftest ^{:robots true} test-parsing-of-input-with-just-a-one-line-comment
             (is (= {} (parse "#")))
