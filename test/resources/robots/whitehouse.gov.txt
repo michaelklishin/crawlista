@@ -1,0 +1,19 @@
+User-agent: *
+Crawl-delay: 10
+
+Disallow: /petition-tool/
+Disallow: /?q=petition-tool/
+Disallow: /*_escaped_fragment_
+Disallow: /*_escaped_fragment_=/petition/
+Disallow: /*_escaped_fragment_=/petitions/
+Disallow: /petitions/!/petitions
+Disallow: /?q=petitions/!/petitions/
+Disallow: /petitions
+Disallow: /search*
+Disallow: /?q=search*
+Disallow: /*.xml$
+
+User-agent: imo-google-robot-intelink
+Disallow: /
+
+Sitemap: http://www.whitehouse.gov/feed/media/video-audio

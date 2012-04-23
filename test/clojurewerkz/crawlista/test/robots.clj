@@ -102,8 +102,6 @@
                                                                                         {"user-agent" "*"}])))
 
 
-;; split into multiple tests because otherwise we hit JVM's default method size limit with these
-;; large maps embedded into the body. MK.
 (deftest ^{:robots true} test-low-level-parser-with-real-world-example-set1
          (testing "real world robots.txt"
            (are [input output] (is (= (parse* (slurp (io/resource input))) output))
@@ -2303,8 +2301,6 @@
                                         {"sitemap" "http://www.gazeta.ru/sitemap.xml"}])))
 
 
-;; split into multiple tests because otherwise we hit JVM's default method size limit with these
-;; large maps embedded into the body. MK.
 (deftest ^{:robots true} test-low-level-parser-with-real-world-example-set2
          (testing "real world robots.txt"
            (are [input output] (is (= (parse* (slurp (io/resource input))) output))
@@ -2629,16 +2625,111 @@
                                            {"disallow" "/profile-find.g"}
                                            {"disallow" "/comment.g"}
                                            {"disallow" "/email-post.g"}
-                                           {"disallow" "/share-post-menu.g"}])))
+                                           {"disallow" "/share-post-menu.g"}]
+                "robots/whitehouse.gov.txt"   [{"user-agent" "*"}
+                                               {"crawl-delay" 10}
+                                               {"disallow" "/petition-tool/"}
+                                               {"disallow" "/?q=petition-tool/"}
+                                               {"disallow" "/*_escaped_fragment_"}
+                                               {"disallow" "/*_escaped_fragment_=/petition/"}
+                                               {"disallow" "/*_escaped_fragment_=/petitions/"}
+                                               {"disallow" "/petitions/!/petitions"}
+                                               {"disallow" "/?q=petitions/!/petitions/"}
+                                               {"disallow" "/petitions"}
+                                               {"disallow" "/search*"}
+                                               {"disallow" "/?q=search*"}
+                                               {"disallow" "/*.xml$"}
+                                               {"user-agent" "imo-google-robot-intelink"}
+                                               {"disallow" "/"}
+                                               {"sitemap" "http://www.whitehouse.gov/feed/media/video-audio"}]
+                "robots/readwriteweb.com.txt" [{"user-agent" "*"}
+                                               {"disallow" "/test/"}
+                                               {"disallow" "/new/"}
+                                               {"disallow" "/42/"}
+                                               {"disallow" "/cgi-bin/"}
+                                               {"disallow" "/modules/"}
+                                               {"disallow" "/misc/"}
+                                               {"disallow" "/themes/"}
+                                               {"disallow" "/sites/"}
+                                               {"disallow" "/cron.php"}
+                                               {"disallow" "/_orion/"}
+                                               {"disallow" "/admin/"}
+                                               {"disallow" "/node/"}
+                                               {"disallow" "/filter/tips/"}
+                                               {"disallow" "/search/"}
+                                               {"disallow" "/user/"}
+                                               {"user-agent" "Googlebot-Image"}
+                                               {"disallow" "/"}
+                                               {"user-agent" "008"}
+                                               {"disallow" "/"}
+                                               {"user-agent" "mxbot"}
+                                               {"disallow" "/"}
+                                               {"user-agent" "heritrix"}
+                                               {"disallow" "/"}
+                                               {"user-agent" "Exabot"}
+                                               {"disallow" "/"}
+                                               {"user-agent" "Sosospider"}
+                                               {"disallow" "/"}
+                                               {"user-agent" "Sosoimagespider"}
+                                               {"disallow" "/"}
+                                               {"user-agent" "rdfbot"}
+                                               {"disallow" "/"}
+                                               {"user-agent" "CamontSpider"}
+                                               {"disallow" "/"}
+                                               {"user-agent" "twiceler"}
+                                               {"disallow" "/search/"}
+                                               {"sitemap" "http://www.readwriteweb.com/sitemap_index.xml"}]
+                "robots/gigaom.com.txt"       [{"sitemap" "http://gigaom.com/sitemap.xml"}
+                                               {"user-agent" "IRLbot"}
+                                               {"crawl-delay" 3600}
+                                               {"user-agent" "*"}
+                                               {"disallow" "/next/"}
+                                               {"user-agent" "*"}
+                                               {"disallow" "/activate/"}
+                                               {"user-agent" "*"}
+                                               {"disallow" "/wp-login.php"}
+                                               {"user-agent" "*"}
+                                               {"disallow" "/signup/"}
+                                               {"user-agent" "*"}
+                                               {"disallow" "/related-tags.php"}
+                                               {"user-agent" "*"}
+                                               {"disallow" "/cgi-bin/"}
+                                               {"user-agent" "*"}
+                                               {"disallow" "/wp-admin/"}
+                                               {"disallow" "/wp-includes/"}]
+                "robots/tumblr.site.txt"      [{"user-agent" "*"}
+                                               {"disallow" "/t/trackback"}
+                                               {"disallow" "/t/comments"}
+                                               {"disallow" "/t/stats"}
+                                               {"disallow" "/t/app"}
+                                               {"disallow" "/.m/"}
+                                               {"user-agent" "Googlebot-Mobile"}
+                                               {"allow" "/.m/"}
+                                               {"disallow" "/"}
+                                               {"user-agent" "Y!J-SRD"}
+                                               {"allow" "/.m/"}
+                                               {"disallow" "/"}
+                                               {"user-agent" "Y!J-MBS"}
+                                               {"allow" "/.m/"}
+                                               {"disallow" "/"}
+                                               {"user-agent" "Active Cache Request"}
+                                               {"disallow" "*"}]
+                "robots/afisha.ru.txt"        [{"user-agent" "Yandex"}
+                                               {"disallow" "*/cinema/*/reservation/*/"}
+                                               {"disallow" "*/restaurant/reservation/"}
+                                               {"host" "www.afisha.ru"}
+                                               {"sitemap" "http://www.afisha.ru/sitemap_index.xml"}
+                                               {"user-agent" "*"}
+                                               {"disallow" "*/cinema/*/reservation/*/"}
+                                               {"disallow" "*/restaurant/reservation/"}
+                                               {"sitemap" "http://www.afisha.ru/sitemap_index.xml"}])))
 
 
 
-;; split into multiple tests because otherwise we hit JVM's default method size limit with these
-;; large maps embedded into the body. MK.
 (deftest ^{:robots true} test-low-level-parser-with-real-world-example-set3
          (testing "real world robots.txt"
            (are [input output] (is (= (parse* (slurp (io/resource input))) output))
-                                "robots/ebay.com.txt"     [{"user-agent" "eBay-crawler"}
+                "robots/ebay.com.txt"     [{"user-agent" "eBay-crawler"}
                                            {"disallow" ""}
                                            {"user-agent" "*"}
                                            {"disallow" "/disney/"}
