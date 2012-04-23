@@ -2179,7 +2179,80 @@
                                             {"disallow" "/wiki/Wikipedia_talk:Article_Incubator/"}
                                             {"disallow" "/wiki/Wikipedia_talk%3AArticle_Incubator/"}
                                             {"disallow" "/wiki/Category:Noindexed_pages"}
-                                            {"disallow" "/wiki/Category%3ANoindexed_pages"}])))
+                                            {"disallow" "/wiki/Category%3ANoindexed_pages"}]
+                "robots/elpais.com.txt" [{"user-agent" "*"}
+                                         {"disallow" "/buscador/"}
+                                         {"disallow" "/pruebas/"}
+                                         {"disallow" "/publicidad/"}
+                                         {"disallow" "/notificarelacionadas"}
+                                         {"disallow" "/pxlctl.gif"}
+                                         {"disallow" "/pxlctl2.gif"}
+                                         {"disallow" "/*.swf$"}]
+                "robots/usatoday.com.txt" [{"sitemap" "http://www.usatoday.com/sitemap-www.xml"}
+                                           {"sitemap" "http://www.usatoday.com/video/sitemap"}
+                                           {"user-agent" "*"}
+                                           {"disallow" "/feedback"}
+                                           {"disallow" "/HTML"}
+                                           {"disallow" "/html"}
+                                           {"disallow" "/cgi-bin"}
+                                           {"disallow" "/system"}
+                                           {"disallow" "/inetart"}
+                                           {"disallow" "/maps"}
+                                           {"disallow" "/money/motley/mmfront.htm"}
+                                           {"disallow" "/marketing/fleet"}
+                                           {"disallow" "/RealMedia"}
+                                           {"disallow" "/schemas"}
+                                           {"disallow" "/sponsors"}
+                                           {"disallow" "/test"}
+                                           {"disallow" "/testing"}
+                                           {"disallow" "/chad"}
+                                           {"disallow" "/a"}
+                                           {"disallow" "/form"}
+                                           {"disallow" "/forms"}
+                                           {"disallow" "/survey"}
+                                           {"disallow" "/uwire"}
+                                           {"disallow" "/sports/scores95"}
+                                           {"disallow" "/sports/scores96"}
+                                           {"disallow" "/sports/scores97"}
+                                           {"disallow" "/sports/scores98"}
+                                           {"disallow" "/sports/scores99"}
+                                           {"disallow" "/aponline"}
+                                           {"disallow" "/sports/cscores"}
+                                           {"disallow" "/elect/ew"}
+                                           {"disallow" "/elect/eq"}
+                                           {"disallow" "/elect/es"}
+                                           {"disallow" "/news/washdc/elect/states"}
+                                           {"disallow" "/olympics"}
+                                           {"disallow" "/sports/baseball/bbw"}
+                                           {"disallow" "/2000/calendar"}
+                                           {"disallow" "/palm"}
+                                           {"disallow" "/sports/basketba/skwb"}
+                                           {"disallow" "/sports/basketba/skw"}
+                                           {"disallow" "/usatonline"}
+                                           {"disallow" "/community/chat_test"}
+                                           {"disallow" "/community/chat_template"}
+                                           {"disallow" "/asp"}
+                                           {"disallow" "/att/vanity"}
+                                           {"disallow" "/img/featuredemployer"}
+                                           {"disallow" "/travel/vacations"}
+                                           {"disallow" "/wireless/nex"}
+                                           {"disallow" "/wireless/test"}
+                                           {"disallow" "/wireless/testWap"}
+                                           {"disallow" "/wireless/testxspt"}
+                                           {"disallow" "/wireless/vgn"}
+                                           {"disallow" "/wireless/xnex"}
+                                           {"disallow" "/wireless/xvgn"}
+                                           {"disallow" "/wireless/xwap"}
+                                           {"disallow" "/search"}
+                                           {"disallow" "/news/education/2008-college-form.pdf"}
+                                           {"disallow" "/repurposing/hotels"}
+                                           {"disallow" "/news/politics/election2008/issue.aspx"}
+                                           {"disallow" "/media_kit/images/open_air/2008_open_air_editorial_calendar_v3.pdf"}
+                                           {"disallow" "/toolkit"}
+                                           {"disallow" "/USAWtravelService/"}
+                                           {"disallow" "/labs/sandbox"}
+                                           {"disallow" "/marketing/CCIUsers"}
+                                           {"allow" "/asp/tools/search"}])))
 
 #_ (deftest ^{:robots true} test-parsing-of-input-with-just-a-user-agent-string
             (is (= {"webcrawler" []}       (parse "User-agent: webcrawler")))
