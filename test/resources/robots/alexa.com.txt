@@ -1,0 +1,193 @@
+# The crawlers listed below are allowed on the Alexa site.  
+# Alexa allows other crawlers on a case by case basis. 
+
+#
+# Alexa provides access to traffic ranking data via Amazon Web Services. 
+# More information here: <URL: http://aws.amazon.com/awis>
+
+User-agent: Mediapartners-Google*
+Disallow: /cgi-bin
+Disallow: /edit
+Disallow: /toolbar/success
+Disallow: /help/viewforum.php
+Disallow: /site/clickstream
+
+User-agent: googlemediabot*
+Disallow: /cgi-bin
+Disallow: /edit
+Disallow: /toolbar/success
+Disallow: /help/viewforum.php
+Disallow: /site/clickstream
+
+User-agent: googlebot   
+Disallow: /cgi-bin
+Disallow: /edit
+Disallow: /toolbar/success
+Disallow: /help/viewforum.php
+Disallow: /site/clickstream
+Disallow: /search
+Disallow: /data/
+Disallow: /site/linksin
+Disallow: /virtual
+Disallow: /edit
+Disallow: /reset
+Disallow: /profile
+Disallow: /write
+Disallow: /siteaudit/visibility
+Disallow: /login
+Disallow: /logout
+Disallow: /register
+Disallow: /accept
+Disallow: /audituser
+Disallow: /startreport
+Disallow: /quickregister
+Disallow: /account
+Disallow: /reviews/single
+
+User-agent: gulliver    
+Disallow: /cgi-bin
+Disallow: /edit
+Disallow: /toolbar/success
+Disallow: /help/viewforum.php
+
+User-agent: slurp       
+Disallow: /cgi-bin
+Disallow: /edit
+Disallow: /toolbar/success
+Disallow: /help/viewforum.php
+Disallow: /site/clickstream
+
+User-agent: fast        
+Disallow: /cgi-bin
+Disallow: /edit
+Disallow: /toolbar/success
+Disallow: /help/viewforum.php
+
+User-agent: scooter     
+Disallow: /cgi-bin
+Disallow: /search
+Disallow: /edit
+Disallow: /toolbar/success
+Disallow: /help/viewforum.php
+
+User-agent: vscooter    
+Disallow: /cgi-bin
+Disallow: /search
+Disallow: /edit
+Disallow: /toolbar/success
+Disallow: /help/viewforum.php
+
+User-agent: ia_archiver 
+Disallow: /cgi-bin
+Disallow: /search
+Disallow: /edit
+Disallow: /toolbar/success
+Disallow: /help/viewforum.php
+
+User-agent: Nutch       
+Disallow: /cgi-bin
+Disallow: /search
+Disallow: /edit
+Disallow: /toolbar/success
+Disallow: /help/viewforum.php
+
+User-agent: FAST-WebCrawler
+Disallow: /cgi-bin
+Disallow: /search
+Disallow: /edit
+Disallow: /toolbar/success
+Disallow: /help/viewforum.php
+
+User-agent: teoma
+Disallow: /cgi-bin
+Disallow: /search
+Disallow: /edit
+Disallow: /toolbar/success
+Disallow: /help/viewforum.php
+
+User-agent: Lycos_Spider_(T-Rex)        
+Disallow: /cgi-bin
+Disallow: /search
+Disallow: /edit
+Disallow: /toolbar/success
+Disallow: /help/viewforum.php
+
+User-agent: bingbot
+Disallow: /cgi-bin
+Disallow: /edit
+Disallow: /toolbar/success
+Disallow: /help/viewforum.php
+Disallow: /site/clickstream
+
+User-agent: MSNBot
+Disallow: /cgi-bin
+Disallow: /edit
+Disallow: /toolbar/success
+Disallow: /help/viewforum.php
+Disallow: /site/clickstream
+
+User-agent: MSNPTC
+Disallow: /cgi-bin
+Disallow: /search
+Disallow: /edit
+Disallow: /toolbar/success
+Disallow: /help/viewforum.php
+
+User-agent: msnbot-media/1.0
+Disallow: /cgi-bin
+Disallow: /edit
+Disallow: /toolbar/success
+Disallow: /help/viewforum.php
+
+User-agent: ArchitextSpider
+Disallow: /cgi-bin
+Disallow: /search
+Disallow: /edit
+Disallow: /toolbar/success
+Disallow: /help/viewforum.php
+
+User-agent: ZyBorg
+Disallow: /cgi-bin
+Disallow: /search
+Disallow: /edit
+Disallow: /toolbar/success
+Disallow: /help/viewforum.php
+
+User-agent: SurveyBot
+Disallow: /cgi-bin
+Disallow: /search
+Disallow: /edit
+Disallow: /toolbar/success
+Disallow: /help/viewforum.php
+
+User-agent: AlexaBot
+Disallow: /cgi-bin
+Disallow: /edit
+Disallow: /toolbar/success
+Disallow: /help/viewforum.php
+
+User-agent: Baiduspider
+Disallow: /cgi-bin
+Disallow: /search
+Disallow: /edit
+Disallow: /toolbar/success
+Disallow: /help/viewforum.php
+
+User-agent: Yandex
+Disallow: /cgi-bin
+Disallow: /edit
+Disallow: /toolbar/success
+Disallow: /help/viewforum.php
+Disallow: /site/clickstream
+
+User-agent: JikeSpider
+Disallow: /cgi-bin
+Disallow: /edit
+Disallow: /toolbar/success
+Disallow: /help/viewforum.php
+Disallow: /site/clickstream
+
+# Disallow all other crawlers
+
+User-agent: *           
+Disallow: / 
