@@ -187,7 +187,7 @@ import clojure.lang.*;;
   CTL            = (cntrl | 127);
   TEXT           = any -- CTL;
   ID             = any -- HASH -- CRLF;
-  AGENT_INITIAL  = 'a'..'z' | 'A'..'Z';
+  AGENT_INITIAL  = 'a'..'z' | 'A'..'Z' | '0'-'9';
   WILDCARD       = '*';
 
   SLASH          = '/';

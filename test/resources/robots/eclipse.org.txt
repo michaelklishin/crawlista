@@ -1,0 +1,10 @@
+User-agent: *
+Disallow: /downloads/download.php
+Disallow: /search/
+Disallow: /go/
+
+# Platform 1.0 doc - https://bugs.eclipse.org/bugs/show_bug.cgi?id=109674
+Disallow: /documentation/html/
+
+User-agent: 008
+Disallow: /
