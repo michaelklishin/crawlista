@@ -10,11 +10,18 @@
                 "Disallow: /"               [{"disallow"   "/"}]
                 "Disallow: /search"         [{"disallow"   "/search"}])))
 
-(deftest ^{:robots true :focus true} test-disallow-none-lines-parsing
+(deftest ^{:robots true} test-disallow-none-lines-parsing
          (testing "simple cases with disallow lines only"
            (are [input output] (is (= (parse* input) output))
                 "\n\n\nDisallow:\nUser-agent: *\n\n"  [{"disallow"   ""}
                                                        {"user-agent" "*"}])))
+
+(deftest ^{:robots true} test-host-lines-parsing
+         (testing "simple cases"
+           (are [input output] (is (= (parse* input) output))
+                "\n\nHost:www.gazeta.ru  \n" [{"host"    "www.gazeta.ru"}]
+                "\n\nHost:www.gazeta.ru\nSitemap: http://www.gazeta.ru/sitemap.xml\n\n"  [{"host"    "www.gazeta.ru"}
+                                                                                          {"sitemap" "http://www.gazeta.ru/sitemap.xml"}])))
 
 (deftest ^{:robots true} test-low-level-parser
          (testing "cases with comments only"
@@ -2252,7 +2259,43 @@
                                            {"disallow" "/USAWtravelService/"}
                                            {"disallow" "/labs/sandbox"}
                                            {"disallow" "/marketing/CCIUsers"}
-                                           {"allow" "/asp/tools/search"}])))
+                                           {"allow" "/asp/tools/search"}]
+                "robots/gazeta.ru.txt" [{"user-agent" "*"}
+                                        {"disallow" "/cgi-bin"}
+                                        {"disallow" "/booking"}
+                                        {"disallow" "/cont"}
+                                        {"disallow" "/counters"}
+                                        {"disallow" "/dig"}
+                                        {"disallow" "/chat"}
+                                        {"disallow" "/chat2"}
+                                        {"disallow" "/css"}
+                                        {"disallow" "/includes"}
+                                        {"disallow" "/online"}
+                                        {"disallow" "/onlinen"}
+                                        {"disallow" "/onlinex"}
+                                        {"disallow" "/prazdnik"}
+                                        {"disallow" "/print"}
+                                        {"disallow" "/tabs"}
+                                        {"disallow" "/vote"}
+                                        {"disallow" "/dict"}
+                                        {"disallow" "/rockefeller"}
+                                        {"disallow" "/rockgame"}
+                                        {"disallow" "/k141"}
+                                        {"disallow" "/tmp"}
+                                        {"disallow" "/livejournal"}
+                                        {"disallow" "/search"}
+                                        {"disallow" "/*comment_id"}
+                                        {"disallow" "/*refresh"}
+                                        {"disallow" "/*?map"}
+                                        {"disallow" "/eyjafjallajokull"}
+                                        {"disallow" "/eyjafjallajokulli"}
+                                        {"disallow" "/nm2008"}
+                                        {"disallow" "/vacancy"}
+                                        {"disallow" "/adbook"}
+                                        {"disallow" "/*true&width"}
+                                        {"disallow" "/*keepThis"}
+                                        {"host" "www.gazeta.ru"}
+                                        {"sitemap" "http://www.gazeta.ru/sitemap.xml"}])))
 
 #_ (deftest ^{:robots true} test-parsing-of-input-with-just-a-user-agent-string
             (is (= {"webcrawler" []}       (parse "User-agent: webcrawler")))

@@ -48,6 +48,17 @@ Then create a branch and make your changes on it. Once you are done with your ch
 tests pass, submit a pull request on Github.
 
 
+### Regenerating robots.txt Parser
+
+If you make changes to the [Ragel](http://www.complang.org/ragel/)-based `robots.txt` parser in Crawlista, you need to regenerate it:
+
+    ragel -J -o src/java/clojurewerkz/crawlista/robots/Parser.java src/rl/clojurewerkz/crawlista/robots/Parser.rl
+    lein2 javac
+
+and then run `robots.txt` parser test suite with
+
+    lein2 test :robots
+
 
 ## License
 

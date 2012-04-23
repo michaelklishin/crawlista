@@ -103,6 +103,29 @@ import clojure.lang.*;;
 
 
   #
+  # Host entries
+  #
+
+  action host_rule_start {
+    // System.out.println("action: host_rule_start. p = " + p);
+    hnsp = p;
+  }
+
+  action host_rule_end   {
+    // System.out.println("action: host_rule_end. p = " + p);
+
+    String rule = new String(data, hnsp, (p - hnsp));
+    // we matched empty host line (Host:)
+    if(!rule.equals("Host:")) {
+      // System.out.println("Saw host_rule: " + rule);
+
+      IPersistentMap m = PersistentHashMap.create();
+      result.conj(m.assoc("host", rule.trim()));
+    }
+  }
+
+
+  #
   # Noindex entries
   #
 
@@ -201,6 +224,8 @@ import clojure.lang.*;;
   Y              = 'Y' | 'y';
   X              = 'X' | 'x';
 
+  H              = 'H' | 'h';
+
   agent_prefix   = U S E R "-" A G E N T COLON;
 
   wildcard_agent  = WILDCARD SPHT*;
@@ -223,6 +248,9 @@ import clojure.lang.*;;
   sitemap_rule    = path >sitemap_rule_start %/sitemap_rule_end %sitemap_rule_end;
   sitemap_prefix  = S I T E M A P COLON;
 
+  host_rule       = path >host_rule_start %/host_rule_end %host_rule_end;
+  host_prefix     = H O S T COLON;
+
   crawldelay_rule    = digit+ >crawldelay_rule_start %/crawldelay_rule_end %crawldelay_rule_end;
   crawldelay_prefix  = C R A W L "-" D E L A Y COLON;
 
@@ -237,10 +265,13 @@ import clojure.lang.*;;
   sitemapline     = SPHT* sitemap_prefix CRLF |
                     SPHT* sitemap_prefix    SPHT* sitemap_rule  comment? CRLF;
 
+  hostline        = SPHT* host_prefix CRLF |
+                    SPHT* host_prefix    SPHT* host_rule  comment? CRLF;
+
   crawldelayline  = SPHT* crawldelay_prefix SPHT* crawldelay_rule comment? CRLF;
   noindexline     = SPHT* noindex_prefix    SPHT* noindex_rule    comment? CRLF;
 
-  ruleline        = disallowline | allowline | sitemapline | noindexline | crawldelayline;
+  ruleline        = disallowline | allowline | sitemapline | noindexline | crawldelayline | hostline;
 
   record          = commentline* agentline (commentline agentline)*
                     | ruleline (commentline ruleline)*;
@@ -270,6 +301,9 @@ public class Parser {
 
     // sitemap line start position
     int slsp = 0;
+
+    // hostname line start position
+    int hnsp = 0;
 
     // noindex line start position
     int nisp = 0;
