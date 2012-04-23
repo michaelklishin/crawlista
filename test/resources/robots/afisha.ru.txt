@@ -1,0 +1,10 @@
+User-agent: Yandex
+Disallow: */cinema/*/reservation/*/
+Disallow: */restaurant/reservation/
+Host: www.afisha.ru
+Sitemap: http://www.afisha.ru/sitemap_index.xml
+
+User-agent: *
+Disallow: */cinema/*/reservation/*/
+Disallow: */restaurant/reservation/
+Sitemap: http://www.afisha.ru/sitemap_index.xml

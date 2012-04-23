@@ -99,7 +99,12 @@
                                                                                       {"user-agent" "*"}]
                 "User-agent: Mediapartners-Google*\nDisallow:\n\nUser-agent: *"        [{"user-agent" "Mediapartners-Google*"}
                                                                                         {"disallow"   ""}
-                                                                                        {"user-agent" "*"}]))
+                                                                                        {"user-agent" "*"}])))
+
+
+;; split into multiple tests because otherwise we hit JVM's default method size limit with these
+;; large maps embedded into the body. MK.
+(deftest ^{:robots true} test-low-level-parser-with-real-world-example-set1
          (testing "real world robots.txt"
            (are [input output] (is (= (parse* (slurp (io/resource input))) output))
                 "robots/apple.com.txt" [{"user-agent" "*"}
@@ -2295,7 +2300,14 @@
                                         {"disallow" "/*true&width"}
                                         {"disallow" "/*keepThis"}
                                         {"host" "www.gazeta.ru"}
-                                        {"sitemap" "http://www.gazeta.ru/sitemap.xml"}]
+                                        {"sitemap" "http://www.gazeta.ru/sitemap.xml"}])))
+
+
+;; split into multiple tests because otherwise we hit JVM's default method size limit with these
+;; large maps embedded into the body. MK.
+(deftest ^{:robots true} test-low-level-parser-with-real-world-example-set2
+         (testing "real world robots.txt"
+           (are [input output] (is (= (parse* (slurp (io/resource input))) output))
                 "robots/alexa.com.txt"   [{"user-agent" "Mediapartners-Google*"}
                                           {"disallow" "/cgi-bin"}
                                           {"disallow" "/edit"}
@@ -2598,7 +2610,60 @@
                                           {"disallow" "/go/"}
                                           {"disallow" "/documentation/html/"}
                                           {"user-agent" "008"}
-                                          {"disallow" "/"}])))
+                                          {"disallow" "/"}]
+                "robots/audi.com.txt"     [{"user-agent" "*"}
+                                           {"disallow" "/us/brand/pre-live/"}
+                                           {"disallow" "/us/brand/AKQAStaging/"}
+                                           {"disallow" "/us/brand/AKQADev/"}
+                                           {"disallow" "/us/brand/akqatest/"}
+                                           {"disallow" "/us/brand/en/models-2011/"}
+                                           {"disallow" "/us/brand/en/models/2010/"}
+                                           {"disallow" "/us/brand/AKQAStaging.html"}
+                                           {"disallow" "/us/brand/AKQAStaging/tools/form/audicare.formlayer.html"}
+                                           {"disallow" "/us/brand/AKQADev.html"}
+                                           {"disallow" "/us/brand/akqatest.html"}
+                                           {"disallow" "/dummy"}
+                                           {"disallow" "/de_partner/p_11111"}
+                                           {"disallow" "*?frontend-debug=true"}]
+                "robots/blogger.com.txt"  [{"user-agent" "*"}
+                                           {"disallow" "/profile-find.g"}
+                                           {"disallow" "/comment.g"}
+                                           {"disallow" "/email-post.g"}
+                                           {"disallow" "/share-post-menu.g"}])))
+
+
+
+;; split into multiple tests because otherwise we hit JVM's default method size limit with these
+;; large maps embedded into the body. MK.
+(deftest ^{:robots true} test-low-level-parser-with-real-world-example-set3
+         (testing "real world robots.txt"
+           (are [input output] (is (= (parse* (slurp (io/resource input))) output))
+                                "robots/ebay.com.txt"     [{"user-agent" "eBay-crawler"}
+                                           {"disallow" ""}
+                                           {"user-agent" "*"}
+                                           {"disallow" "/disney/"}
+                                           {"disallow" "/ebayadvsearch/"}
+                                           {"sitemap" "http://www.ebay.com/lst/PDP_US_main_index.xml"}
+                                           {"sitemap" "http://www.ebay.com/lst/PDP_US_incremental_index.xml"}
+                                           {"sitemap" "http://www.ebay.com/lst/VIP_US_index.xml"}
+                                           {"sitemap" "http://www.ebay.com/lst/SRP_US_index.xml"}]
+                "robots/taobao.com.txt"   [{"user-agent" "Baiduspider"}
+                                           {"disallow" "/"}
+                                           {"user-agent" "baiduspider"}
+                                           {"disallow" "/"}])))
+
+
+(deftest ^{:robots true} test-low-level-parser-with-bulk-parsing
+         (testing "real world robots.txt"
+           ;; no "unparseable input" exceptions should be thrown. These examples produce maps that are
+           ;; too large to embed into the code w/o messing with the default JVM method size limit. MK.
+           (are [filename] (parse* (slurp (io/resource filename)))
+                "robots/linkedin.com.txt"
+                "robots/goldmansachs.com.txt"
+                "robots/bnpparibas.com.txt"
+                "robots/wordpress.com.txt"
+                "robots/wordpress_example.txt"
+                "robots/seniorenland.com.txt")))
 
 #_ (deftest ^{:robots true} test-parsing-of-input-with-just-a-user-agent-string
             (is (= {"webcrawler" []}       (parse "User-agent: webcrawler")))

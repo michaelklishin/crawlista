@@ -1,0 +1,34 @@
+User-agent: *
+Disallow: /cgi-bin/
+Disallow: /wp-admin/
+Disallow: /wp-includes/
+Disallow: /wp-content/plugins/
+Disallow: /wp-content/cache/
+Disallow: /wp-content/themes/
+Allow: /wp-content/uploads/
+# Disallow: /tag/ # uncomment if you’re not using tags
+# Disallow: /category/ # uncomment if you’re not using categories
+# Disallow: /author/ # uncomment for single user blogs
+Disallow: /feed/
+Disallow: /trackback/
+# Disallow: /print/ # wp-print block
+Disallow: /2009/ # the year your blog was born
+Disallow: /2010/
+Disallow: /2011/
+Disallow: /2012/ # and so on
+Disallow: /index.php # separate directive for the main script file of WP
+Disallow: /*? # search results
+Disallow: /*.php$
+Disallow: /*.js$
+Disallow: /*.inc$
+Disallow: /*.css$
+Disallow: */feed/
+Disallow: */trackback/
+# Disallow: */print/
+User-agent: Googlebot-Image
+Disallow:
+Allow: /
+User-agent: Mediapartners-Google
+Disallow:
+Allow: /
+Sitemap: http://yourdomain.com/sitemap.xml

@@ -1,0 +1,14 @@
+User-agent: *
+Disallow: /us/brand/pre-live/
+Disallow: /us/brand/AKQAStaging/
+Disallow: /us/brand/AKQADev/
+Disallow: /us/brand/akqatest/
+Disallow: /us/brand/en/models-2011/
+Disallow: /us/brand/en/models/2010/
+Disallow: /us/brand/AKQAStaging.html
+Disallow: /us/brand/AKQAStaging/tools/form/audicare.formlayer.html
+Disallow: /us/brand/AKQADev.html
+Disallow: /us/brand/akqatest.html
+Disallow: /dummy
+Disallow: /de_partner/p_11111
+Disallow: *?frontend-debug=true
