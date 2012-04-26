@@ -1,6 +1,6 @@
-(ns clojurewerkz.crawlista.test.extraction-test
+(ns clojurewerkz.crawlista.test.extraction.links-test
   (:import [java.net URI URL])
-  (:use clojurewerkz.crawlista.extraction
+  (:use clojurewerkz.crawlista.extraction.links
         clojurewerkz.crawlista.url
         clojure.test
         [clojure.set :only [subset?]]
