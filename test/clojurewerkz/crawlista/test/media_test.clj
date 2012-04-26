@@ -1,4 +1,4 @@
-(ns clojurewerkz.crawlista.test.media
+(ns clojurewerkz.crawlista.test.media-test
   (:require [pantomime.media :as pm]
             [clj-http.client :as http])
   (:use clojurewerkz.crawlista.media clojure.test))

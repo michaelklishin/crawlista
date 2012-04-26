@@ -1,4 +1,4 @@
-(ns clojurewerkz.crawlista.test.url
+(ns clojurewerkz.crawlista.test.url-test
   (:import [java.net URI URL])
   (:use clojurewerkz.crawlista.url
         clojure.test))
