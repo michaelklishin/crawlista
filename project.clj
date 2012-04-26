@@ -9,7 +9,7 @@
                  ;; Boilerpipe treats NekoHTML and Xerces as optional dependencies but absolutely
                  ;; does not work without them. MK.
                  [net.sourceforge.nekohtml/nekohtml "1.9.15"]
-                 [xerces/xerces                     "2.9.1"]
+                 [xerces/xercesImpl                  "2.9.1"]
                  [de.l3s.boilerpipe/boilerpipe      "1.2.0"]]
   :source-paths       ["src/clojure"]
   :resource-paths     ["src/resources"]
