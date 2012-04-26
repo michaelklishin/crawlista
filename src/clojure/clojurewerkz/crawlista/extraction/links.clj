@@ -1,5 +1,5 @@
-(ns clojurewerkz.crawlista.extraction
-  (:import [org.jsoup Jsoup]
+(ns clojurewerkz.crawlista.extraction.links
+  (:import org.jsoup.Jsoup
            [org.jsoup.nodes Document Element]
            [java.net URI URL MalformedURLException])
   (:use    clojurewerkz.crawlista.string

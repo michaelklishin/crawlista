@@ -1,4 +1,4 @@
-(ns clojurewerkz.crawlista.test.robots
+(ns clojurewerkz.crawlista.test.robots-test
   (:require [clojure.java.io :as io])
   (:use clojurewerkz.crawlista.robots
         clojure.test))

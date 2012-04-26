@@ -1,6 +1,17 @@
 ## Changes between Crawlista 1.0.0-alpha13 and 1.0.0-alpha14
 
-No changes so far.
+### Links Extraction moved into a separate namespace
+
+Links extraction functions have been moved to the `clojurewerkz.crawlista.extraction.links` namespace.
+
+
+### Content Extraction
+
+New `clojurewerkz.crawlista.extraction.content` namespaces provides functions that extract page content using
+[Boilerpipe Core](http://code.google.com/p/boilerpipe/). For more theoretical background on the extraction algorithm(s),
+see [this paper](http://www.l3s.de/~kohlschuetter/boilerplate/) and [this video lecture](http://videolectures.net/wsdm2010_kohlschutter_bdu/).
+
+Boilerpipe 1.2.0 is licensed under the [Apache 2.0 License](http://www.apache.org/licenses/LICENSE-2.0).
 
 
 ## Changes between Crawlista 1.0.0-alpha12 and 1.0.0-alpha13
