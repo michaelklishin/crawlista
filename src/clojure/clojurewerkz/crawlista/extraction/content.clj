@@ -7,7 +7,7 @@
 ;; Implementation
 ;;
 
-(def ^{:private true}
+(def ^{:private true :tag ArticleExtractor}
   article-extractor (ArticleExtractor/getInstance))
 
 ;;
