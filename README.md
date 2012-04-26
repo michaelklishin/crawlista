@@ -5,19 +5,32 @@ Crawlista is a support library for Clojure applications that crawl the Web.
 [![Continuous Integration status](https://secure.travis-ci.org/michaelklishin/crawlista.png)](http://travis-ci.org/michaelklishin/crawlista)
 
 
+## Features
+
+ * Detection of crawlable content (using [Pantomime](https://github.com/michaelklishin/pantomime))
+ * Extraction of links with normalization (using [Urly](https://github.com/michaelklishin/urly))
+ * Detection of link presence
+ * Extraction of content (like article text) from pages (using [Boilerpipe Core](http://code.google.com/p/boilerpipe/))
+
+
 ## Usage
 
 ### Installation
 
 With Leiningen
 
-    [clojurewerkz/crawlista "1.0.0-alpha13"]
+    [clojurewerkz/crawlista "1.0.0-alpha14"]
 
 or, if you are comfortable with using snapshots,
 
     [clojurewerkz/crawlista "1.0.0-SNAPSHOT"]
 
 New snapshots are [published to clojars.org](https://clojars.org/clojurewerkz/crawlista) every day (if there are any changes).
+
+
+## Supported Clojure versions
+
+Crawlista is built from the ground up for Clojure 1.3 and up.
 
 
 ## Crawlista is a Work In Progress
@@ -31,10 +44,6 @@ Crawlista is a work in progress. Please see our test suite for code examples.
 
 CI is hosted by [travis-ci.org](http://travis-ci.org)
 
-
-## Supported Clojure versions
-
-Crawlista is built from the ground up for Clojure 1.3 and up.
 
 
 ## Development

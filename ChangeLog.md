@@ -1,3 +1,8 @@
+## Changes between Crawlista 1.0.0-alpha14 and 1.0.0-alpha15
+
+No changes yet.
+
+
 ## Changes between Crawlista 1.0.0-alpha13 and 1.0.0-alpha14
 
 ### Links Extraction moved into a separate namespace
