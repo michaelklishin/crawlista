@@ -19,6 +19,7 @@
 
 
 (deftest test-unified-http-response-content-type-detection
+  ()
   (are [url expect-true?] (let [{:keys [^String body headers status]} (http/get url)]
                              (is (= 200 status))
                              (if expect-true?
@@ -27,7 +28,8 @@
        "http://files.travis-ci.org/docs/amqp/0.9.1/AMQP091Specification.pdf" false
        "http://github.com/robots.txt"                                        false
        "http://www.amazon.com/sitemap-manual-index.xml"                      false
-       "http://docs.oracle.com/javase/7/docs/index.html"                     true
+       "http://arstechnica.com"                                              true
+       "http://readwriteweb.com"                                             true
        "http://clojuredocs.org/"                                             true
        "http://upload.wikimedia.org/wikipedia/en/1/1a/Clojure-glyph.svg"     false
        "http://upload.wikimedia.org/wikipedia/commons/9/9a/PNG_transparency_demonstration_2.png" false
