@@ -33,9 +33,19 @@ New snapshots are [published to clojars.org](https://clojars.org/clojurewerkz/cr
 Crawlista is built from the ground up for Clojure 1.3 and up.
 
 
-## Crawlista is a Work In Progress
 
-Crawlista is a work in progress. Please see our test suite for code examples.
+## Documentation & Examples
+
+Crawlista is a work in progress. Please see our test suite for code examples. Once APIs and core functionality stabilizes,
+we will begin writing documentation guides and update this document.
+
+
+
+## Crawlista Is a ClojureWerkz Project
+
+Crawlista is part of the [group of Clojure libraries known as ClojureWerkz](http://clojurewerkz.org), together with
+[Neocons](https://github.com/michaelklishin/neocons), [Langohr](https://github.com/michaelklishin/langohr), [Elastisch](https://github.com/clojurewerkz/elastisch), [Welle](https://github.com/michaelklishin/welle), [Monger](https://github.com/michaelklishin/monger), [Quartzite](https://github.com/michaelklishin/quartzite) and several others.
+
 
 
 ## Continuous Integration
