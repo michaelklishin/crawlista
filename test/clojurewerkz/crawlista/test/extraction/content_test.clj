@@ -3,6 +3,8 @@
   (:use clojurewerkz.crawlista.extraction.content
         clojure.test))
 
+(deftest test-extract-title
+  (is (= "Wired.com" (extract-title (slurp (clojure.java.io/resource "html/example1.html"))))))
 
 (deftest test-extract-text
   (testing "ars article"

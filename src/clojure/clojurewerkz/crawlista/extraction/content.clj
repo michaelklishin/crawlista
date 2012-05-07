@@ -1,7 +1,9 @@
 (ns clojurewerkz.crawlista.extraction.content
   (:require [clojure.java.io :as io])
   (:import de.l3s.boilerpipe.extractors.ArticleExtractor
-           de.l3s.boilerpipe.BoilerpipeExtractor))
+           de.l3s.boilerpipe.BoilerpipeExtractor
+           org.jsoup.Jsoup
+           org.jsoup.nodes.Document))
 
 ;;
 ;; Implementation
@@ -13,6 +15,10 @@
 ;;
 ;; API
 ;;
+
+(defn extract-title
+  (^String [^String body]
+           (-> ^Document (Jsoup/parse body) .title)))
 
 (defn ^String extract-text
   "Extracts main content text. By default, Article Extractor is used"

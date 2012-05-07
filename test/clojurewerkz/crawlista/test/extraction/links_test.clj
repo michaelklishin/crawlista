@@ -8,9 +8,6 @@
 
 (println (str "Using Clojure version " *clojure-version*))
 
-(deftest test-extract-title
-  (is (= "Wired.com" (extract-title (slurp (clojure.java.io/resource "html/example1.html"))))))
-
 (deftest test-extract-body-text
   (is (= 139 (count (extract-body-text (slurp (clojure.java.io/resource "html/example1.html")))))))
 

@@ -30,10 +30,6 @@
 ;; API
 ;;
 
-(defn extract-title
-  (^String [^String body]
-           (-> ^Document (Jsoup/parse body) .title)))
-
 (defn extract-body-text
   (^String [^String body]
            (-> ^Document (Jsoup/parse body) .body .text)))

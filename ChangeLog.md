@@ -1,6 +1,8 @@
 ## Changes between Crawlista 1.0.0-alpha14 and 1.0.0-alpha15
 
-No changes yet.
+### extract-title moved to `clojurewerkz.crawlista.extraction.content`
+
+`extract-title` was moved to the `clojurewerkz.crawlista.extraction.content` namespace
 
 
 ## Changes between Crawlista 1.0.0-alpha13 and 1.0.0-alpha14
