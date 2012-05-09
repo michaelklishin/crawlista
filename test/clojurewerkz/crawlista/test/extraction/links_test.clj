@@ -2951,11 +2951,15 @@
     (is (= #{} result))))
 
 
-(deftest test-has-anchor
+(deftest ^{:focus true} test-has-anchor
   (let [body (slurp (clojure.java.io/resource "html/arstechnica.com_full.html"))]
     (is (has-anchor? body "/apple"))
     (is (has-anchor? body "/apple" "Apple"))
     (is (not (has-anchor? body "/apple" "Open Source")))
     (is (has-anchor? body "/open-source" "Open Source"))
     (is (has-anchor? body "http://www.wired.com" "Wired"))
-    (is (has-anchor? body "http://www.style.com" "Style"))))
+    (is (has-anchor? body "http://www.style.com" "Style")))
+  (let [body (slurp (clojure.java.io/resource "html/arstechnica.com2.html"))]
+    (is (has-anchor? body "/civis"))
+    (is (has-anchor? body "/civis" "Forums"))
+    (is (not (has-anchor? body "/apple" "Open Source")))))
