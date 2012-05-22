@@ -19,7 +19,6 @@
 
 
 (deftest test-unified-http-response-content-type-detection
-  ()
   (are [url expect-true?] (let [{:keys [^String body headers status]} (http/get url)]
                              (is (= 200 status))
                              (if expect-true?
@@ -31,8 +30,8 @@
        "http://arstechnica.com"                                              true
        "http://readwriteweb.com"                                             true
        "http://clojuredocs.org/"                                             true
-       "http://upload.wikimedia.org/wikipedia/en/1/1a/Clojure-glyph.svg"     false
-       "http://files.novemberain.com/images/png/transparent_png.png"         false
-       "http://creativecommons.org/images/deed/cc-logo.jpg"                  false
-       "http://elpais.com.uy/formatos/rss/index.asp?seccion=umomento"        false
+       "http://upload.wikimedia.org/wikipedia/commons/1/1a/Clojure-glyph.svg" false
+       "http://files.novemberain.com/images/png/transparent_png.png"          false
+       "http://creativecommons.org/images/deed/cc-logo.jpg"                   false
+       "http://elpais.com.uy/formatos/rss/index.asp?seccion=umomento"         false
        "http://tagesanzeiger.ch/panorama/vermischtes/stichwort.rss?tagId=1280" false))
