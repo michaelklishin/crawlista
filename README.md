@@ -19,7 +19,7 @@ Crawlista is a support library for Clojure applications that crawl the Web.
 
 With Leiningen
 
-    [clojurewerkz/crawlista "1.0.0-alpha15"]
+    [clojurewerkz/crawlista "1.0.0-alpha16"]
 
 or, if you are comfortable with using snapshots,
 
