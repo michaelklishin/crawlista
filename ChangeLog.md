@@ -1,6 +1,8 @@
 ## Changes between Crawlista 1.0.0-alpha15 and 1.0.0-alpha16
 
-No changes yet.
+### JSoup 1.6.3
+
+[JSoup](https://jsoup.org) has been upgraded to 1.6.3.
 
 
 ## Changes between Crawlista 1.0.0-alpha14 and 1.0.0-alpha15
