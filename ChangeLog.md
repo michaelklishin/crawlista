@@ -1,3 +1,8 @@
+## Changes between Crawlista 1.0.0-alpha16 and 1.0.0-alpha17
+
+No changes yet.
+
+
 ## Changes between Crawlista 1.0.0-alpha15 and 1.0.0-alpha16
 
 ### JSoup 1.6.3
