@@ -25,7 +25,7 @@
                                (is (html-content? body headers))
                                (is (not (html-content? body headers)))))
        "http://files.travis-ci.org/docs/amqp/0.9.1/AMQP091Specification.pdf" false
-       "http://github.com/robots.txt"                                        false
+       "http://www.infoq.com/robots.txt"                                     false
        "http://www.amazon.com/sitemap-manual-index.xml"                      false
        "http://arstechnica.com"                                              true
        "http://readwriteweb.com"                                             true
