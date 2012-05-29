@@ -3,7 +3,7 @@
   :min-lein-version "2.0.0"
   :dependencies [[org.clojure/clojure          "1.3.0"]
                  [clj-http                     "0.3.6"]
-                 [org.jsoup/jsoup              "1.6.2"]
+                 [org.jsoup/jsoup              "1.6.3"]
                  [clojurewerkz/urly            "2.0.0-alpha2"]
                  [com.novemberain/pantomime    "1.3.0"]
                  ;; Boilerpipe treats NekoHTML and Xerces as optional dependencies but absolutely
