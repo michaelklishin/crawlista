@@ -2,8 +2,8 @@
   (:import [java.net URI URL MalformedURLException]
            clojurewerkz.urly.UrlLike)
   (:use [clojure.string :only [split blank?]]
-        [clojurewerkz.crawlista.string]
         [clojure.string :only [lower-case]]
+        clojurewerkz.support.string
         [clojurewerkz.urly.core :only [path-of url-like eliminate-extra-protocol-prefixes]]))
 
 ;;

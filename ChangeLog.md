@@ -1,6 +1,11 @@
-## Changes between Crawlista 1.0.0-alpha16 and 1.0.0-alpha17
+## Changes between Crawlista 1.0.0-alpha17 and 1.0.0-alpha18
 
 No changes yet.
+
+
+## Changes between Crawlista 1.0.0-alpha16 and 1.0.0-alpha17
+
+[Clojurewerkz Support](https://github.com/clojurewerkz/support) dependecy has been upgraded to `0.5.0`.
 
 
 ## Changes between Crawlista 1.0.0-alpha15 and 1.0.0-alpha16
