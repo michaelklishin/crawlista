@@ -29,9 +29,11 @@
 
 (def resourcify
   (comp (fn [^String s]
-          (if-not (re-find #"\.([a-zA-Z0-9]+)$" (path-of s))
-            (maybe-append s "/")
-            s))
+          (if-let [path (path-of s)]
+            (if-not (re-find #"\.([a-zA-Z0-9]+)$" (path-of s))
+              (maybe-append s "/")
+              s)
+            ""))
         strip-query-string
         lower-case))
 

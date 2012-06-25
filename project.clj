@@ -5,7 +5,7 @@
                  [clj-http                     "0.3.6"]
                  [clojurewerkz/support         "0.5.0"]
                  [org.jsoup/jsoup              "1.6.3"]
-                 [clojurewerkz/urly            "2.0.0-alpha2"]
+                 [clojurewerkz/urly            "2.0.0-alpha3"]
                  [com.novemberain/pantomime    "1.3.0"]
                  ;; Boilerpipe treats NekoHTML and Xerces as optional dependencies but absolutely
                  ;; does not work without them. MK.

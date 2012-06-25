@@ -21,6 +21,7 @@
 
 
 (deftest test-resourcification
+  (is (= "" (resourcify "http://www.kfw.de/Unternehmensbefragung_2012.pdf]")))
   (is (= "http://novemberain.com/" (resourcify "http://NOVEMBERAIN.com?query=string")))
   (is (= "http://novemberain.com/" (resourcify "http://NOVEMBERAIN.com")))
   (is (= "http://novemberain.com/" (resourcify "http://NOVEMBERAIN.com?query=string#fragment")))
