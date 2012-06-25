@@ -1,6 +1,7 @@
 ## Changes between Crawlista 1.0.0-alpha17 and 1.0.0-alpha18
 
-No changes yet.
+[Urly](https://github.com/michaelklishin/urly) dependecy has been upgraded to `2.0.0-alpha3`.
+Added handling of bad urls to resourcification, bad/unparsable url will return an empty string now.
 
 
 ## Changes between Crawlista 1.0.0-alpha16 and 1.0.0-alpha17

@@ -1,4 +1,4 @@
-(defproject clojurewerkz/crawlista "1.0.0-SNAPSHOT"
+(defproject clojurewerkz/crawlista "1.0.0-alpha18"
   :description "Support library for Clojure applications that crawl the Web"
   :min-lein-version "2.0.0"
   :dependencies [[org.clojure/clojure          "1.3.0"]
@@ -20,7 +20,7 @@
                        :1.4 {:dependencies [[org.clojure/clojure "1.4.0"]]}
                        :1.5 {:dependencies [[org.clojure/clojure "1.5.0-master-SNAPSHOT"]]}}
   :aliases        {"ci"  ["with-profile" "dev:dev,1.4"]
-                   "all" ["with-profile" "dev:dev,1.4:dev,1.5"]}  
+                   "all" ["with-profile" "dev:dev,1.4:dev,1.5"]}
   :repositories {"boilerpipe"         {:url "http://boilerpipe.googlecode.com/svn/repo/"}
                  "sonatype"           {:url "http://oss.sonatype.org/content/repositories/releases"
                                        :snapshots false
