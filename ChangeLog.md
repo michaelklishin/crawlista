@@ -1,3 +1,7 @@
+## Changes between Crawlista 1.0.0-alpha18 and 1.0.0-alpha19
+
+No changes yet.
+
 ## Changes between Crawlista 1.0.0-alpha17 and 1.0.0-alpha18
 
 [Urly](https://github.com/michaelklishin/urly) dependecy has been upgraded to `2.0.0-alpha3`.
