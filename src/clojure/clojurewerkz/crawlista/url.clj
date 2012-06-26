@@ -1,8 +1,7 @@
 (ns clojurewerkz.crawlista.url
   (:import [java.net URI URL MalformedURLException]
            clojurewerkz.urly.UrlLike)
-  (:use [clojure.string :only [split blank?]]
-        [clojure.string :only [lower-case]]
+  (:use [clojure.string :only [trim blank? lower-case]]
         clojurewerkz.support.string
         [clojurewerkz.urly.core :only [path-of url-like eliminate-extra-protocol-prefixes]]))
 
@@ -35,7 +34,8 @@
               s)
             ""))
         strip-query-string
-        lower-case))
+        lower-case
+        trim))
 
 (defn- maybe-prepend-protocol
   "Fixes broken URLs like //jobs.arstechnica.com/list/1186 (that parse fine and both have host and are not considered absolute by java.net.URI)"

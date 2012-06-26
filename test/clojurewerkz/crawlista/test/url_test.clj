@@ -26,6 +26,7 @@
   (is (= "http://novemberain.com/" (resourcify "http://NOVEMBERAIN.com")))
   (is (= "http://novemberain.com/" (resourcify "http://NOVEMBERAIN.com?query=string#fragment")))
   (is (= "http://novemberain.com/page.html" (resourcify "http://NOVEMBERAIN.com/page.html?query=string")))
+  (is (= "http://novemberain.com/page/" (resourcify "  http://novemberain.com/page   ")))
   (is (= "http://novemberain.com/page/" (resourcify "http://NOVEMBERAIN.com/page")))
   (is (= "http://novemberain.com/page/" (resourcify "http://NOVEMBERAIN.com/page/"))))
 
