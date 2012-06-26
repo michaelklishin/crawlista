@@ -1,6 +1,7 @@
 ## Changes between Crawlista 1.0.0-alpha18 and 1.0.0-alpha19
 
-No changes yet.
+Added url whitespace trimming to resourcification.
+
 
 ## Changes between Crawlista 1.0.0-alpha17 and 1.0.0-alpha18
 
