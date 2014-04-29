@@ -24,7 +24,7 @@
                              (if expect-true?
                                (is (html-content? body headers))
                                (is (not (html-content? body headers)))))
-       "http://files.travis-ci.org/docs/amqp/0.9.1/AMQP091Specification.pdf" false
+       "https://upload.wikimedia.org/wikipedia/commons/7/72/SVO_Ring.pdf"    false
        "http://www.infoq.com/robots.txt"                                     false
        "http://www.amazon.com/sitemap-manual-index.xml"                      false
        "http://arstechnica.com"                                              true
