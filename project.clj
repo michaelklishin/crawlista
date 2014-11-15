@@ -5,7 +5,7 @@
                  [clj-http                     "1.0.0"]
                  [clojurewerkz/support         "1.1.0"]
                  [org.jsoup/jsoup              "1.6.3"]
-                 [clojurewerkz/urly            "2.0.0-alpha3"]
+                 [clojurewerkz/urly            "2.0.0-alpha5"]
                  [com.novemberain/pantomime    "2.3.0"]
                  ;; Boilerpipe treats NekoHTML and Xerces as optional dependencies but absolutely
                  ;; does not work without them. MK.
@@ -17,10 +17,10 @@
   :java-source-paths  ["src/java"]
   :profiles           {:dev {:resource-paths ["test/resources"]
                              :dependencies [[xerces/xerces "2.4.0"]]}
-                       :1.4 {:dependencies [[org.clojure/clojure "1.4.0"]]}
-                       :1.5 {:dependencies [[org.clojure/clojure "1.5.0-master-SNAPSHOT"]]}}
-  :aliases        {"ci"  ["with-profile" "dev:dev,1.4"]
-                   "all" ["with-profile" "dev:dev,1.4:dev,1.5"]}
+                       :1.5 {:dependencies [[org.clojure/clojure "1.5.1"]]}
+                       :1.7 {:dependencies [[org.clojure/clojure "1.7.0-alpha4"]]}
+                       :master {:dependencies [[org.clojure/clojure "1.7.0-master-SNAPSHOT"]]}}
+  :aliases        {"all" ["with-profile" "dev:dev,1.5:dev,1.7:dev,master"]}
   :repositories {"boilerpipe"         {:url "http://boilerpipe.googlecode.com/svn/repo/"}
                  "sonatype"           {:url "http://oss.sonatype.org/content/repositories/releases"
                                        :snapshots false
@@ -28,7 +28,7 @@
                  "sonatype-snapshots" {:url "http://oss.sonatype.org/content/repositories/snapshots"
                                        :snapshots true
                                        :releases {:checksum :fail :update :always}}}
-  :warn-on-reflection true
+  :global-vars {*warn-on-reflection* true}
   :test-selectors     {:default    (constantly true)
                        :focus      :focus
                        :extraction :extraction
