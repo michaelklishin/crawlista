@@ -26,10 +26,10 @@
                                (is (not (html-content? body headers)))))
        "https://upload.wikimedia.org/wikipedia/commons/7/72/SVO_Ring.pdf"    false
        "http://www.infoq.com/robots.txt"                                     false
-       "http://www.amazon.com/sitemap-manual-index.xml"                      false
+       "http://www.google.com/sitemap.xml"                                   false
        "http://arstechnica.com"                                              true
        "http://readwriteweb.com"                                             true
-       "http://clojuredocs.org/"                                             true
+       "http://clojure.org/"                                                 true
        "http://upload.wikimedia.org/wikipedia/commons/1/1a/Clojure-glyph.svg" false
        "http://creativecommons.org/images/deed/cc-logo.jpg"                   false
        "http://elpais.com.uy/formatos/rss/index.asp?seccion=umomento"         false
