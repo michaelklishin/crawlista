@@ -2,7 +2,7 @@
   :description "Support library for Clojure applications that crawl the Web"
   :min-lein-version "2.5.0"
   :dependencies [[org.clojure/clojure          "1.3.0"]
-                 [clj-http                     "0.3.6"]
+                 [clj-http                     "1.0.0"]
                  [clojurewerkz/support         "1.1.0"]
                  [org.jsoup/jsoup              "1.6.3"]
                  [clojurewerkz/urly            "2.0.0-alpha3"]
