@@ -1,6 +1,6 @@
 (defproject clojurewerkz/crawlista "1.0.0-SNAPSHOT"
   :description "Support library for Clojure applications that crawl the Web"
-  :min-lein-version "2.5.0"
+  :min-lein-version "2.5.1"
   :dependencies [[org.clojure/clojure          "1.6.0"]
                  [clj-http                     "1.0.0"]
                  [clojurewerkz/support         "1.1.0"]
