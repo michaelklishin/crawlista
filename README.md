@@ -78,6 +78,6 @@ and then run `robots.txt` parser test suite with
 
 ## License
 
-Copyright (C) 2011-2015 Michael S. Klishin, Alex Petrov, and the ClojureWerkz team.
+Copyright (C) 2011-2016 Michael S. Klishin, Alex Petrov, and the ClojureWerkz team.
 
 Distributed under the Eclipse Public License, the same as Clojure.
